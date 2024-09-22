@@ -1,0 +1,66 @@
+---
+---
+
+<section>
+  <h1 class="invisible">Valentín Nicheglod</h1>
+  <div class="header">
+    <div class="logo-container">
+      <img src="logo.svg" alt="" />
+    </div>
+  </div>
+  <div class="grid gap-8 w-fit ml-20 mt-20">
+    <div class="flex items-center p-8 gap-8 shadow-md rounded-3xl bg-white">
+      <div class="text-7xl">&#128075;&#127996;</div>
+      <div>
+        <span class="text-lg">Hola, soy</span>
+        <div class="title">Valentín <i data-feather="circle"></i></div>
+      </div>
+    </div>
+    <div class="grid gap-4">
+      <div
+        class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white"
+      >
+        <div class="text-5xl">&#x1F9D1;&#x1F3FB;&#x200D;&#x1F4BB;</div>
+        <h2 class="text-2xl">Desarrollador Full Stack</h2>
+      </div>
+      <div
+        class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white"
+      >
+        <div class="text-5xl">&#x1F9D1;&#x1F3FB;&#x200D;&#x1F3A8;</div>
+        <h2 class="text-2xl">Diseñador UX/UI</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  section {
+    position: relative;
+    height: 100dvh;
+    background-image: url(/images/HeroBackground.jpg);
+    background-size: cover;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #0768eb 60%, #1effff);
+    }
+
+    .header {
+      position: absolute;
+      top: 2rem;
+      right: 0;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .logo-container {
+      padding-right: 2rem;
+      padding-left: 1rem;
+      border-radius: 3rem 0 0 3rem;
+      background-color: #fff;
+    }
+  }
+</style>
