@@ -13,42 +13,31 @@ import { Icon } from "astro-icon/components";
     right: 4rem;
     padding: 0.5rem 1rem;
     visibility: hidden;
-    border-radius: 9999px;
     background-color: #fff;
     color: #000e33;
-  }
-
-  .fade-out {
-    animation-name: fade-out;
-    animation-duration: 0.5s;
-  }
-
-  @keyframes fade-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
+    border-radius: 9999px;
   }
 </style>
 <script>
   const instructions = document.querySelector(".instructions");
   let timeout: any;
 
-  timeout = setTimeout(() => {
+  const showInstructions = () => {
     instructions?.classList.add("visible");
     instructions?.classList.add("animate-jump-in");
     document
       .querySelector(".instructions")
       ?.classList.add("animate-duration-1000");
-  }, 5000);
+  }
 
-  window.addEventListener("scroll", () => {
+  const clearInstructions = () => {
     clearTimeout(timeout);
     instructions?.classList.remove("animate-jump-in");
     instructions?.classList.add("animate-reverse");
     instructions?.classList.add("animate-fade");
-    removeEventListener("scroll", () => {});
-  });
+    window.removeEventListener("scroll", clearInstructions);
+  }
+
+  timeout = setTimeout(showInstructions, 5000);
+  window.addEventListener("scroll", clearInstructions);
 </script>
