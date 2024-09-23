@@ -5,7 +5,11 @@ export default {
     './src/**/*.{astro,html,js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#366eff'
+      }
+    },
   },
   plugins: [
     require('tailwindcss-animated')
