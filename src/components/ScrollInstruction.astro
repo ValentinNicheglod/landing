@@ -2,8 +2,8 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="instructions flex items-center gap-2 text-slate-900">
-  <Icon name="arrow-down" />
+<div class="instructions flex items-center gap-2">
+  <Icon name="arrow-down" class="text-primary animate-bounce animate-infinite mt-2" />
   Desliza hacia abajo para ver mas
 </div>
 <style>
@@ -15,6 +15,7 @@ import { Icon } from "astro-icon/components";
     visibility: hidden;
     border-radius: 9999px;
     background-color: #fff;
+    color: #000e33;
   }
 
   .fade-out {
