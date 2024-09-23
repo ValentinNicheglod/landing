@@ -5,30 +5,32 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 <section>
   <h1 class="invisible">Valentín Nicheglod</h1>
   <div class="header">
-    <div class="logo-container">
     <div class="theme-container shadow-md outline-slate-300">
       <ThemeToggle />
     </div>
+    <div class="logo-container shadow-md outline-slate-300">
       <img src="logo.svg" alt="" />
     </div>
   </div>
   <div class="grid gap-8 w-fit ml-20 mt-20">
-    <div class="flex items-center p-8 gap-8 shadow-md rounded-3xl bg-white">
+    <div
+      class="flex items-center p-8 gap-8 shadow-md rounded-3xl bg-white outline-slate-300"
+    >
       <div class="text-7xl">&#128075;&#127996;</div>
       <div>
         <span class="text-lg">Hola, soy</span>
-        <div class="title">Valentín <i data-feather="circle"></i></div>
+        <div class="title">Valentín</div>
       </div>
     </div>
     <div class="grid gap-4">
       <div
-        class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white"
+        class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white outline-slate-300"
       >
         <div class="text-5xl">&#x1F9D1;&#x1F3FB;&#x200D;&#x1F4BB;</div>
         <h2 class="text-2xl">Desarrollador Full Stack</h2>
       </div>
       <div
-        class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white"
+        class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white outline-slate-300"
       >
         <div class="text-5xl">&#x1F9D1;&#x1F3FB;&#x200D;&#x1F3A8;</div>
         <h2 class="text-2xl">Diseñador UX/UI</h2>
@@ -44,7 +46,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
     background-size: cover;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -53,10 +55,12 @@ import ThemeToggle from "../components/ThemeToggle.astro";
     }
 
     .header {
-      position: absolute;
+      position: fixed;
       top: 2rem;
       right: 0;
+      z-index: 10;
       display: flex;
+      height: 3.125rem;
       gap: 1rem;
     }
 
@@ -77,6 +81,9 @@ import ThemeToggle from "../components/ThemeToggle.astro";
       background-color: #fff;
     }
 
-
+    .outline-slate-300 {
+      outline-width: 0.5px;
+      outline-style: solid;
+    }
   }
 </style>
