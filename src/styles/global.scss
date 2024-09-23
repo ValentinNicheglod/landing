@@ -1,14 +1,41 @@
 // Typography
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 // Tailwind
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Theme
+$light: #f2f6ff;
+$dark: #151922;
+
+html {
+  // Estilos comunes
+  font-family: "Arial", sans-serif;
+
+  // Tema claro
+  &[data-theme="light"] {
+    body {
+      background-color: $light;
+      color: $dark;
+      transition: 0.5s;
+    }
+  }
+
+  // Tema oscuro
+  &[data-theme="dark"] {
+    body {
+      background-color: $dark;
+      color: $light;
+      transition: 0.5s;
+    }
+  }
+}
 
 span {
   color: #47526c;
