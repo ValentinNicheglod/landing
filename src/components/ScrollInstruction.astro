@@ -1,10 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
+import heroTranslations from '../locales/hero.locales.json';
+
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props as Props;
+const translations =  heroTranslations[lang];
 ---
 
 <div class="instructions flex items-center gap-2">
   <Icon name="arrow-down" class="text-primary animate-bounce animate-infinite mt-2" />
-  Desliza hacia abajo para ver mas
+  <span class="content">
+    {translations.instruction}
+  </span>
 </div>
 <style>
   .instructions {
