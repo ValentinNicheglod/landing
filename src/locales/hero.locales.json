@@ -1,0 +1,14 @@
+{
+    "en": {
+        "presentation": "Hi, I'm",
+        "instruction": "Scroll down to see more content",
+        "developer": "Full Stack Developer",
+        "designer": "UX/UI Designer"
+    },
+    "es": {
+        "presentation": "Hola, soy",
+        "instruction": "Desliza hacia abajo para ver mas",
+        "developer": "Desarrollador Full Stack",
+        "designer": "Diseñador UX/UI"
+    }
+}
