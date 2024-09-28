@@ -99,8 +99,8 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 
       document.addEventListener("scroll", observe);
 
-      logoContainer?.addEventListener("mouseenter", showOptions);
-      logoContainer?.addEventListener("mouseleave", hideOptions);
+      logoContainer?.addEventListener("mouseenter", () => intersectingHeroSection === false && showOptions());
+      logoContainer?.addEventListener("mouseleave", () => intersectingHeroSection === false && hideOptions());
     }
   </script>
 </html>
