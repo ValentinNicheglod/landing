@@ -1,0 +1,84 @@
+---
+import moment from "moment-timezone";
+import { getCountryForTimezone } from "countries-and-timezones";
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+
+const getUserCountry = () => {
+  return getCountryForTimezone(moment.tz.guess());
+};
+
+const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
+---
+
+<button id="language-toggle">
+  <img
+    id="english-flag"
+    src={`/images/flags/${englishFlag}.png`}
+    class="outline-slate-300 rounded-full"
+    alt=""
+  />
+  <img
+    id="spanish-flag"
+    src={`/images/flags/ES.png`}
+    alt=""
+    class="z-10 outline-slate-300 rounded-full"
+    class:list={{ hidden: lang !== "es" }}
+  />
+</button>
+<style>
+  button {
+    position: relative;
+    outline-offset: 5px;
+
+    width: 50px;
+    height: 50px;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: 0.5s;
+  }
+
+  img,
+  button::after {
+    --size: 25px;
+
+    position: absolute;
+    top: calc(var(--size) / 2);
+    right: calc(var(--size) / 2);
+
+    width: var(--size);
+    height: var(--size);
+
+    transform: scale(1.125);
+  }
+</style>
+<script>
+  const changeLanguage = () => {
+    const spanishFlag = document.querySelector("#spanish-flag");
+    spanishFlag?.classList.add("animate-duration-500");
+
+    const html = document.querySelector("html");
+    const selectedLanguage = html?.getAttribute("lang");
+
+    if (selectedLanguage === "en") {
+      spanishFlag?.classList.remove("hidden");
+    } else {
+      spanishFlag?.classList.add("animate-reverse");
+    }
+    spanishFlag?.classList.add("animate-fade");
+
+    const ANIMATION_DURATION = 500;
+    setTimeout(() => {
+      location.pathname = selectedLanguage === "en" ? "/es" : "/en";
+    }, ANIMATION_DURATION);
+  };
+
+  document
+    .querySelector("#language-toggle")
+    ?.addEventListener("click", changeLanguage);
+</script>
