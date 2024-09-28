@@ -4,7 +4,7 @@
   .theme-toggle {
     --size: 2rem;
     --icon-fill: hsl(210 10% 30%);
-    --icon-fill-hover: #FDB813;
+    --icon-fill-hover: #fdb813;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,8 +21,8 @@
     outline-offset: 5px;
   }
 
-  :global([data-theme='dark']) .theme-toggle {
-    --icon-fill-hover: #C9C9C9;
+  :global([data-theme="dark"]) .theme-toggle {
+    --icon-fill-hover: #c9c9c9;
   }
 
   .sun-and-moon > :is(.moon, .sun, .sun-beams) {
@@ -31,7 +31,7 @@
 
   .theme-toggle > .sun-and-moon > :is(.moon, .sun) {
     fill: var(--icon-fill);
-    transition: .5s;
+    transition: 0.5s;
   }
 
   .theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) {
@@ -47,39 +47,37 @@
     stroke: var(--icon-fill-hover);
   }
 
-    .sun-and-moon > :is(.moon, .sun) {
-      fill: var(--icon-fill);
-    }
+  .sun-and-moon > :is(.moon, .sun) {
+    fill: var(--icon-fill);
+  }
 
-    .theme-toggle:is(:hover, :focus-visible)
-      > .sun-and-moon
-      > :is(.moon, .sun) {
-      fill: var(--icon-fill-hover);
-    }
+  .theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) {
+    fill: var(--icon-fill-hover);
+  }
 
-    .sun-and-moon > .sun-beams {
-      stroke: var(--icon-fill);
-      stroke-width: 2px;
-    }
+  .sun-and-moon > .sun-beams {
+    stroke: var(--icon-fill);
+    stroke-width: 2px;
+  }
 
-    .theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
-      stroke: var(--icon-fill-hover);
-    }
+  .theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
+    stroke: var(--icon-fill-hover);
+  }
 
-  :global([data-theme='dark']) .sun-and-moon > .sun {
+  :global([data-theme="dark"]) .sun-and-moon > .sun {
     transform: scale(1.75);
   }
 
-  :global([data-theme='dark']) .sun-and-moon > .sun-beams {
+  :global([data-theme="dark"]) .sun-and-moon > .sun-beams {
     opacity: 0;
   }
 
-  :global([data-theme='dark']) .sun-and-moon > .moon > circle {
+  :global([data-theme="dark"]) .sun-and-moon > .moon > circle {
     transform: translateX(-7px);
   }
 
   @supports (cx: 1) {
-    :global([data-theme='dark']) .sun-and-moon > .moon > circle {
+    :global([data-theme="dark"]) .sun-and-moon > .moon > circle {
       cx: 17;
       transform: translateX(0);
     }
@@ -106,18 +104,18 @@
       }
     }
 
-    :global([data-theme='dark']) .sun-and-moon > .sun {
+    :global([data-theme="dark"]) .sun-and-moon > .sun {
       transition-timing-function: var(--ease-3);
       transition-duration: 0.25s;
       transform: scale(1.75);
     }
 
-    :global([data-theme='dark']) .sun-and-moon > .sun-beams {
+    :global([data-theme="dark"]) .sun-and-moon > .sun-beams {
       transition-duration: 0.15s;
       transform: rotateZ(-25deg);
     }
 
-    :global([data-theme='dark']) .sun-and-moon > .moon > circle {
+    :global([data-theme="dark"]) .sun-and-moon > .moon > circle {
       transition-duration: 0.5s;
       transition-delay: 0.25s;
     }
@@ -164,10 +162,10 @@
 </button>
 
 <script is:inline>
-  const storageKey = 'theme-preference';
+  const storageKey = "theme-preference";
 
   const onClick = () => {
-    theme.value = theme.value === 'light' ? 'dark' : 'light';
+    theme.value = theme.value === "light" ? "dark" : "light";
     setPreference();
   };
 
@@ -175,19 +173,19 @@
     if (localStorage.getItem(storageKey)) {
       return localStorage.getItem(storageKey);
     } else {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
     }
   };
 
   const setPreference = () => {
-    localStorage.setItem(storageKey, theme.value || '');
+    localStorage.setItem(storageKey, theme.value || "");
     reflectPreference();
   };
 
   const reflectPreference = () => {
-    document.firstElementChild?.setAttribute('data-theme', theme.value || '');
+    document.firstElementChild?.setAttribute("data-theme", theme.value || "");
   };
 
   const theme = {
@@ -199,13 +197,13 @@
   window.onload = () => {
     reflectPreference();
 
-    document.querySelector('#theme-toggle')?.addEventListener('click', onClick);
+    document.querySelector("#theme-toggle")?.addEventListener("click", onClick);
   };
 
   window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', ({ matches: isDark }) => {
-      theme.value = isDark ? 'dark' : 'light';
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", ({ matches: isDark }) => {
+      theme.value = isDark ? "dark" : "light";
       setPreference();
     });
 </script>

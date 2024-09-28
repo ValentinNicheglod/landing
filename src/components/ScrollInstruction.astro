@@ -1,17 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
-import heroTranslations from '../locales/hero.locales.json';
+import heroTranslations from "../locales/hero.locales.json";
 
 interface Props {
-  lang: 'es' | 'en';
+  lang: "es" | "en";
 }
 
 const { lang } = Astro.props as Props;
-const translations =  heroTranslations[lang];
+const translations = heroTranslations[lang];
 ---
 
 <div class="instructions flex items-center gap-2">
-  <Icon name="arrow-down" class="text-primary animate-bounce animate-infinite mt-2" />
+  <Icon
+    name="arrow-down"
+    class="text-primary animate-bounce animate-infinite mt-2"
+  />
   <span class="content">
     {translations.instruction}
   </span>
@@ -38,7 +41,7 @@ const translations =  heroTranslations[lang];
     document
       .querySelector(".instructions")
       ?.classList.add("animate-duration-1000");
-  }
+  };
 
   const clearInstructions = () => {
     clearTimeout(timeout);
@@ -46,7 +49,7 @@ const translations =  heroTranslations[lang];
     instructions?.classList.add("animate-reverse");
     instructions?.classList.add("animate-fade");
     window.removeEventListener("scroll", clearInstructions);
-  }
+  };
 
   timeout = setTimeout(showInstructions, 5000);
   window.addEventListener("scroll", clearInstructions);
