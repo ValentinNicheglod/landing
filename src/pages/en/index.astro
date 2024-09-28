@@ -1,4 +1,5 @@
 ---
+import Layout from '../../layouts/Layout.astro';
 import Hero from '../../sections/Hero.astro';
 import '/src/styles/global.scss';
 ---
@@ -12,7 +13,9 @@ import '/src/styles/global.scss';
     <title>Valentín Nicheglod | Portfolio</title>
   </head>
   <body>
-    <Hero lang="en" />
+    <Layout>
+      <Hero />
+    </Layout>
   </body>
   <script>
     const notLangugePreferenceSaved = !sessionStorage.getItem('lang');

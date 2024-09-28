@@ -1,0 +1,106 @@
+---
+import LanguageToggle from "../components/LanguageToggle.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+---
+
+<html>
+  <body>
+    <div class="header">
+      <div class="option shadow-md outline-slate-300">
+        <ThemeToggle />
+      </div>
+      <div class="option shadow-md outline-slate-300">
+        <LanguageToggle />
+      </div>
+      <div class="logo-container shadow-md outline-slate-300 z-50">
+        <img src="/logo.svg" alt="" />
+      </div>
+    </div>
+    <slot />
+  </body>
+  <style type="scss">
+    .header {
+      position: fixed;
+      top: 2rem;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      height: 3.125rem;
+      gap: 1rem;
+    }
+
+    .logo-container {
+      padding-right: 2rem;
+      padding-left: 1rem;
+      border-radius: 3rem 0 0 3rem;
+      background-color: #fff;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.125rem;
+      height: 3.125rem;
+      border-radius: 9999px;
+      background-color: #fff;
+      transition: 1s;
+    }
+
+    .outline-slate-300 {
+      outline-width: 0.5px;
+      outline-style: solid;
+    }
+  </style>
+  <script>
+    const hero = document.querySelector("#hero");
+    let intersectingHeroSection = true;
+
+    if (hero) {
+      const logoContainer = document.querySelector(".logo-container");
+      const options = document.getElementsByClassName("option");
+
+      const showOptions = () => {
+        const optionsArray = Array.from(options);
+        optionsArray.forEach((option) => {
+          option.setAttribute("style", "transform: translateX(0)");
+        });
+      };
+
+      const hideOptions = () => {
+        const optionsArray = Array.from(options);
+        optionsArray.reverse().forEach((option, index) => {
+          option.setAttribute(
+            "style",
+            `transform: translateX(${100 * (index + 1)}px)`
+          );
+        });
+      };
+
+      const observe = () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (intersectingHeroSection === false) {
+                intersectingHeroSection = true;
+                showOptions();
+              }
+            } else {
+              if (intersectingHeroSection === true) {
+                intersectingHeroSection = false;
+                hideOptions();
+              }
+            }
+          });
+        });
+
+        observer.observe(hero);
+      };
+
+      document.addEventListener("scroll", observe);
+
+      logoContainer?.addEventListener("mouseenter", showOptions);
+      logoContainer?.addEventListener("mouseleave", hideOptions);
+    }
+  </script>
+</html>

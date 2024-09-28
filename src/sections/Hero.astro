@@ -1,27 +1,16 @@
 ---
+import LanguageToggle from "../components/LanguageToggle.astro";
 import ScrollInstruction from "../components/ScrollInstruction.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
-import heroTranslations from '../locales/hero.locales.json';
+import heroTranslations from "../locales/hero.locales.json";
 
-
-interface Props {
-  lang: 'es' | 'en';
-}
-
-const { lang } = Astro.props as Props;
-const translations =  heroTranslations[lang];
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = heroTranslations[lang];
 ---
 
-<section>
+<section id="hero">
   <h1 class="invisible">Valentín Nicheglod</h1>
-  <div class="header">
-    <div class="theme-container shadow-md outline-slate-300">
-      <ThemeToggle />
-    </div>
-    <div class="logo-container shadow-md outline-slate-300">
-      <img src="/logo.svg" alt="" />
-    </div>
-  </div>
+
   <ScrollInstruction lang={lang} />
   <div class="grid gap-8 w-fit ml-20 mt-20">
     <div
@@ -63,38 +52,6 @@ const translations =  heroTranslations[lang];
       width: 100%;
       height: 5px;
       background: linear-gradient(90deg, #0768eb 60%, #1effff);
-    }
-
-    .header {
-      position: fixed;
-      top: 2rem;
-      right: 0;
-      z-index: 10;
-      display: flex;
-      height: 3.125rem;
-      gap: 1rem;
-    }
-
-    .logo-container {
-      padding-right: 2rem;
-      padding-left: 1rem;
-      border-radius: 3rem 0 0 3rem;
-      background-color: #fff;
-    }
-
-    .theme-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 3.125rem;
-      height: 3.125rem;
-      border-radius: 9999px;
-      background-color: #fff;
-    }
-
-    .outline-slate-300 {
-      outline-width: 0.5px;
-      outline-style: solid;
     }
   }
 </style>
