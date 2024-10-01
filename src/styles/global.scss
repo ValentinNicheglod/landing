@@ -12,42 +12,73 @@ body {
 
 // Theme
 $light: #f2f6ff;
-$dark: #151922;
+$dark: #1d2530;
 
 html {
+  $background-color: #ffff;
   // Estilos comunes
   font-family: "Arial", sans-serif;
 
+  .bg-color,
+  .border-color {
+    transition: 0.5s;
+  }
+
+  body {
+    transition: background-color 0.5s;
+  }
+
   // Tema claro
   &[data-theme="light"] {
+    $background-color: red;
+
     body {
       background-color: $light;
       color: $dark;
-      transition: 0.5s;
+    }
+
+    span {
+      color: #5b698b;
+    }
+
+    .bg-color {
+      background-color: #ffff;
+    }
+
+    .border-color {
+      border-color: #ffff;
     }
   }
 
   // Tema oscuro
   &[data-theme="dark"] {
+    $background-color: blue;
+
     body {
       background-color: $dark;
       color: $light;
-      transition: 0.5s;
+    }
+
+    span {
+      color: hsl(223, 21%, 65%);
+    }
+
+    .bg-color {
+      background-color: #2b313b;
+    }
+
+    .border-color {
+      border-color: #1d2530;
     }
   }
 }
 
-span {
-  color: #47526c;
-}
-
 img {
-    user-drag: none;
-    -webkit-user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .title {
@@ -58,4 +89,8 @@ img {
 
 h2 {
   color: #000e33;
+}
+
+.flex-col {
+  display: flex;
 }
