@@ -1,7 +1,9 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Hero from '../../sections/Hero.astro';
-import '/src/styles/global.scss';
+import Loader from "../../components/Loader.astro";
+import Layout from "../../layouts/Layout.astro";
+import About from "../../sections/About.astro";
+import Hero from "../../sections/Hero.astro";
+import "/src/styles/global.scss";
 ---
 
 <html lang="en">
@@ -14,17 +16,18 @@ import '/src/styles/global.scss';
   </head>
   <body>
     <Layout>
+      <div class="w-dvw h-dvh overflow-hidden absolute">
+        <Loader />
+      </div>
       <Hero />
+      <div id="content" class="hidden">
+        <About />
+      </div>
     </Layout>
   </body>
   <script>
-    const notLangugePreferenceSaved = !sessionStorage.getItem('lang');
-    if (notLangugePreferenceSaved) {
-      const navigatorLanguageIsSpanish = navigator.language.includes('es');
-      if (navigatorLanguageIsSpanish) {
-        location.pathname = '/es';
-        sessionStorage.setItem('lang', 'es');
-      }
-    }
+    import { showContent, initializeLanguage } from "../../scripts/index.js";
+    showContent();
+    initializeLanguage();
   </script>
 </html>

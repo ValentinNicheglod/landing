@@ -1,7 +1,5 @@
 ---
-import LanguageToggle from "../components/LanguageToggle.astro";
 import ScrollInstruction from "../components/ScrollInstruction.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 import heroTranslations from "../locales/hero.locales.json";
 
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
@@ -12,13 +10,13 @@ const translations = heroTranslations[lang];
   <h1 class="invisible">Valentín Nicheglod</h1>
 
   <ScrollInstruction lang={lang} />
-  <div class="grid gap-8 w-fit ml-20 mt-20">
+  <div class="grid gap-8 w-fit ml-20 mt-20 z-10 relative">
     <div
       class="flex items-center p-8 gap-8 shadow-md rounded-3xl bg-white outline-slate-300"
     >
       <div class="text-7xl">&#128075;&#127996;</div>
       <div>
-        <span class="text-lg">{translations.presentation}</span>
+        <span class="text-lg text-gray">{translations.presentation}</span>
         <div class="title">Valentín</div>
       </div>
     </div>
@@ -38,12 +36,12 @@ const translations = heroTranslations[lang];
     </div>
   </div>
 </section>
-<style>
+<style type="scss">
   section {
     position: relative;
-    height: 100dvh;
     background-image: url(/images/HeroBackground.jpg);
     background-size: cover;
+    min-height: 100dvh;
 
     &::after {
       content: "";
