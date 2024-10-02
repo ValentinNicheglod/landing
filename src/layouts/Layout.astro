@@ -6,10 +6,10 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 <html>
   <body>
     <div class="header">
-      <div class="option shadow-md outline-slate-300">
+      <div class="option outline-slate-300">
         <ThemeToggle />
       </div>
-      <div class="option shadow-md outline-slate-300">
+      <div class="option outline-slate-300">
         <LanguageToggle />
       </div>
       <div class="logo-container shadow-md outline-slate-300 z-30">
@@ -48,7 +48,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
     }
 
     .outline-slate-300 {
-      outline-width: 0.5px;
+      outline-width: .5px;
       outline-style: solid;
     }
   </style>
@@ -64,6 +64,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
         const optionsArray = Array.from(options);
         optionsArray.forEach((option) => {
           option.setAttribute("style", "transform: translateX(0)");
+          option.classList.add("shadow-md");
         });
       };
 
@@ -74,6 +75,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
             "style",
             `transform: translateX(${100 * (index + 1)}px)`
           );
+          option.classList.remove("shadow-md");
         });
       };
 
@@ -99,8 +101,14 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 
       document.addEventListener("scroll", observe);
 
-      logoContainer?.addEventListener("mouseenter", () => intersectingHeroSection === false && showOptions());
-      logoContainer?.addEventListener("mouseleave", () => intersectingHeroSection === false && hideOptions());
+      logoContainer?.addEventListener(
+        "mouseenter",
+        () => intersectingHeroSection === false && showOptions()
+      );
+      logoContainer?.addEventListener(
+        "mouseleave",
+        () => intersectingHeroSection === false && hideOptions()
+      );
     }
   </script>
 </html>
