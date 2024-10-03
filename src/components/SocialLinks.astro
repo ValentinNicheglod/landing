@@ -1,0 +1,49 @@
+---
+import Behance from "../images/social/Behance.png";
+import Dribbble from "../images/social/Dribble.png";
+import GitHub from "../images/social/GitHub.png";
+import Linkedin from "../images/social/Linkedin.png";
+
+const contactLinks = [
+  {
+    title: "Behance",
+    href: "http://www.behance.net/valentin_nicheglod",
+  },
+  {
+    title: "Dribble",
+    href: "https://dribbble.com/valentin_nicheglod",
+  },
+  {
+    title: "GitHub",
+    href: "https://github.com/ValentinNicheglod",
+  },
+  {
+    title: "LinkedIn",
+    href: "https://www.linkedin.com/in/valentin-nicheglod/",
+  },
+];
+
+---
+
+<div class="flex gap-2 md:gap-3">
+  {
+    contactLinks.map((link) => (
+      <a href={link.href} target="_blank" rel="noreferrer noopener" class="w-11 md:w-12 aspect-square">
+        <img
+          src={`src/images/social/${link.title}.png`}
+          alt={`${link.title} icon`}
+        />
+      </a>
+    ))
+  }
+</div>
+<style>
+  a {
+    cursor: pointer;
+    transition: .5s;
+  }
+
+  a:hover {
+    transform: scale(1.1);
+  }
+</style>
