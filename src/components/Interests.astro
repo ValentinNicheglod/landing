@@ -1,0 +1,53 @@
+---
+import aboutTranslations from "../locales/about.locales.json";
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = aboutTranslations[lang];
+
+const interests = [
+  {
+    label: translations.architecture,
+    emojiCode: "&#x1F3DB;",
+  },
+  {
+    label: translations.aviation,
+    emojiCode: "&#x1F6EB;&#xFE0F;",
+  },
+  {
+    label: translations.design,
+    emojiCode: "&#x1F3A8;",
+  },
+  {
+    label: translations.photography,
+    emojiCode: "&#x1F4F8;",
+  },
+  {
+    label: translations.technology,
+    emojiCode: "&#x1F5A5;",
+  },
+  {
+    label: translations.travel,
+    emojiCode: "&#x1F30E;",
+  },
+];
+---
+
+<div class="flex-col gap-3 md:gap-4">
+  <h3 class="text-xl md:text-3xl font-semibold opacity-85">
+    {translations.interests}
+  </h3>
+  <div class="flex gap-3 md:gap-4">
+    {
+      interests.map((interest) => (
+        <div class="flex-col gap-2">
+          <div class="interest bg-color p-4 shadow-md rounded-md aspect-square">
+            <div class="text-4xl md:text-5xl" set:html={interest.emojiCode} />
+          </div>
+          <p class="text-center text-xs md:text-sm font-light">
+            {interest.label}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</div>
