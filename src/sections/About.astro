@@ -1,0 +1,44 @@
+---
+import Interests from "../components/Interests.astro";
+import BlurredCircle from "../components/ui/BlurredCircle.astro";
+import UserCard from "../components/UserCard.astro";
+import aboutTranslations from "../locales/about.locales.json";
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = aboutTranslations[lang];
+---
+
+<div class="min-h-screen flex items-center justify-center p-8 md:p-12 xl:p-16">
+  <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-12 font-medium">
+    <h2 class="title md:hidden">{translations["section-title"]}</h2>
+    <div class="flex flex-col md:flex-row gap-8 md:gap-12 xl:gap-16">
+      <div class="relative flex items-center justify-center">
+        <div
+          class="absolute grid place-items-center -z-10 inset-0 w-fit h-fit m-auto mr-0"
+        >
+          <BlurredCircle color="#1effff75" size={200} />
+        </div>
+        <UserCard />
+        <div
+          class="absolute grid place-items-center -z-10 inset-0 w-fit h-fit m-auto ml-0"
+        >
+          <BlurredCircle color="#0768eb75" size={200} blur={5000} />
+        </div>
+      </div>
+      <div class="flex-col gap-6 lg:gap-8">
+        <h2 class="title hidden md:block">{translations["section-title"]}</h2>
+        <div class="flex-col gap-3 md:gap-4 font-light lg:text-lg text-balance">
+          <p set:html={translations["about-me-content-1"]} />
+          <p set:html={translations["about-me-content-2"]} />
+          <p set:html={translations["about-me-content-3"]} />
+        </div>
+        <div class="hidden lg:flex flex-1 items-end">
+          <Interests />
+        </div>
+      </div>
+    </div>
+    <div class="lg:hidden">
+      <Interests />
+    </div>
+  </div>
+</div>
