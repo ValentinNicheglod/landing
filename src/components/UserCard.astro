@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon/components";
+import Location from "./Location.astro";
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<div class="flex-col gap-6 lg:gap-8 py-6 lg:py-8 p-8 bg-color rounded-3xl shadow-md">
+  <div class="grid gap-3 lg:gap-4">
+    <div class="relative">
+      <div class="profile-pic-bg relative inset-0 p-2 w-60 md:w-52 aspect-square rounded-full m-auto duration-75"></div>
+      <img
+        src="/images/ProfilePic.png"
+        class="absolute inset-0 w-56 md:w-48 aspect-square m-auto rounded-full border-color border-2 duration-75"
+        alt=""
+      />
+    </div>
+    <div class="grid gap-1 items-center">
+      <div class="font-semibold text-2xl text-center">Valentín Nicheglod</div>
+      <span class="text-center text-sm font-light">
+        Full Stack Developer & UX/UI Designer
+      </span>
+    </div>
+  </div>
+  <div class="grid gap-1 lg:gap-2 md:min-w-[16rem] md:max-w-[40rem] m-auto">
+    <Location city="Paysandú" country="Uruguay" flag="UY" />
+    <Location city="Buenos Aires" country="Argentina" flag="AR" />
+  </div>
+  <div class="flex flex-1 items-end justify-center">
+    <SocialLinks />
+  </div>
+</div>
+<style type="scss">
+  .profile-pic-bg {
+    background: linear-gradient(45deg, #149bff, #2bfeff);
+    animation: rotate 5s infinite;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
