@@ -21,11 +21,11 @@ html {
 
   .bg-color,
   .border-color {
-    transition: 0.5s;
+    transition: background-color border-color .5s;
   }
 
   body {
-    transition: background-color 0.5s;
+    transition: background-color .5s;
   }
 
   // Tema claro
@@ -70,6 +70,10 @@ html {
     .border-color {
       border-color: #1d2530;
     }
+
+    .title {
+      filter: saturate(1.5);
+    }
   }
 }
 
@@ -82,9 +86,10 @@ img {
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
   color: #366eff;
+  @apply text-3xl;
+  @apply md:text-4xl;
+  @apply font-bold;
 }
 
 h2 {

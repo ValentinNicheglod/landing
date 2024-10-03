@@ -14,8 +14,10 @@ export const initializeLanguage = () => {
 export const showContent = () => {
   const LOADER_DURATION = 3000;
   const content = document.getElementById("content");
+  const loader = document.getElementById("loader");
 
   setTimeout(() => {
     content?.classList.remove("hidden");
+    document.body.removeChild(loader);
   }, LOADER_DURATION);
 }
