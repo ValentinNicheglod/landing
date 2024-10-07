@@ -8,7 +8,7 @@ const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
 ---
 
-<div class="min-h-screen flex items-center justify-center p-8 md:p-12 xl:p-16">
+<section class="min-h-screen flex items-center justify-center p-8 md:p-12 xl:p-16">
   <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-12 font-medium">
     <h2 class="title md:hidden">{translations["section-title"]}</h2>
     <div class="flex flex-col md:flex-row gap-8 md:gap-12 xl:gap-16">
@@ -41,4 +41,4 @@ const translations = aboutTranslations[lang];
       <Interests />
     </div>
   </div>
-</div>
+</section>
