@@ -10,7 +10,19 @@
     "design": "Design",
     "photography": "Photography",
     "technology": "Technology",
-    "travel": "Travel"
+    "travel": "Travel",
+    "skills": {
+      "personal": "Personal skills",
+      "dev": "Technical skills",
+      "design": "Design skills",
+      "detailAttention": "Meticulousness",
+      "flexibility": "Flexibility",
+      "proactivity": "Proactivity",
+      "commitment": "Commitment",
+      "creativity": "Creativity",
+      "leadership": "Leadership",
+      "prototyping": "Prototyping"
+    }
   },
   "es": {
     "section-title": "Sobre mí",
@@ -23,6 +35,18 @@
     "design": "Diseño",
     "photography": "Fotografía",
     "technology": "Tecnología",
-    "travel": "Viajes"
+    "travel": "Viajes",
+    "skills": {
+      "personal": "Habilidades personales",
+      "dev": "Habilidades técnicas",
+      "design": "Habilidades de diseño",
+      "detailAttention": "Detallismo",
+      "flexibility": "Flexibilidad",
+      "proactivity": "Proactividad",
+      "commitment": "Compromiso",
+      "creativity": "Creatividad",
+      "leadership": "Liderazgo",
+      "prototyping": "Prototipado"
+    }
   }
 }
