@@ -1,0 +1,52 @@
+---
+import BlurredCircle from "./BlurredCircle.astro";
+---
+
+<div class="background absolute blur-3xl overflow-hidden h-full w-full">
+    <div class="absolute gradient-circle">
+        <BlurredCircle size={500} blur={500} color="#1effff" />
+    </div>
+    <div class="absolute gradient-circle">
+        <BlurredCircle size={500} blur={500} color="#25a5fe" />
+    </div>
+    <div class="absolute gradient-circle">
+        <BlurredCircle size={500} blur={500} color="#9155f6" />
+    </div>
+    <div class="absolute gradient-circle">
+        <BlurredCircle size={500} blur={500} color="#9155f6" />
+    </div>
+    <div class="absolute gradient-circle">
+        <BlurredCircle size={500} blur={500} color="#0768eb" />
+    </div>
+</div>
+<style>
+  .background {
+    background: linear-gradient(90deg, #0768eb 20%, #00e6e6 80%, #25a5fe);
+  }
+
+  .gradient-circle {
+    top: -750px;
+    left: -30%;
+    transition: 10s;
+  }
+</style>
+<script>
+  const gradientCircles = document.getElementsByClassName("gradient-circle");
+
+  const translateCircles = () => {
+    [...gradientCircles].forEach((circle) => {
+      setTimeout(() => {
+        const X_Translation = Math.round(Math.random() * 150);
+        const Y_Translation = Math.round(Math.random() * 50);
+        circle.setAttribute(
+          "style",
+          `transform: translateX(${X_Translation}vw) translateY(${Y_Translation}%)`
+        );
+      }, 1000);
+    });
+  };
+
+  translateCircles();
+
+  setInterval(() => translateCircles(), 10000);
+</script>

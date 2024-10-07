@@ -1,0 +1,21 @@
+.filters {
+    @apply relative grid grid-cols-3 px-2 py-1 rounded-full;
+  
+    button {
+      @apply flex justify-center rounded-full px-3 py-1 opacity-50 z-10;
+      transition: opacity .25s, color .75s;
+  
+      &:hover {
+        @apply opacity-100;
+      }
+  
+      &.selected {
+        @apply text-white opacity-100;
+      }
+    }
+  
+    .indicator {
+      @apply w-1/3 h-full rounded-full bg-primary;
+      transition: .5s;
+    }
+  }

@@ -1,0 +1,180 @@
+---
+import GradientBackground from "../components/ui/GradientBackground.astro";
+
+import "../styles/skills.scss";
+import "../styles/filters.scss";
+import "swiper/css";
+
+import aboutTranslations from "../locales/about.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = aboutTranslations[lang];
+
+const filterOptions = [
+  {
+    label: translations.skills.personal,
+    value: 0,
+  },
+  {
+    label: translations.skills.design,
+    value: 1,
+  },
+  {
+    label: translations.skills.dev,
+    value: 2,
+  },
+];
+---
+
+<section
+	id="skills"
+  class="overflow-hidden relative border-t-4 border-b-4 border-color-inverse"
+>
+  <GradientBackground />
+  <div class="relative flex flex-col gap-6 inset-0 p-6 md:p-8 xl:p-12">
+    <div class="flex justify-end">
+      <div id="skills-filter" class="filters">
+        {
+          filterOptions.map((option) => (
+            <button
+              id={`skill-filter-${option.value}`}
+              data-value={option.value}
+            >
+              {option.label}
+            </button>
+          ))
+        }
+        <div class="absolute w-full h-full p-1">
+          <div id="skills-filter-indicator" class="indicator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-1 items-center justify-between">
+      <div class="flex items-center gap-6 max-w-96">
+        <div id="skills-icon" class="text-5xl md:text-8xl"></div>
+        <div id="skills-title" class="title text-white text-balance"></div>
+      </div>
+      <div class="overflow-hidden">
+        <div id="skills-swiper" class="swiper pb-4">
+          <div id="skills-list" class="swiper-wrapper"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.getElementById(`skill-filter-0`)?.classList.add("selected");
+</script>
+<script>
+  import Swiper from "swiper";
+  import { Autoplay } from "swiper/modules";
+
+  import { getSkillsData } from "../data/skillsData";
+
+  const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
+  const skillsData = getSkillsData(lang);
+
+  let selectedFilterIndex = 0;
+  let swiper: Swiper;
+
+  const getSkillsElements = () => {
+    const skillElements = skillsData[selectedFilterIndex].skills.map(
+      (skill) => {
+        const skillElement = document.createElement("div");
+        skillElement.classList.add("swiper-slide", "bg-color");
+
+        const image = document.createElement("img");
+        image.setAttribute("src", `src/images/skills/${skill.image}.png`);
+
+        const text = document.createElement("span");
+        text.innerText = skill.name;
+
+        skillElement.appendChild(image);
+        skillElement.appendChild(text);
+        return skillElement;
+      }
+    );
+    return skillElements;
+  };
+
+  const changeButtonState = () => {
+    document.querySelector(".selected")?.classList.remove("selected");
+    document
+      .getElementById(`skill-filter-${selectedFilterIndex}`)
+      ?.classList.add("selected");
+  };
+
+  const translateIndicator = () => {
+    const indicator = document.getElementById("skills-filter-indicator");
+    indicator?.setAttribute(
+      "style",
+      `transform: translateX(${selectedFilterIndex * 100}%)`
+    );
+  };
+
+  const changeIcon = () => {
+    const skillsIcon = document.getElementById("skills-icon");
+
+    if (skillsIcon) {
+      skillsIcon.innerHTML = skillsData[selectedFilterIndex].icon;
+    }
+  };
+
+  const changeTitle = () => {
+    const skillsTitle = document.getElementById("skills-title");
+
+    if (skillsTitle) {
+      skillsTitle.innerHTML = skillsData[selectedFilterIndex].title;
+    }
+  };
+
+  const changeSkills = () => {
+    const skillsList = document.getElementById("skills-list");
+
+    if (skillsList) {
+      skillsList.innerHTML = "";
+      skillsList.append(...getSkillsElements());
+    }
+
+    initializeSwiper();
+  };
+
+  const initializeSwiper = () => {
+		swiper?.destroy();
+
+    swiper = new Swiper("#skills-swiper", {
+      slidesPerView: 6,
+      spaceBetween: 12,
+      autoplay: true,
+      modules: [Autoplay],
+    });
+
+    if (skillsData[selectedFilterIndex].skills.length < 6) {
+      swiper.destroy();
+    }
+  };
+
+  const handleFilter = (filter: Element) => {
+    const _selectedFilterIndex =
+      filter.attributes.getNamedItem("data-value")?.value;
+
+    if (_selectedFilterIndex) {
+      selectedFilterIndex = parseInt(_selectedFilterIndex);
+
+      changeButtonState();
+      translateIndicator();
+      changeIcon();
+      changeTitle();
+      changeSkills();
+    }
+  };
+
+  const filters = document.getElementById("skills-filter");
+
+  if (filters) {
+    for (const filter of filters.children) {
+      filter.addEventListener("click", () => handleFilter(filter));
+    }
+
+    handleFilter(filters.children[0]);
+  }
+</script>
