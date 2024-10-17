@@ -1,5 +1,6 @@
 ---
 import GradientBackground from "../components/ui/GradientBackground.astro";
+import { Filters } from "../models/enums/filters.enum";
 
 import "../styles/skills.scss";
 import "../styles/filters.scss";
@@ -12,22 +13,22 @@ const translations = aboutTranslations[lang];
 const filterOptions = [
   {
     label: translations.skills.personal,
-    value: 0,
+    value: Filters.PERSONAL,
   },
   {
     label: translations.skills.design,
-    value: 1,
+    value: Filters.DESIGN,
   },
   {
     label: translations.skills.dev,
-    value: 2,
+    value: Filters.DEV,
   },
 ];
 ---
 
 <section
 	id="skills"
-  class="overflow-hidden relative border-t-4 border-b-4 border-color-inverse"
+  class="overflow-hidden relative border-t-4 border-b-4 border-color-inverse bg-white dark:bg-slate-300"
 >
   <GradientBackground />
   <div class="relative flex flex-col gap-6 inset-0 p-6 md:p-8 xl:p-12">
@@ -69,6 +70,7 @@ const filterOptions = [
   import { Autoplay } from "swiper/modules";
 
   import { getSkillsData } from "../data/skillsData";
+  import { changeButtonState, translateIndicator } from "../scripts/filters.scripts";
 
   const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
   const skillsData = getSkillsData(lang);
@@ -94,21 +96,6 @@ const filterOptions = [
       }
     );
     return skillElements;
-  };
-
-  const changeButtonState = () => {
-    document.querySelector(".selected")?.classList.remove("selected");
-    document
-      .getElementById(`skill-filter-${selectedFilterIndex}`)
-      ?.classList.add("selected");
-  };
-
-  const translateIndicator = () => {
-    const indicator = document.getElementById("skills-filter-indicator");
-    indicator?.setAttribute(
-      "style",
-      `transform: translateX(${selectedFilterIndex * 100}%)`
-    );
   };
 
   const changeIcon = () => {
@@ -160,8 +147,8 @@ const filterOptions = [
     if (_selectedFilterIndex) {
       selectedFilterIndex = parseInt(_selectedFilterIndex);
 
-      changeButtonState();
-      translateIndicator();
+      changeButtonState(`skill-filter-${selectedFilterIndex}`, "skills-filter");
+      translateIndicator('skills-filter-indicator', selectedFilterIndex);
       changeIcon();
       changeTitle();
       changeSkills();
