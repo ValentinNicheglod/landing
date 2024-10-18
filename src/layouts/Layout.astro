@@ -57,7 +57,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
     let intersectingHeroSection = true;
 
     if (hero) {
-      const logoContainer = document.querySelector(".logo-container");
+      const header = document.querySelector(".header");
       const options = document.getElementsByClassName("option");
 
       const showOptions = () => {
@@ -101,11 +101,11 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 
       document.addEventListener("scroll", observe);
 
-      logoContainer?.addEventListener(
+      header?.addEventListener(
         "mouseenter",
         () => intersectingHeroSection === false && showOptions()
       );
-      logoContainer?.addEventListener(
+      header?.addEventListener(
         "mouseleave",
         () => intersectingHeroSection === false && hideOptions()
       );
