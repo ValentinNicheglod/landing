@@ -1,3 +1,5 @@
+import { isProduction } from "../models/constants";
+
 /** If user navigator language is Spanish the page will be initialized in that language instead of English */
 export const initializeLanguage = () => {
     const notLanguagePreferenceSaved = !sessionStorage.getItem("lang");
@@ -12,7 +14,7 @@ export const initializeLanguage = () => {
 
 /** Show page content when animation loading finished */
 export const showContent = () => {
-  const LOADER_DURATION = 3000;
+  const LOADER_DURATION = isProduction ? 3000 : 0;
   const content = document.getElementById("content");
   const loader = document.getElementById("loader");
 
