@@ -1,5 +1,6 @@
 ---
 import aboutTranslations from "../locales/about.locales.json";
+import { Emojis } from "../models/enums/emojis.enum";
 
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
@@ -7,27 +8,27 @@ const translations = aboutTranslations[lang];
 const interests = [
   {
     label: translations.architecture,
-    emojiCode: "&#x1F3DB;",
+    emojiCode: Emojis.Architecture,
   },
   {
     label: translations.aviation,
-    emojiCode: "&#x1F6EB;&#xFE0F;",
+    emojiCode: Emojis.Aviation,
   },
   {
     label: translations.design,
-    emojiCode: "&#x1F3A8;",
+    emojiCode: Emojis.Design,
   },
   {
     label: translations.photography,
-    emojiCode: "&#x1F4F8;",
+    emojiCode: Emojis.Photography,
   },
   {
     label: translations.technology,
-    emojiCode: "&#x1F5A5;",
+    emojiCode: Emojis.Technology,
   },
   {
     label: translations.travel,
-    emojiCode: "&#x1F30E;",
+    emojiCode: Emojis.Travel,
   },
 ];
 ---

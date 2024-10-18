@@ -1,6 +1,7 @@
 ---
 import ScrollInstruction from "../components/ScrollInstruction.astro";
 import heroTranslations from "../locales/hero.locales.json";
+import { Emojis } from "../models/enums/emojis.enum";
 
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = heroTranslations[lang];
@@ -14,7 +15,7 @@ const translations = heroTranslations[lang];
     <div
       class="flex items-center p-8 gap-8 shadow-md rounded-3xl bg-white outline-slate-300"
     >
-      <div class="text-7xl">&#128075;&#127996;</div>
+      <div class="text-7xl" set:html={Emojis.HandWave}></div>
       <div class="grid gap-3">
         <span class="text-lg text-gray">{translations.presentation}</span>
         <div class="title">Valentín</div>
@@ -24,13 +25,13 @@ const translations = heroTranslations[lang];
       <div
         class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white outline-slate-300"
       >
-        <div class="text-5xl">&#x1F9D1;&#x1F3FB;&#x200D;&#x1F4BB;</div>
+        <div class="text-5xl" set:html={Emojis.Developer}></div>
         <h2 class="text-2xl">{translations.developer}</h2>
       </div>
       <div
         class="flex items-center px-8 py-4 gap-6 shadow-md rounded-3xl bg-white outline-slate-300"
       >
-        <div class="text-5xl">&#x1F9D1;&#x1F3FB;&#x200D;&#x1F3A8;</div>
+        <div class="text-5xl" set:html={Emojis.Designer}></div>
         <h2 class="text-2xl">{translations.designer}</h2>
       </div>
     </div>

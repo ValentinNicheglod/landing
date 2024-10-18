@@ -1,4 +1,5 @@
 import aboutTranslations from "../locales/about.locales.json";
+import { Emojis } from "../models/enums/emojis.enum";
 
 export const getSkillsData = (lang: "es" | "en") => {
   const translations = aboutTranslations[lang];
@@ -6,7 +7,7 @@ export const getSkillsData = (lang: "es" | "en") => {
   return [
     {
       title: translations.skills.personal,
-      icon: "&#x1F481;&#x1F3FB;&#x200D;&#x2642;",
+      icon: Emojis.Personal,
       skills: [
         {
           name: translations.skills.commitment,
@@ -36,7 +37,7 @@ export const getSkillsData = (lang: "es" | "en") => {
     },
     {
       title: translations.skills.design,
-      icon: "&#x1F9D1;&#x1F3FB;&#x200D;&#x1F3A8;",
+      icon: Emojis.Designer,
       skills: [
         {
           name: "Adobe XD",
@@ -66,7 +67,7 @@ export const getSkillsData = (lang: "es" | "en") => {
     },
     {
       title: translations.skills.dev,
-      icon: "&#x1F9D1;&#x1F3FB;&#x200D;&#x1F4BB;",
+      icon: Emojis.Developer,
       skills: [
         {
           name: "Javascript",
