@@ -1,0 +1,60 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { label, image, href } = Astro.props;
+---
+
+<button>
+  <a href={href} class="flex flex-col justify-between items-start gap-2">
+    <div class="flex justify-between w-full">
+      <img src={`src/images/${image}`} class="w-12 h-12" />
+      <div>
+        <div class="chevron ml-2">
+          <Icon name="chevron-right" class="icon text-xl" />
+        </div>
+      </div>
+    </div>
+    <span class="font-medium">
+      {label}
+    </span>
+  </a>
+</button>
+<style>
+  button {
+    @apply border-slate-300 hover:border-primary bg-slate-50 hover:bg-slate-200 rounded-lg pl-3 p-2;
+    border-width: 1.5px;
+    transition: 0.5s;
+
+    img {
+      @apply drop-shadow-lg;
+    }
+
+    span {
+      @apply text-zinc-500;
+    }
+
+    .chevron {
+      @apply p-1 rounded-full aspect-square;
+      transition: 0.5s;
+
+      .icon {
+        transition: 0.5s;
+        @apply text-slate-400;
+      }
+    }
+
+    &:hover {
+      span {
+        @apply text-primary;
+      }
+
+      .chevron {
+        @apply animate-jump animate-duration-1000 animate-delay-500 animate-iteration-2 bg-primary shadow-md;
+
+        .icon {
+          @apply text-white;
+        }
+      }
+    }
+  }
+</style>
