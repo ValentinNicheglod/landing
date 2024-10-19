@@ -1,0 +1,50 @@
+{
+  "en": {
+    "sectionTitle": "My projects",
+    "design": "UX/UI Design",
+    "dev": "Web Development",
+    "images": "Image gallery",
+    "open": "Open project",
+    "technologies": "Technologies used",
+    "lift": {
+      "subtitle": "Landing Page",
+      "description": "I designed and implemented a landing page for a fictional construction company which highlights the company identity and services.<br>This design aims to attract and convert visitors into customers, reflecting the essence of the company."
+    },
+    "meteor": {
+      "subtitle": "UX Case Study",
+      "description": "UX case study on an inclusive fashion e-commerce app. This app allows users to purchase products available in a wide variety of models and sizes, ensuring that everyone feels represented and can find what they are looking for."
+    },
+    "radley": {
+      "subtitle": "Web Prototype",
+      "description": "Web prototype of a fashion e-commerce platform that allows users to browse, search, and purchase products. It includes categories for easy navigation and a shopping cart to manage selected items."
+    },
+    "reconnect": {
+      "subtitle": "Pricing Page",
+      "description": "Subscription page that offers various plans with specific features for different types of customers. I implemented a monthly or annual selection system, highlighting prices and features in a clear and appealing way."
+    }
+  },
+  "es": {
+    "sectionTitle": "Mis proyectos",
+    "design": "Diseño UX/UI",
+    "dev": "Desarrollo Web",
+    "images": "Imágenes",
+    "open": "Ver proyecto",
+    "technologies": "Tecnologías utilizadas",
+    "lift": {
+      "subtitle": "Landing Page",
+      "description": "Diseñé e implementé una landing page para una empresa de construcción ficticia que destaca su identidad y servicios.<br>Este diseño busca atraer y convertir a visitantes en clientes, reflejando la esencia de la empresa."
+    },
+    "meteor": {
+      "subtitle": "Caso de Estudio UX",
+      "description": "Caso de estudio UX sobre una aplicación de e-commerce de moda centrada en la inclusividad. Esta app permite a los usuarios comprar productos disponibles en una amplia variedad de modelos y tallas, asegurando que todos se sientan representados y puedan encontrar lo que buscan."
+    },
+    "radley": {
+      "subtitle": "Prototipo Web",
+      "description": "Prototipo web de un e-commerce de moda que permite a los usuarios visualizar, buscar y comprar productos. Incluye categorías para facilitar la navegación y una bolsa de compras para gestionar los artículos seleccionados."
+    },
+    "reconnect": {
+      "subtitle": "Suscripción a planes",
+      "description": "Página de suscripción que ofrece varios planes con funcionalidades específicas para distintos tipos de clientes. Implementé un sistema de selección mensual o anual, destacando precios y características de manera clara y atractiva."
+    }
+  }
+}
