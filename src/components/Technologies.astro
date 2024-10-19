@@ -1,0 +1,48 @@
+---
+const { technologies } = Astro.props as { technologies: string[] };
+import { technologiesWithOwnBG } from "../models/constants";
+import projectsTranslations from "../locales/projects.locales.json";
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = projectsTranslations[lang];
+
+const iconHasOwnBackground = (techName: string) => {
+  return technologiesWithOwnBG.has(techName);
+};
+---
+
+<div
+  class="flex justify-between items-center border-slate-300 bg-slate-100 rounded-lg p-2 pb-1"
+>
+  <span class="text-sm font-light tech-label">{translations.technologies}</span>
+  <div class="flex gap-2">
+    {
+      technologies.map((technology) => (
+        <div
+          class="rounded-full overflow-hidden tech-badge"
+          class:list={{
+            "p-1.5 bg-neutral-200": !iconHasOwnBackground(technology),
+          }}
+        >
+          <img
+            src={`src/images/skills/${technology}.png`}
+            alt=""
+            class:list={{
+              "w-6 h-6": !iconHasOwnBackground(technology),
+              "w-9 h-9": iconHasOwnBackground(technology),
+            }}
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
+<style type="scss">
+  .tech-badge {
+    transition: 0.25s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+</style>
