@@ -72,6 +72,10 @@ html {
   }
 }
 
+section:is(#projects) {
+  height: min(100dvh, 1000px);
+}
+
 img {
   -webkit-user-drag: none;
   user-select: none;
