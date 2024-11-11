@@ -1,0 +1,129 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import { projectsData } from "../data/projects.data";
+import projectsTranslations from "../locales/projects.locales.json";
+import { Filters } from "../models/enums/filters.enum";
+
+import "../styles/filters.scss";
+import "swiper/css";
+import 'swiper/css/navigation';
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = projectsTranslations[lang];
+
+const filterOptions = [
+  {
+    label: "Todos",
+    value: Filters.PERSONAL,
+  },
+  {
+    label: translations.design,
+    value: Filters.DESIGN,
+  },
+  {
+    label: translations.dev,
+    value: Filters.DEV,
+  },
+];
+---
+
+<section id="projects" class="flex flex-col p-8 md:p-12 xl:p-16">
+  <div class="flex justify-between py-10">
+    <h2 class="title">Proyectos</h2>
+    <div id="projects-filter" class="filters bg-slate-200">
+      {
+        filterOptions.map((option) => (
+          <button
+            id={`project-filter-${option.value}`}
+            data-value={option.value}
+          >
+            {option.label}
+          </button>
+        ))
+      }
+      <div class="absolute w-full h-full p-1">
+        <div id="projects-filter-indicator" class="indicator"></div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-1 content-center">
+    <div id="projects-swiper" class="swiper">
+      <div class="swiper-wrapper">
+        {
+          projectsData.map((project, index) => (
+            <div class="swiper-slide">
+              <ProjectCard project={project} index={index}/>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import Swiper from "swiper";
+  import { Autoplay } from "swiper/modules";
+  import {
+    changeButtonState,
+    translateIndicator,
+  } from "../scripts/filters.scripts";
+
+  let swiper: Swiper;
+
+  const initializeSwiper = () => {
+    swiper?.destroy();
+    console.log("ínit");
+    swiper = new Swiper("#projects-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      autoplay: {
+        pauseOnMouseEnter: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1.25,
+        },
+        768: {
+          slidesPerView: 1.5,
+        },
+        1024: {
+          slidesPerView: 2.5,
+        },
+        1280: {
+          slidesPerView: 3,
+        },
+        1536: {
+          slidesPerView: 3.5,
+        }
+      },
+      loop: true,
+      //modules: [Autoplay],
+
+    });
+  };
+
+  const handleFilter = (filter: Element) => {
+    const selectedIndex = filter.attributes.getNamedItem("data-value")?.value;
+    if (selectedIndex) {
+      const selectedFilterIndex = parseInt(selectedIndex);
+      changeButtonState(
+        `project-filter-${selectedFilterIndex}`,
+        "projects-filter"
+      );
+      translateIndicator("projects-filter-indicator", selectedFilterIndex);
+      initializeSwiper();
+    }
+  };
+
+  const filters = document.getElementById("projects-filter");
+
+  if (filters) {
+    for (const filter of filters.children) {
+      filter.addEventListener("click", () => handleFilter(filter));
+    }
+
+    document.addEventListener("DOMContentLoaded", () =>
+      handleFilter(filters.children[0])
+    );
+  }
+</script>

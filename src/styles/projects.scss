@@ -1,0 +1,48 @@
+.project-card {
+  @apply relative rounded-xl md:rounded-2xl border-slate-300 aspect-square overflow-hidden;
+  border-width: .5px;
+  background-size: cover !important;
+
+  .wrapper {
+    @apply absolute flex flex-col w-full aspect-square;
+
+    .overlay-top {
+      height: 75%;
+      transition: 0.5s;
+    }
+
+    .content {
+      @apply relative flex flex-col gap-2 aspect-square pb-4;
+      background: #00000090;
+
+      &::before {
+        $height: 25px;
+        content: "";
+        display: block;
+        position: absolute;
+        top: -$height;
+        width: 100%;
+        height: $height;
+        background: linear-gradient(180deg, transparent, #00000090);
+      }
+    }
+
+    .project-information {
+      @apply flex items-center gap-2 duration-75;
+    }
+
+    .view-more {
+     @apply text-xs text-white text-nowrap px-2 py-0.5 rounded-full bg-primary; 
+    }
+  }
+
+  &:hover {
+    .overlay-top {
+      height: 0;
+    }
+
+    .content {
+      background: #00000099;
+    }
+  }
+}

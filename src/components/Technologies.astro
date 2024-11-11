@@ -28,8 +28,8 @@ const iconHasOwnBackground = (techName: string) => {
             src={`src/images/skills/${technology}.png`}
             alt=""
             class:list={{
-              "w-6 h-6": !iconHasOwnBackground(technology),
-              "w-9 h-9": iconHasOwnBackground(technology),
+              "w-6 h-6 sm:w-5 sm:h-5 xl:w-6 xl:h-6": !iconHasOwnBackground(technology),
+              "w-9 h-9 sm:w-8 sm:h-8 xl:w-9 xl:h-9": iconHasOwnBackground(technology),
             }}
           />
         </div>

@@ -5,6 +5,8 @@
     "dev": "Web Development",
     "images": "Image gallery",
     "open": "Open project",
+    "more": "+ View more",
+    "less": "+ View less",
     "technologies": "Technologies used",
     "lift": {
       "subtitle": "Landing Page",
@@ -12,7 +14,7 @@
     },
     "meteor": {
       "subtitle": "UX Case Study",
-      "description": "UX case study on an inclusive fashion e-commerce app. This app allows users to purchase products available in a wide variety of models and sizes, ensuring that everyone feels represented and can find what they are looking for."
+      "description": "UX case study on an inclusive fashion e-commerce app. This app allows users to purchase products available in a wide variety of models and sizes."
     },
     "radley": {
       "subtitle": "Web Prototype",
@@ -29,6 +31,8 @@
     "dev": "Desarrollo Web",
     "images": "Imágenes",
     "open": "Ver proyecto",
+    "more": "+ Ver mas",
+    "less": "- Ver menos",
     "technologies": "Tecnologías utilizadas",
     "lift": {
       "subtitle": "Landing Page",
@@ -36,7 +40,7 @@
     },
     "meteor": {
       "subtitle": "Caso de Estudio UX",
-      "description": "Caso de estudio UX sobre una aplicación de e-commerce de moda centrada en la inclusividad. Esta app permite a los usuarios comprar productos disponibles en una amplia variedad de modelos y tallas, asegurando que todos se sientan representados y puedan encontrar lo que buscan."
+      "description": "Caso de estudio UX sobre una aplicación de e-commerce de moda centrada en la inclusividad. Esta app permite a los usuarios comprar productos disponibles en una amplia variedad de modelos y tallas."
     },
     "radley": {
       "subtitle": "Prototipo Web",

@@ -7,14 +7,22 @@ const { label, image, href } = Astro.props;
 <button>
   <a href={href} class="flex flex-col justify-between items-start gap-2">
     <div class="flex justify-between w-full">
-      <img src={`src/images/${image}`} class="w-12 h-12" />
+      <img src={`src/images/${image}`} class="w-10 h-10 lg:w-12 lg:h-12" />
       <div>
-        <div class="chevron ml-2">
-          <Icon name="chevron-right" class="icon text-xl" />
+        <div class="chevron relative ml-2">
+          {
+            href.includes("http") && (
+              <Icon
+                name="external-link"
+                class="icon link-icon text-lg lg:text-xl"
+              />
+            )
+          }
+          <Icon name="chevron-right" class="icon text-lg lg:text-xl" />
         </div>
       </div>
     </div>
-    <span class="font-medium">
+    <span class="font-medium button-label">
       {label}
     </span>
   </a>
@@ -30,7 +38,7 @@ const { label, image, href } = Astro.props;
     }
 
     span {
-      @apply text-zinc-500;
+      @apply text-zinc-500 whitespace-nowrap;
     }
 
     .chevron {
@@ -40,6 +48,10 @@ const { label, image, href } = Astro.props;
       .icon {
         transition: 0.5s;
         @apply text-slate-400;
+      }
+
+      .link-icon {
+        @apply absolute top-1 opacity-0;
       }
     }
 
@@ -53,6 +65,14 @@ const { label, image, href } = Astro.props;
 
         .icon {
           @apply text-white;
+        }
+
+        .link-icon {
+          @apply opacity-100;
+        }
+
+        .link-icon + .icon {
+          @apply opacity-0;
         }
       }
     }

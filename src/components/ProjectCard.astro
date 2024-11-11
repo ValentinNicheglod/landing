@@ -1,0 +1,146 @@
+---
+import type { Project } from "../models/types/project.type";
+import projectsTranslations from "../locales/projects.locales.json";
+import ProjectLogo from "./ui/ProjectLogo.astro";
+import "../styles/projects.scss";
+import SquareButton from "./SquareButton.astro";
+import Technologies from "./Technologies.astro";
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = projectsTranslations[lang];
+
+const { project, index } = Astro.props as { project: Project; index: number };
+---
+
+<div
+  class="project-card"
+  style={`background: url(src/images/projects/${project.path}/background.png)`}
+>
+  <div class="wrapper">
+    <div class="overlay-top"></div>
+    <div class="content">
+      <div class="project-information">
+        <ProjectLogo project={project} />
+        <div class="flex flex-col">
+          <div class="font-semibold text-white text-2xl">
+            {project.name}
+          </div>
+          <span class="text-slate-300 text-sm md:text-base">
+            {translations[project.path].subtitle}
+          </span>
+        </div>
+      </div>
+      <div class="relative flex-1 px-4">
+        <span
+          id={`description-${index}`}
+          class="text-slate-100 font-light text-pretty description"
+          set:html={translations[project.path].description}
+        />
+        &nbsp;
+        <button id={`view-more-${index}`} class="view-more hidden">
+          {translations.more}
+        </button>
+      </div>
+      <div id={`technologies-${index}`} class="px-4">
+        <Technologies technologies={project.technologies} />
+      </div>
+      <div class="grid grid-cols-3 gap-1 sm:gap-3 px-4 zd">
+        {
+          project.github && (
+            <SquareButton
+              image="social/GitHub.png"
+              label="GitHub"
+              href={project.github}
+            />
+          )
+        }
+        {
+          project.behance && (
+            <SquareButton
+              image="social/Behance.png"
+              label="Behance"
+              href={project.behance}
+            />
+          )
+        }
+        <SquareButton
+          image="Gallery.png"
+          label={translations.images}
+          href="/gallery"
+        />
+        <SquareButton
+          image="Open.png"
+          label={translations.open}
+          href={project.url}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<script define:vars={{ index, project, translations }}>
+  let showingFullDescription = false;
+
+  const setCardStyles = () => {
+    const cardWidth = document.querySelector(".project-card").clientWidth;
+    const isSmallCard = cardWidth < 400;
+
+    const descriptions = document.getElementsByClassName("description");
+    const labels = document.getElementsByClassName("button-label");
+    const viewMoreButtons = document.getElementsByClassName("view-more");
+
+    if (isSmallCard) {
+      [...labels].forEach((label) => {
+        label.classList.add("text-xs");
+      });
+
+      [...viewMoreButtons].forEach((button) => {
+        button.classList.remove("hidden");
+      });
+
+      [...descriptions].forEach((description) => {
+        description.innerHTML =
+          translations[project.path].description.split(".")[0] + ".";
+        description.classList.add("text-xs");
+      });
+    } else {
+      [...labels].forEach((label) => {
+        label.classList.add("text-xs");
+      });
+
+      [...viewMoreButtons].forEach((button) => {
+        button.classList.add("hidden");
+      });
+
+      [...descriptions].forEach((description) => {
+        description.innerHTML = translations[project.path].description;
+        description.classList.remove("text-xs");
+      });
+    }
+  };
+
+  const handleViewMoreClick = () => {
+    showingFullDescription = !showingFullDescription;
+    const description = document.getElementById(`description-${index}`);
+    const viewMoreButton = document.getElementById(`view-more-${index}`);
+    const technologies = document.getElementById(`technologies-${index}`);
+
+    if (showingFullDescription) {
+      viewMoreButton.innerText = translations.less;
+      description.innerHTML = translations[project.path].description;
+      technologies.classList.add("hidden");
+    } else {
+      viewMoreButton.innerText = translations.more;
+      description.innerHTML =
+        translations[project.path].description.split(".")[0] + ".";
+      technologies.classList.remove("hidden");
+    }
+  };
+
+  window.addEventListener("resize", setCardStyles);
+  window.addEventListener("DOMContentLoaded", () => {
+    setCardStyles();
+    document
+      .getElementById(`view-more-${index}`)
+      .addEventListener("click", handleViewMoreClick);
+  });
+</script>
