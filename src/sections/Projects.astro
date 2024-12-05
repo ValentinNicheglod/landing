@@ -2,7 +2,7 @@
 import ProjectCard from "../components/ProjectCard.astro";
 import { projectsData } from "../data/projects.data";
 import projectsTranslations from "../locales/projects.locales.json";
-import { Filters } from "../models/enums/filters.enum";
+import { ProjectFilters } from "../models/enums/filters.enum";
 
 import "../styles/filters.scss";
 import "swiper/css";
@@ -14,15 +14,15 @@ const translations = projectsTranslations[lang];
 const filterOptions = [
   {
     label: "Todos",
-    value: Filters.PERSONAL,
+    value: ProjectFilters.ALL,
   },
   {
     label: translations.design,
-    value: Filters.DESIGN,
+    value: ProjectFilters.DESIGN,
   },
   {
     label: translations.dev,
-    value: Filters.DEV,
+    value: ProjectFilters.DEV,
   },
 ];
 ---

@@ -1,6 +1,6 @@
 ---
 import GradientBackground from "../components/ui/GradientBackground.astro";
-import { Filters } from "../models/enums/filters.enum";
+import { SkillsFilters } from "../models/enums/filters.enum";
 
 import "../styles/skills.scss";
 import "../styles/filters.scss";
@@ -13,15 +13,15 @@ const translations = aboutTranslations[lang];
 const filterOptions = [
   {
     label: translations.skills.personal,
-    value: Filters.PERSONAL,
+    value: SkillsFilters.PERSONAL,
   },
   {
     label: translations.skills.design,
-    value: Filters.DESIGN,
+    value: SkillsFilters.DESIGN,
   },
   {
     label: translations.skills.dev,
-    value: Filters.DEV,
+    value: SkillsFilters.DEV,
   },
 ];
 ---
