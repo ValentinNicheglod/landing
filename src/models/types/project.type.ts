@@ -7,5 +7,7 @@ export type Project = {
   name: string;
   url: string;
   type: Filters;
+  galleryImages: string[];
+  scrollablePrototype?: boolean;
   technologies: string[];
 } & ({ github: string; behance?: never } | { behance: string; github?: never });
