@@ -17,10 +17,15 @@
     "countries-and-timezones": "^3.6.0",
     "moment-timezone": "^0.5.45",
     "postcss": "^8.4.47",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "sass": "^1.79.3",
     "swiper": "^11.1.14",
     "tailwindcss": "^3.4.12",
     "tailwindcss-animated": "^1.1.2",
     "typescript": "^5.6.2"
+  },
+  "prettier": {
+    "plugins": ["prettier-plugin-tailwindcss"]
   }
 }
