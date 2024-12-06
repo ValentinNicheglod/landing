@@ -16,12 +16,12 @@ $dark: #1d2530;
 
 html {
   body {
-    transition: background-color .5s;
+    transition: background-color 0.5s;
   }
 
   .bg-color,
   .border-color {
-    transition: background-color border-color .5s;
+    transition: background-color border-color 0.5s;
   }
 
   // Tema claro
@@ -65,10 +65,10 @@ html {
       border-color: #1d2530;
     }
 
-    .title, .indicator {
+    .title,
+    .indicator {
       filter: saturate(1.5);
     }
-
   }
 }
 
@@ -97,4 +97,13 @@ h2 {
 
 .flex-col {
   display: flex;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 32px;
 }

@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+import heroTranslations from "../locales/hero.locales.json";
+
+const { image, projectPath } = Astro.props as {
+  image: string;
+  projectPath: string;
+};
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = heroTranslations[lang];
+---
+
+<div>
+  <div
+    class="w-fit m-auto inset-0 mt-8"
+    class:list={{ "opacity-0": !image.includes("scroll") }}
+  >
+    <div
+      class="flex items-center gap-2 px-2 py-1 rounded-full bg-white shadow-md animate-bounce animate-infinite"
+    >
+      <Icon name="arrow-down" class="text-primary text-sm" />
+      <span class="text-black text-sm">
+        {translations.instruction}
+      </span>
+    </div>
+  </div>
+  <div>
+    <img src="src/images/projects/project-background.png" class="background" />
+    <img
+      src={`src/images/projects/${projectPath}/mockup-window.png`}
+      class="prototype-window"
+    />
+    <div
+      class="prototype-content"
+      class:list={{ "overflow-hidden": !image.includes("scroll") }}
+    >
+      <img src={`src/images/projects/${projectPath}/mockups/${image}.jpg`} />
+    </div>
+  </div>
+</div>
+<style lang="scss">
+  $base-width: min(900px, 70vw);
+
+  .background {
+    margin: auto;
+    width: calc($base-width * 1.05);
+    height: 100%;
+    transform: translateY(-2rem);
+  }
+
+  .prototype-window {
+    @apply absolute inset-0 m-auto;
+    width: $base-width;
+  }
+
+  .prototype-content {
+    @apply absolute inset-0 z-50 m-auto overflow-y-auto;
+    width: calc($base-width * 0.96);
+    height: calc($base-width * 0.565);
+    transform: translateY(calc($base-width * 0.0135));
+    scrollbar-width: thin;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+</style>

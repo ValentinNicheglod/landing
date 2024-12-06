@@ -1,0 +1,51 @@
+
+dialog {
+    @apply rounded-2xl;
+    width: min(1200px, 80vw);
+    max-height: min(800px, 95dvh);
+    background-color: #e1eaff;
+    
+    > div {
+        @apply flex h-full;
+    }
+}
+
+dialog[open] {
+  opacity: 1;
+}
+
+/*   Closed state of the dialog   */
+dialog {
+  opacity: 0;
+    transition: all 0.7s allow-discrete;
+}
+
+dialog[open] {
+    opacity: 1;
+}
+
+/*   Before-open state  */
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+  }
+}
+
+/* Transition the :backdrop when the dialog modal is promoted to the top layer */
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: all 0.7s allow-discrete;
+  /* Equivalent to
+    transition: all 0.7s allow-discrete; */
+}
+
+dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 75%);
+  backdrop-filter: blur(.5px);
+}
+
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
+}
