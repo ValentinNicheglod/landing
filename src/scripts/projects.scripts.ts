@@ -1,0 +1,174 @@
+import Swiper from "swiper";
+import { projectsData } from "../data/projects.data";
+import { Autoplay, Navigation } from "swiper/modules";
+import type { Project } from "../models/types/project.type";
+import { ProjectFilters } from "../models/enums/filters.enum";
+import { changeButtonState, translateIndicator } from "./filters.scripts";
+import type { SwiperSlide } from "swiper/element";
+
+let projectSwiper: Swiper | null = null;
+let selectedFilterIndex: ProjectFilters;
+
+const getProjectsGallerySwiperConfig = (project: Project) => ({
+  slidesPerView: 1,
+  centeredSlides: true,
+  navigation:
+    project.galleryImages.length > 1
+      ? {
+          nextEl: `#${project.path}-next`,
+          prevEl: `#${project.path}-prev`,
+        }
+      : false,
+  modules: [Navigation],
+});
+
+const getProjectsListSwiperConfig = () => ({
+  slidesPerView: 1,
+  spaceBetween: 16,
+  autoplay: {
+    pauseOnMouseEnter: true,
+  },
+  breakpoints: {
+    704: {
+      slidesPerView: 1.25,
+    },
+    768: {
+      slidesPerView: 2,
+    },
+    992: {
+      slidesPerView: 2.5,
+    },
+    1218: {
+      slidesPerView: 3,
+    },
+    1792: {
+      slidesPerView: 4,
+    },
+  },
+  loop: true,
+  modules: [Autoplay],
+});
+
+const initializeProjectsGallerySwiper = () => {
+  projectsData.forEach((project) => {
+    const projectGallery = `#${project.path}-gallery-swiper`;
+    new Swiper(projectGallery, getProjectsGallerySwiperConfig(project));
+  });
+};
+
+export const initializeProjectsSwiper = () => {
+  projectSwiper = new Swiper("#projects-swiper", getProjectsListSwiperConfig());
+};
+
+const addProjectCardButtonsListeners = () => {
+  projectsData.forEach((project) => {
+    if (project.type === ProjectFilters.DEV) {
+      const githubButton = document.getElementById(
+        `${project.path}-github-button`,
+      );
+      githubButton?.addEventListener("click", () =>
+        window.open(project.github, "_blank"),
+      );
+    }
+
+    if (project.type === ProjectFilters.DESIGN) {
+      const behanceButton = document.getElementById(
+        `${project.path}-behance-button`,
+      );
+      behanceButton?.addEventListener("click", () =>
+        window.open(project.behance, "_blank"),
+      );
+    }
+
+    const openProjectButton = document.getElementById(
+      `${project.path}-open-button`,
+    );
+    openProjectButton?.addEventListener("click", () => {
+      window.open(project.url, "_blank");
+    });
+
+    const openGalleryButton = document.getElementById(
+      `${project.path}-gallery-button`,
+    );
+    const closeGalleryButton = document.getElementById(
+      `${project.path}-gallery-close-button`,
+    );
+    openGalleryButton?.addEventListener("click", () =>
+      openGalleryModal(project.path),
+    );
+    closeGalleryButton?.addEventListener("click", () =>
+      closeGalleryModal(project.path),
+    );
+  });
+};
+
+const addFiltersListeners = () => {
+  const filters = document.getElementById("projects-filter");
+
+  if (filters) {
+    for (const filter of filters.children) {
+      filter.addEventListener("click", () => handleFilter(filter));
+    }
+  }
+};
+
+const openGalleryModal = (projectPath: string) => {
+  const dialog = document.getElementById(
+    `${projectPath}-gallery`,
+  ) as HTMLDialogElement;
+  const closeButton = document.getElementById(`${projectPath}-close-btn`);
+
+  projectSwiper?.autoplay?.stop();
+
+  dialog?.showModal();
+
+  dialog?.blur();
+  closeButton?.blur();
+};
+
+const closeGalleryModal = (projectPath: string) => {
+  const galleryModal = document.getElementById(
+    `${projectPath}-gallery`,
+  ) as HTMLDialogElement;
+
+  projectSwiper?.autoplay?.start();
+
+  galleryModal.close();
+};
+
+const handleFilter = (filter: Element) => {
+  const selectedIndex = filter.attributes.getNamedItem("data-value")?.value;
+
+  if (selectedIndex) {
+    selectedFilterIndex = parseInt(selectedIndex);
+    changeButtonState(
+      `project-filter-${selectedFilterIndex}`,
+      "projects-filter",
+    );
+    translateIndicator("projects-filter-indicator", selectedFilterIndex);
+    setProjectSlides();
+  }
+};
+
+const setProjectSlides = () => {
+  const projectSlides = document.querySelectorAll('.swiper-slide') as unknown as SwiperSlide[];
+  projectSlides.forEach((slide) => {
+    if (!slide.dataset.type) return;
+
+    const projectType: ProjectFilters = parseInt(slide.dataset.type);
+    if (selectedFilterIndex === ProjectFilters.ALL || projectType === selectedFilterIndex) {
+      slide.style.display = 'block';
+    } else {
+      slide.style.display = 'none';
+    }
+  });
+
+  projectSwiper?.update();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeProjectsSwiper();
+  addFiltersListeners();
+  initializeProjectsGallerySwiper();
+  addProjectCardButtonsListeners();
+});

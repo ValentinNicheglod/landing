@@ -1,12 +1,14 @@
 ---
+import { Icon } from "astro-icon/components";
 import ProjectCard from "../components/ProjectCard.astro";
+import ProjectGallery from "../components/ProjectGallery.astro";
 import { projectsData } from "../data/projects.data";
 import projectsTranslations from "../locales/projects.locales.json";
 import { ProjectFilters } from "../models/enums/filters.enum";
 
 import "../styles/filters.scss";
+import "../styles/dialog.scss";
 import "swiper/css";
-import 'swiper/css/navigation';
 
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
@@ -35,6 +37,7 @@ const filterOptions = [
         filterOptions.map((option) => (
           <button
             id={`project-filter-${option.value}`}
+            class:list={{ selected: option.value === 0 }}
             data-value={option.value}
           >
             {option.label}
@@ -51,8 +54,8 @@ const filterOptions = [
       <div class="swiper-wrapper">
         {
           projectsData.map((project, index) => (
-            <div class="swiper-slide">
-              <ProjectCard project={project} index={index}/>
+            <div class="swiper-slide" data-type={project.type}>
+              <ProjectCard project={project} index={index} />
             </div>
           ))
         }
@@ -60,70 +63,4 @@ const filterOptions = [
     </div>
   </div>
 </section>
-<script>
-  import Swiper from "swiper";
-  import { Autoplay } from "swiper/modules";
-  import {
-    changeButtonState,
-    translateIndicator,
-  } from "../scripts/filters.scripts";
-
-  let swiper: Swiper;
-
-  const initializeSwiper = () => {
-    swiper?.destroy();
-    console.log("ínit");
-    swiper = new Swiper("#projects-swiper", {
-      slidesPerView: 1,
-      spaceBetween: 16,
-      autoplay: {
-        pauseOnMouseEnter: true,
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: 1.25,
-        },
-        768: {
-          slidesPerView: 1.5,
-        },
-        1024: {
-          slidesPerView: 2.5,
-        },
-        1280: {
-          slidesPerView: 3,
-        },
-        1536: {
-          slidesPerView: 3.5,
-        }
-      },
-      loop: true,
-      //modules: [Autoplay],
-
-    });
-  };
-
-  const handleFilter = (filter: Element) => {
-    const selectedIndex = filter.attributes.getNamedItem("data-value")?.value;
-    if (selectedIndex) {
-      const selectedFilterIndex = parseInt(selectedIndex);
-      changeButtonState(
-        `project-filter-${selectedFilterIndex}`,
-        "projects-filter"
-      );
-      translateIndicator("projects-filter-indicator", selectedFilterIndex);
-      initializeSwiper();
-    }
-  };
-
-  const filters = document.getElementById("projects-filter");
-
-  if (filters) {
-    for (const filter of filters.children) {
-      filter.addEventListener("click", () => handleFilter(filter));
-    }
-
-    document.addEventListener("DOMContentLoaded", () =>
-      handleFilter(filters.children[0])
-    );
-  }
-</script>
+<script src="../scripts/projects.scripts.ts"></script>
