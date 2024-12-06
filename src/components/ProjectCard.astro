@@ -48,30 +48,37 @@ const { project, index } = Astro.props as { project: Project; index: number };
         {
           project.github && (
             <SquareButton
+              id="github"
               image="social/GitHub.png"
               label="GitHub"
-              href={project.github}
+              project={project}
+              url={project.github}
             />
           )
         }
         {
           project.behance && (
             <SquareButton
+              id="behance"
               image="social/Behance.png"
               label="Behance"
-              href={project.behance}
+              project={project}
+              url={project.behance}
             />
           )
         }
         <SquareButton
+          id="gallery"
           image="Gallery.png"
           label={translations.images}
-          href="/gallery"
+          project={project}
         />
         <SquareButton
+          id="open"
           image="Open.png"
           label={translations.open}
-          href={project.url}
+          project={project}
+          url={project.url}
         />
       </div>
     </div>

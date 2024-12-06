@@ -1,80 +1,24 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const { label, image, href } = Astro.props;
+const { label, image, url, project, id } = Astro.props;
+import "../styles/buttons.scss";
 ---
 
-<button>
-  <a href={href} class="flex flex-col justify-between items-start gap-2">
-    <div class="flex justify-between w-full">
-      <img src={`src/images/${image}`} class="w-10 h-10 lg:w-12 lg:h-12" />
-      <div>
-        <div class="chevron relative ml-2">
-          {
-            href.includes("http") && (
-              <Icon
-                name="external-link"
-                class="icon link-icon text-lg lg:text-xl"
-              />
-            )
-          }
-          <Icon name="chevron-right" class="icon text-lg lg:text-xl" />
-        </div>
+<button
+  class="square-button"
+  id={url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`}
+>
+  <div class="flex justify-between w-full">
+    <img src={`src/images/${image}`} />
+    <div>
+      <div class="chevron">
+        {url && <Icon name="external-link" class="icon link-icon" />}
+        <Icon name="chevron-right" class="icon" />
       </div>
     </div>
-    <span class="font-medium button-label">
-      {label}
-    </span>
-  </a>
+  </div>
+  <span class="font-medium button-label">
+    {label}
+  </span>
 </button>
-<style>
-  button {
-    @apply border-slate-300 hover:border-primary bg-slate-50 hover:bg-slate-200 rounded-lg pl-3 p-2;
-    border-width: 1.5px;
-    transition: 0.5s;
-
-    img {
-      @apply drop-shadow-lg;
-    }
-
-    span {
-      @apply text-zinc-500 whitespace-nowrap;
-    }
-
-    .chevron {
-      @apply p-1 rounded-full aspect-square;
-      transition: 0.5s;
-
-      .icon {
-        transition: 0.5s;
-        @apply text-slate-400;
-      }
-
-      .link-icon {
-        @apply absolute top-1 opacity-0;
-      }
-    }
-
-    &:hover {
-      span {
-        @apply text-primary;
-      }
-
-      .chevron {
-        @apply animate-jump animate-duration-1000 animate-delay-500 animate-iteration-2 bg-primary shadow-md;
-
-        .icon {
-          @apply text-white;
-        }
-
-        .link-icon {
-          @apply opacity-100;
-        }
-
-        .link-icon + .icon {
-          @apply opacity-0;
-        }
-      }
-    }
-  }
-</style>
