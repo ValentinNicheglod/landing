@@ -1,0 +1,68 @@
+---
+import { Icon } from "astro-icon/components";
+import SocialLinks from "../components/SocialLinks.astro";
+import GradientBackground from "../components/ui/GradientBackground.astro";
+import contactTranslations from "../locales/contact.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = contactTranslations[lang];
+---
+
+<section
+  id="contact"
+  class="flex flex-col p-8 md:p-12 xl:p-16 relative overflow-hidden"
+>
+  <GradientBackground />
+  <div class="grid gap-24 justify-items-center z-10">
+    <h2 class="title text-white">{translations.sectionTitle}</h2>
+    <div class="w-2/5">
+      <SocialLinks size="large" />
+    </div>
+    <div class="card">
+      <div class="grid gap-4">
+        <h3 class="text-xl md:text-3xl font-semibold opacity-85">
+          {translations.sectionSubtitle}
+        </h3>
+        <span class="text-balance">
+          {translations.content}
+        </span>
+      </div>
+      <a href="mailto:valentinnicheglod1@gmail.com">
+        <div class="p-1 rounded-full bg-white">
+          <Icon name="send" class="text-[#9155f6] mr-0.5 mt-0.5" />
+        </div>
+        <div class="pb-0.5">
+          {translations.sendEmail}
+          &nbsp;&nbsp;
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+<style>
+  section {
+    border-bottom: 5px solid #ffff;
+  }
+
+  h2 {
+    filter: drop-shadow(0px 0px 8px #22222215);
+  }
+
+  a {
+    @apply m-auto w-fit cursor-pointer rounded-full p-3 hover:pr-6;
+    @apply text-xl font-medium text-white;
+    @apply flex items-center gap-3 hover:gap-12;
+    background-color: #9155f6;
+    box-shadow: 0px 4px 24px rgba(145, 85, 246, 0.25);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.75s;
+  }
+
+  a:hover {
+    background-color: #7225f3;
+    box-shadow: 0px 4px 24px rgba(114, 37, 243, 0.3);
+  }
+
+  .card {
+    @apply grid w-4/5 justify-center gap-8 rounded-3xl bg-white px-16 py-8 text-center;
+    border: 1px solid #cccc;
+  }
+</style>
