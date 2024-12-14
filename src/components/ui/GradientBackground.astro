@@ -2,7 +2,7 @@
 import BlurredCircle from "./BlurredCircle.astro";
 ---
 
-<div class="background absolute blur-3xl overflow-hidden h-full w-full">
+<div class="background absolute blur-3xl overflow-hidden h-full w-full scale-125">
     <div class="absolute gradient-circle">
         <BlurredCircle size={500} blur={500} color="#1effff" />
     </div>
@@ -21,7 +21,7 @@ import BlurredCircle from "./BlurredCircle.astro";
 </div>
 <style>
   .background {
-    background: linear-gradient(90deg, #0768eb 20%, #00e6e6 80%, #25a5fe);
+    background: linear-gradient(90deg, #0768eb 20%, #00c5c5 80%, #25a5fe);
   }
 
   .gradient-circle {
