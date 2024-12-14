@@ -3,12 +3,14 @@
         "presentation": "Hi, I'm",
         "instruction": "Scroll down to see more content",
         "developer": "Full Stack Developer",
-        "designer": "UX/UI Designer"
+        "designer": "UX/UI Designer",
+        "madeWithLove": "Made with love using"
     },
     "es": {
         "presentation": "Hola, soy",
         "instruction": "Desliza hacia abajo para ver mas contenido",
         "developer": "Desarrollador Full Stack",
-        "designer": "Diseñador UX/UI"
+        "designer": "Diseñador UX/UI",
+        "madeWithLove": "Hecho con amor utilizando"
     }
 }
