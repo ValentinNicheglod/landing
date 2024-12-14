@@ -1,0 +1,15 @@
+{
+  "en": {
+    "sectionTitle": "Let's keep in contact",
+    "sectionSubtitle": "¿Do you have any project on mind?",
+    "content": "I value teamwork, collaborative ideas, and trust that together we can develop products that truly make a difference. If you're interested in collaborating, feel free to reach out!",
+    "sendEmail": "Send me an email"
+    
+  },
+  "es": {
+    "sectionTitle": "Mantengámonos en contacto",
+    "sectionSubtitle": "¿Tienes algún proyecto en mente?",
+    "content": "Valoro el trabajo en equipo, las ideas colaborativas y confío en que juntos podemos desarrollar productos que realmente marquen la diferencia, si te interesa colaborar, ¡no dudes en contactarme!",
+    "sendEmail": "Envíame un correo"
+  }
+}

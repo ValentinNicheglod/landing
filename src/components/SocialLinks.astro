@@ -20,13 +20,12 @@ const contactLinks = [
 ];
 
 const { size } = Astro.props;
-
 ---
 
-<div class="flex gap-2 md:gap-3">
+<div class="flex gap-2 md:gap-3" class:list={{'justify-between': size === 'large'}}>
   {
     contactLinks.map((link) => (
-      <a href={link.href} target="_blank" rel="noreferrer noopener" class="w-11 md:w-12 aspect-square" class:list={{'w-8 md:w-9': size === 'small'}}>
+      <a href={link.href} target="_blank" rel="noreferrer noopener" class="aspect-square" class:list={{'w-11 md:w-12': !size, 'w-8 md:w-9': size === 'small', 'w-14 md:w-15': size === 'large'}}>
         <img
           src={`src/images/social/${link.title}.png`}
           alt={`${link.title} icon`}
