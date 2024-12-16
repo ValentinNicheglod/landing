@@ -19,7 +19,7 @@ const iconHasOwnBackground = (techName: string) => {
     {
       technologies.map((technology) => (
         <div
-          class="rounded-full overflow-hidden tech-badge"
+          class="rounded-full overflow-hidden transition-transform hover:-translate-y-1"
           class:list={{
             "p-1.5 bg-neutral-200": !iconHasOwnBackground(technology),
           }}
@@ -28,8 +28,10 @@ const iconHasOwnBackground = (techName: string) => {
             src={`src/images/skills/${technology}.png`}
             alt=""
             class:list={{
-              "w-6 h-6 sm:w-5 sm:h-5 xl:w-6 xl:h-6": !iconHasOwnBackground(technology),
-              "w-9 h-9 sm:w-8 sm:h-8 xl:w-9 xl:h-9": iconHasOwnBackground(technology),
+              "w-6 h-6 sm:w-5 sm:h-5 xl:w-6 xl:h-6":
+                !iconHasOwnBackground(technology),
+              "w-9 h-9 sm:w-8 sm:h-8 xl:w-9 xl:h-9":
+                iconHasOwnBackground(technology),
             }}
           />
         </div>
@@ -37,12 +39,3 @@ const iconHasOwnBackground = (techName: string) => {
     }
   </div>
 </div>
-<style type="scss">
-  .tech-badge {
-    transition: 0.25s;
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-</style>

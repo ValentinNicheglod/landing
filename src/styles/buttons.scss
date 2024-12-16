@@ -1,9 +1,11 @@
 .square-button {
-  @apply flex flex-col items-start justify-between gap-2 rounded-lg border-slate-300 bg-slate-50 p-2 pl-3 hover:border-primary hover:bg-slate-200;
+  @apply flex flex-col items-start justify-between gap-2 p-2 pl-3;
+  @apply rounded-lg border-slate-300 bg-slate-50 hover:border-primary hover:bg-slate-200;
   border-width: 1.5px;
 
   img {
-    @apply h-10 w-10 drop-shadow-lg lg:h-12 lg:w-12;
+    @apply h-10 w-10 drop-shadow-lg;
+    @apply lg:h-12 lg:w-12;
   }
 
   span {
@@ -14,11 +16,13 @@
     @apply relative ml-2 aspect-square rounded-full p-1;
 
     .icon {
-      @apply text-lg text-slate-400 lg:text-xl;
+      @apply text-lg text-slate-400;
+      @apply lg:text-xl;
     }
 
     .link-icon {
-      @apply absolute top-1 opacity-0;
+      @apply absolute top-1;
+      @apply opacity-0;
     }
   }
 
@@ -42,6 +46,21 @@
         @apply opacity-0;
       }
     }
+  }
+}
+
+.contact-button {
+  @apply m-auto w-fit cursor-pointer flex items-center gap-3;
+  @apply rounded-full p-3;
+  @apply text-xl font-medium text-white;
+  @apply hover:pr-6 hover:gap-12;
+  background-color: #9155f6;
+  box-shadow: 0px 4px 24px rgba(145, 85, 246, 0.25);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.75s;
+
+  &:hover {
+    background-color: #7225f3;
+    box-shadow: 0px 4px 24px rgba(114, 37, 243, 0.3);
   }
 }
 

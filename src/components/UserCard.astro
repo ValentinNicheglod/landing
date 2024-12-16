@@ -4,10 +4,10 @@ import Location from "./Location.astro";
 import SocialLinks from "./SocialLinks.astro";
 ---
 
-<div class="flex-col gap-6 lg:gap-8 py-6 lg:py-8 p-8 bg-color rounded-3xl shadow-md">
+<div class="flex flex-col gap-6 lg:gap-8 py-6 lg:py-8 p-8 bg-color rounded-3xl shadow-md">
   <div class="grid gap-3 lg:gap-4">
     <div class="relative">
-      <div class="profile-pic-bg relative inset-0 p-2 w-60 md:w-52 aspect-square rounded-full m-auto duration-75"></div>
+      <div class="profile-pic-bg relative inset-0 p-2 w-60 md:w-52 aspect-square rounded-full m-auto duration-75 animate-spin animate-duration-[3s]"></div>
       <img
         src="/images/ProfilePic.png"
         class="absolute inset-0 w-56 md:w-48 aspect-square m-auto rounded-full border-color border-2 duration-75"
@@ -32,15 +32,5 @@ import SocialLinks from "./SocialLinks.astro";
 <style type="scss">
   .profile-pic-bg {
     background: linear-gradient(45deg, #149bff, #2bfeff);
-    animation: rotate 5s infinite;
-  }
-
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 </style>

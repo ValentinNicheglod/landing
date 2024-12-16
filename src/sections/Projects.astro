@@ -8,6 +8,7 @@ import { ProjectFilters } from "../models/enums/filters.enum";
 
 import "../styles/filters.scss";
 import "../styles/dialog.scss";
+import "../styles/projects.scss";
 import "swiper/css";
 
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
@@ -63,7 +64,7 @@ const filterOptions = [
     </div>
     {
       projectsData.map((project, index) => (
-        <dialog id={`${project.path}-gallery`} class="overflow-hidden">
+        <dialog id={`${project.path}-gallery`} class="overflow-hidden rounded-2xl">
           <button
             id={`${project.path}-gallery-close-button`}
             class="absolute right-4 top-4 text-red-400 hover:text-red-500 transition-all z-10"
