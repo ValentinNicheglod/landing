@@ -91,37 +91,35 @@ const { project, index } = Astro.props as { project: Project; index: number };
     const cardWidth = document.querySelector(".project-card").clientWidth;
     const isSmallCard = cardWidth < 400;
 
-    const descriptions = document.getElementsByClassName("description");
     const labels = document.getElementsByClassName("button-label");
     const viewMoreButtons = document.getElementsByClassName("view-more");
 
     if (isSmallCard) {
-      [...labels].forEach((label) => {
-        label.classList.add("text-xs");
+      [...labels].forEach((labelRef) => {
+        labelRef.classList.add("text-xs");
       });
 
-      [...viewMoreButtons].forEach((button) => {
-        button.classList.remove("hidden");
+      [...viewMoreButtons].forEach((buttonRef) => {
+        buttonRef.classList.remove("hidden");
       });
 
-      [...descriptions].forEach((description) => {
-        description.innerHTML =
-          translations[project.path].description.split(".")[0] + ".";
-        description.classList.add("text-xs");
-      });
+      const descriptionRef = document.getElementById(`description-${index}`);
+      const shortDescription = translations[project.path].description.split(".")[0];
+      descriptionRef.innerHTML = `${shortDescription}.`;
+      descriptionRef.classList.add("text-xs");
     } else {
-      [...labels].forEach((label) => {
-        label.classList.add("text-xs");
+      [...labels].forEach((labelRef) => {
+        labelRef.classList.add("text-xs");
       });
 
-      [...viewMoreButtons].forEach((button) => {
-        button.classList.add("hidden");
+      [...viewMoreButtons].forEach((buttonRef) => {
+        buttonRef.classList.add("hidden");
       });
 
-      [...descriptions].forEach((description) => {
-        description.innerHTML = translations[project.path].description;
-        description.classList.remove("text-xs");
-      });
+      const descriptionRef = document.getElementById(`description-${index}`);
+      const fullDescription = translations[project.path].description;
+      descriptionRef.innerHTML = fullDescription;
+      descriptionRef.classList.remove("text-xs");
     }
   };
 
