@@ -1,12 +1,11 @@
 ---
-
 const contactLinks = [
   {
     title: "Behance",
     href: "http://www.behance.net/valentin_nicheglod",
   },
   {
-    title: "Dribble",
+    title: "Dribbble",
     href: "https://dribbble.com/valentin_nicheglod",
   },
   {
@@ -22,10 +21,23 @@ const contactLinks = [
 const { size } = Astro.props;
 ---
 
-<div class="flex gap-2 md:gap-3" class:list={{'justify-between': size === 'large'}}>
+<div
+  class="flex gap-2 md:gap-3"
+  class:list={{ "justify-between": size === "large" }}
+>
   {
     contactLinks.map((link) => (
-      <a href={link.href} target="_blank" rel="noreferrer noopener" class="aspect-square transition-transform hover:scale-110 duration-500" class:list={{'w-11 md:w-12': !size, 'w-8 md:w-9': size === 'small', 'w-14 md:w-15': size === 'large'}}>
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noreferrer noopener"
+        class="aspect-square transition-transform hover:scale-110 duration-500"
+        class:list={{
+          "w-11 md:w-12": !size,
+          "w-8 md:w-9": size === "small",
+          "w-14 md:w-15": size === "large",
+        }}
+      >
         <img
           src={`src/images/social/${link.title}.png`}
           alt={`${link.title} icon`}
