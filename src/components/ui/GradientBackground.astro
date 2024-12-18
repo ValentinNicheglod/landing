@@ -1,52 +1,49 @@
 ---
 import BlurredCircle from "./BlurredCircle.astro";
+
+const { sectionId } = Astro.props;
 ---
 
-<div class="background absolute blur-3xl overflow-hidden h-full w-full scale-125">
-    <div class="absolute gradient-circle">
-        <BlurredCircle size={500} blur={500} color="#1effff" />
-    </div>
-    <div class="absolute gradient-circle">
-        <BlurredCircle size={500} blur={500} color="#25a5fe" />
-    </div>
-    <div class="absolute gradient-circle">
-        <BlurredCircle size={500} blur={500} color="#9155f6" />
-    </div>
-    <div class="absolute gradient-circle">
-        <BlurredCircle size={500} blur={500} color="#9155f6" />
-    </div>
-    <div class="absolute gradient-circle">
-        <BlurredCircle size={500} blur={500} color="#0768eb" />
-    </div>
+<div
+  id={`${sectionId}-gradient`}
+  class="background absolute overflow-hidden h-full w-full blur-xl scale-150"
+>
+  <div class="gradient-circle">
+    <BlurredCircle color="#9155f6" />
+  </div>
+  <div class="gradient-circle">
+    <BlurredCircle color="#0df2f2" />
+  </div>
+  <div class="gradient-circle">
+    <BlurredCircle color="#25a5fe" />
+  </div>
+  <div class="gradient-circle">
+    <BlurredCircle color="#9155f6" />
+  </div>
+  <div class="gradient-circle">
+    <BlurredCircle color="#0768eb" />
+  </div>
 </div>
-<style>
+<style lang="scss">
   .background {
-    background: linear-gradient(90deg, #0768eb 20%, #00c5c5 80%, #25a5fe);
+    background: linear-gradient(90deg, #0768eb 20%, #00c5c5 70%, #25a5fe);
+    .gradient-circle {
+      @apply absolute inset-0 m-auto flex w-fit items-center;
+      will-change: transform;
+      transition: transform 10s linear;
+    }
   }
 
-  .gradient-circle {
-    top: -750px;
-    left: -30%;
-    transition: 10s;
+  :root[data-theme="dark"] {
+    .background {
+      filter: saturate(0.8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-circle {
+      display: none;
+    }
   }
 </style>
-<script>
-  const gradientCircles = document.getElementsByClassName("gradient-circle");
-
-  const translateCircles = () => {
-    [...gradientCircles].forEach((circle) => {
-      setTimeout(() => {
-        const X_Translation = Math.round(Math.random() * 150);
-        const Y_Translation = Math.round(Math.random() * 50);
-        circle.setAttribute(
-          "style",
-          `transform: translateX(${X_Translation}vw) translateY(${Y_Translation}%)`
-        );
-      }, 1000);
-    });
-  };
-
-  translateCircles();
-
-  setInterval(() => translateCircles(), 10000);
-</script>
+<script src="/src/scripts/animations.scripts.ts"></script>
