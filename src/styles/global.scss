@@ -91,4 +91,9 @@ h2 {
   color: #000e33;
 }
 
+.light-border {
+  @apply border-slate-200 dark:border-slate-700;
+  border-width: .5px;
+}
+
 

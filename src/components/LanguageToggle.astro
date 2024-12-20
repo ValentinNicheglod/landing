@@ -15,14 +15,14 @@ const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
   <img
     id="english-flag"
     src={`/images/flags/${englishFlag}.png`}
-    class="outline-slate-300 rounded-full"
+    class="outline-slate-300 rounded-full transition-transform"
     alt=""
   />
   <img
     id="spanish-flag"
     src={`/images/flags/ES.png`}
     alt=""
-    class="z-10 outline-slate-300 rounded-full"
+    class="z-10 outline-slate-300 rounded-full transition-transform"
     class:list={{ hidden: lang !== "es" }}
   />
 </button>
@@ -41,6 +41,12 @@ const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     transition: 0.5s;
+
+    &:hover {
+      img {
+        transform: scale(1.25);
+      }
+    }
   }
 
   img,
