@@ -44,11 +44,11 @@ const initGradientsBackgroundAnimations = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const reducedMotion =
-    window.matchMedia(`(prefers-reduced-motion: reduce)`) ||
-    window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+  const reducedMotion = window.matchMedia(
+    `(prefers-reduced-motion: reduce)`,
+  ).matches;
 
-  if (!!reducedMotion) return;
+  if (reducedMotion) return;
 
   initGradientsBackgroundAnimations();
 });

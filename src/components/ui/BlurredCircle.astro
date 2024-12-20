@@ -1,17 +1,18 @@
 ---
 interface Props {
   color: string;
+  size: number;
 }
 
-const { color = "#ff6b6b" } = Astro.props;
+const { color = "#ff6b6b", size } = Astro.props;
 
 const BASE_SIZE = 50;
 const RANDOM_NUMBER = Math.ceil(Math.random() * 10);
-const size = Math.max(10, BASE_SIZE / RANDOM_NUMBER) + "vw";
+const _size = size ? size + "px" : Math.max(10, BASE_SIZE / RANDOM_NUMBER) + "vw";
 ---
 
 <div
-  style={{ backgroundColor: color, width: size, height: size }}
+  style={{ backgroundColor: color, width: _size, height: _size }}
   class="rounded-full opacity-75 blur-2xl"
 >
 </div>
