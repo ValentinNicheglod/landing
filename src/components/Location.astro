@@ -3,9 +3,9 @@ import { Icon } from "astro-icon/components";
 const { city, country, flag } = Astro.props;
 ---
 
-<div class="rounded-full location">
+<div class="location rounded-full dark-opacity">
   <div
-    class="flex items-center gap-2 rounded-full shadow-md px-3 py-1 bg-slate-700 m-0.5"
+    class="inner-container flex items-center gap-2 rounded-full px-3 py-1 bg-slate-700 m-0.5"
   >
     <Icon name="map-pin" class="text-slate-50" />
     <span class="text-slate-50 text-xs sm:text-sm font-light">
@@ -20,6 +20,10 @@ const { city, country, flag } = Astro.props;
 
     &:nth-child(odd) {
       background: linear-gradient(45deg, #2bfeff, #149bff);
+    }
+
+    > div {
+      border: 2px solid var(--bg-color-2);
     }
   }
 </style>

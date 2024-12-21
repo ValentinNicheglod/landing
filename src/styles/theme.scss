@@ -1,0 +1,207 @@
+@use "src/styles/variables/easings" as easing;
+@use "src/styles/variables/theme.variables" as theme;
+
+// Theme Configuration
+
+@mixin light-theme {
+  --bg-color: #{theme.$slate-50};
+  --bg-color-2: #{theme.$white};
+  --bg-color-3: #{theme.$white};
+  --text-color: #{theme.$slate-800};
+  --secondary-text-color: #{theme.$slate-600};
+  --primary-color: #{theme.$primary-light};
+}
+
+@mixin dark-theme {
+  --bg-color: #{theme.$slate-950};
+  --bg-color-2: #{theme.$slate-900};
+  --bg-color-3: #{theme.$slate-700};
+  --text-color: #{theme.$slate-300};
+  --secondary-text-color: #{theme.$slate-500};
+  --primary-color: #{theme.$primary-dark};
+}
+
+:root {
+  @include light-theme;
+}
+
+[data-theme="dark"] {
+  @include dark-theme;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.title {
+  color: var(--primary-color);
+}
+
+span {
+  color: var(--secondary-text-color);
+}
+
+.thin-border {
+  @apply border-slate-200 dark:border-slate-700;
+  border-width: .5px;
+}
+
+.container-background {
+  background-color: var(--bg-color-2);
+}
+
+.inner-container {
+  @apply shadow-md;
+  @extend .thin-border;
+  background-color: var(--bg-color-2);
+}
+
+.dark-opacity {
+  @apply dark:opacity-90;
+}
+
+.dark-invert {
+  @apply dark:invert dark:brightness-90 transition-all duration-500;
+}
+
+.dark-shadow {
+  @apply dark:drop-shadow-[0px_4px_8px_#FFFFFF25];
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    @apply transition-colors duration-500;
+  }
+
+  .dark-opacity {
+    @apply transition-opacity duration-500;
+  }
+
+  .inner-container, .container-background {
+    transition-property: background-color, border-color;
+    transition-duration: 500ms;
+  }
+}
+
+// Theme Toggle Button
+
+.theme-toggle {
+  @apply flex items-center justify-center border-0 bg-none p-0;
+  @apply aspect-square cursor-pointer touch-manipulation rounded-full;
+
+  --size: 2rem;
+  inline-size: var(--size);
+  block-size: var(--size);
+
+  -webkit-tap-highlight-color: transparent;
+  outline-offset: 5px;
+}
+
+:global([data-theme="dark"]) .theme-toggle {
+  --icon-fill-hover: #c9c9c9;
+}
+
+.theme-toggle {
+  --icon-fill: hsl(210 10% 30%);
+  --icon-fill-hover: #fdb813;
+
+  &:is(:hover, :focus-visible) {
+    .sun-and-moon {
+      :is(.moon, .sun) {
+        fill: var(--icon-fill-hover);
+      }
+
+      .sun-beams {
+        stroke: var(--icon-fill-hover);
+      }
+    }
+  }
+
+  .sun-and-moon {
+    :is(.moon, .sun, .sun-beams) {
+      transform-origin: center;
+    }
+
+    :is(.moon, .sun) {
+      fill: var(--icon-fill);
+      transition: 0.5s;
+    }
+
+    .sun-beams {
+      stroke: var(--icon-fill);
+      stroke-width: 2px;
+    }
+  }
+}
+
+:global([data-theme="dark"]) {
+  .sun-and-moon {
+    > .sun {
+      transform: scale(1.75);
+    }
+
+    > .sun-beams {
+      opacity: 0;
+    }
+
+    > .moon {
+      > circle {
+        transform: translateX(-7px);
+      }
+    }
+  }
+}
+
+@supports (cx: 1) {
+  :global([data-theme="dark"]) .sun-and-moon > .moon > circle {
+    cx: 16;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon {
+    > .sun {
+      transition: transform 0.5s easing.$ease-elastic-3;
+    }
+
+    > .sun-beams {
+      transition:
+        transform 0.5s easing.$ease-elastic-4,
+        opacity 0.5s easing.$ease-3;
+    }
+
+    .moon {
+      > circle {
+        transition: transform 0.25s easing.$ease-out-5;
+
+        @supports (cx: 1) {
+          transition: cx 0.25s easing.$ease-out-5;
+        }
+      }
+    }
+  }
+
+  :global([data-theme="dark"]) {
+    .sun-and-moon {
+      > .sun {
+        transition-timing-function: easing.$ease-3;
+        transition-duration: 0.25s;
+        transform: scale(1.75);
+      }
+
+      > .sun-beams {
+        transition-duration: 0.15s;
+        transform: rotateZ(-25deg);
+      }
+
+      > .moon {
+        > circle {
+          transition-duration: 0.5s;
+          transition-delay: 0.25s;
+        }
+      }
+    }
+  }
+}

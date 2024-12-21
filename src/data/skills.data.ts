@@ -42,26 +42,32 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Adobe XD",
           image: "XD",
+          customClass: "dark-shadow",
         },
         {
           name: "Illustrator",
           image: "Illustrator",
+          customClass: "dark-shadow",
         },
         {
           name: "Photoshop",
           image: "Photoshop",
+          customClass: "dark-shadow",
         },
         {
           name: "Figma",
           image: "Figma",
+          customClass: "dark-shadow",
         },
         {
           name: translations.skills.prototyping,
           image: "Prototype",
+          customClass: "dark-shadow",
         },
         {
           name: "WireFraming",
           image: "Wireframe",
+          customClass: "dark-shadow",
         },
       ],
     },
@@ -104,6 +110,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Astro",
           image: "Astro",
+          customClass: "dark-shadow",
         },
         {
           name: "Ionic",
@@ -112,6 +119,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Expo",
           image: "Expo",
+          customClass: "dark-invert",
         },
         {
           name: "Redux",
@@ -136,6 +144,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Less",
           image: "Less",
+          customClass: "dark-shadow",
         },
         {
           name: "Bootstrap",
@@ -148,6 +157,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Express",
           image: "Express",
+          customClass: "dark-invert",
         },
         {
           name: "NPM",
@@ -172,6 +182,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "MySQL",
           image: "MySQL",
+          customClass: "dark-shadow",
         },
         {
           name: "PostgreSQL",
@@ -188,6 +199,8 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "GitHub",
           image: "GitHub",
+          customClass: "dark-invert",
+
         },
       ],
     },

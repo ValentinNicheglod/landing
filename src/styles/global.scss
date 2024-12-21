@@ -5,95 +5,23 @@ body {
   font-family: "Outfit", sans-serif;
 }
 
+.title {
+  @apply text-3xl md:text-4xl font-bold;
+}
+
+// Theme
+@import url("src/styles/theme.scss");
+
 // Tailwind
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-// Theme
-$light: #f2f6ff;
-$dark: #1d2530;
-
-html {
-  body {
-    transition: background-color 0.5s;
-  }
-
-  .bg-color,
-  .border-color {
-    transition: background-color border-color 0.5s;
-  }
-
-  // Tema claro
-  &[data-theme="light"] {
-    body {
-      background-color: $light;
-      color: $dark;
-    }
-
-    span {
-      color: #5b698b;
-    }
-
-    .bg-color {
-      background-color: #ffff;
-    }
-
-    .border-color {
-      border-color: #ffff;
-    }
-  }
-
-  // Tema oscuro
-  &[data-theme="dark"] {
-    $background-color: blue;
-
-    body {
-      background-color: $dark;
-      color: $light;
-    }
-
-    span {
-      color: hsl(223, 21%, 65%);
-    }
-
-    .bg-color {
-      background-color: #2b313b;
-    }
-
-    .border-color {
-      border-color: #1d2530;
-    }
-
-    .title,
-    .indicator {
-      filter: saturate(1.5);
-    }
-  }
-}
+// Image drag disabled
 
 img {
   -webkit-user-drag: none;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select: none;
 }
-
-.title {
-  color: #366eff;
-  @apply text-3xl;
-  @apply md:text-4xl;
-  @apply font-bold;
-}
-
-h2 {
-  color: #000e33;
-}
-
-.light-border {
-  @apply border-slate-200 dark:border-slate-700;
-  border-width: .5px;
-}
-
-

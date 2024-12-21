@@ -51,7 +51,7 @@ const filterOptions = [
     </div>
     <div class="flex flex-1 items-center justify-between">
       <div class="flex items-center gap-6 max-w-96">
-        <div id="skills-icon" class="text-5xl md:text-8xl"></div>
+        <div id="skills-icon" class="text-5xl md:text-8xl dark-opacity"></div>
         <div id="skills-title" class="title text-white text-balance"></div>
       </div>
       <div class="overflow-hidden">
@@ -82,12 +82,15 @@ const filterOptions = [
     const skillElements = skillsData[selectedFilterIndex].skills.map(
       (skill) => {
         const skillElement = document.createElement("div");
-        skillElement.classList.add("swiper-slide", "bg-color");
+        skillElement.classList.add("swiper-slide", "inner-container");
 
         const image = document.createElement("img");
+        image.classList.add("dark-opacity");
+        if (skill.customClass) image.classList.add(skill.customClass);
         image.setAttribute("src", `src/images/skills/${skill.image}.png`);
 
         const text = document.createElement("span");
+        text.style.color = "var(--text-color)";
         text.innerText = skill.name;
 
         skillElement.appendChild(image);
