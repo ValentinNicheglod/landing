@@ -17,31 +17,40 @@ const translations = projectsTranslations[lang];
 const filterOptions = [
   {
     label: "Todos",
+    shortLabel: "Todos",
     value: ProjectFilters.ALL,
   },
   {
     label: translations.design,
+    shortLabel: "Diseño",
     value: ProjectFilters.DESIGN,
   },
   {
     label: translations.dev,
+    shortLabel: "Desarrollo",
     value: ProjectFilters.DEV,
   },
 ];
 ---
 
-<section id="projects" class="flex flex-col p-8 md:p-12 xl:p-16">
-  <div class="flex justify-between py-10">
+<section id="projects" class="flex flex-col p-8 md:p-12 xl:p-16 gap-8 md:gap-12 xl:gap-16">
+  <div class="flex flex-col gap-4 md:gap-6 xl:gap-8 md:flex-row md:justify-between md:pt-12">
     <h2 class="title">{translations.sectionTitle}</h2>
-    <div id="projects-filter" class="filters shadow-sm border-light">
-      {
-        filterOptions.map((option) => (
-          <button
+    <div class="flex">
+      <div id="projects-filter" class="filters shadow-sm border-light">
+        {
+          filterOptions.map((option) => (
+            <button
             id={`project-filter-${option.value}`}
             class:list={{ selected: option.value === 0 }}
             data-value={option.value}
-          >
-            {option.label}
+            >
+            <div class="block md:hidden">
+                {option.shortLabel}
+              </div>
+              <div class="hidden md:block">
+                {option.label}
+              </div>
           </button>
         ))
       }
@@ -49,6 +58,7 @@ const filterOptions = [
         <div id="projects-filter-indicator" class="indicator"></div>
       </div>
     </div>
+  </div>
   </div>
   <div class="flex-1 content-center">
     <div id="projects-swiper" class="swiper">

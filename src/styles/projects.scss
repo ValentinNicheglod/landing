@@ -1,5 +1,5 @@
 #projects {
-  height: min(100dvh, 1000px);
+  @apply lg:h-[min(100dvh,_1000px)];
 }
 
 .swiper-button-next,
@@ -16,7 +16,7 @@
     @apply absolute flex flex-col w-full aspect-square;
 
     .overlay-top {
-      height: 75%;
+      @apply h-0 md:h-3/4;
       transition: 0.5s;
     }
 

@@ -7,32 +7,37 @@ import "../styles/filters.scss";
 import "swiper/css";
 
 import aboutTranslations from "../locales/about.locales.json";
+import { Emojis } from "../models/enums/emojis.enum";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
 
 const filterOptions = [
   {
     label: translations.skills.personal,
+    shortLabel: "Personales",
     value: SkillsFilters.PERSONAL,
   },
   {
     label: translations.skills.design,
+    shortLabel: "Diseño",
     value: SkillsFilters.DESIGN,
   },
   {
     label: translations.skills.dev,
+    shortLabel: "Desarrollo",
     value: SkillsFilters.DEV,
   },
 ];
 ---
 
-<section
-	id="skills"
-  class="overflow-hidden relative bg-white"
->
+<section id="skills" class="overflow-hidden relative bg-white">
   <GradientBackground sectionId="skills" />
   <div class="relative flex flex-col gap-6 inset-0 p-6 md:p-8 xl:p-12">
-    <div class="flex justify-end">
+    <div class="flex md:hidden items-center gap-6 max-w-96">
+      <div class="text-6xl dark-opacity" set:html={Emojis.Personal}></div>
+      <div class="title text-white text-balance">Mis habilidades</div>
+    </div>
+    <div class="flex md:justify-end">
       <div id="skills-filter" class="filters">
         {
           filterOptions.map((option) => (
@@ -40,7 +45,12 @@ const filterOptions = [
               id={`skill-filter-${option.value}`}
               data-value={option.value}
             >
-              {option.label}
+              <div class="block md:hidden">
+                {option.shortLabel}
+              </div>
+              <div class="hidden md:block">
+                {option.label}
+              </div>
             </button>
           ))
         }
@@ -49,9 +59,11 @@ const filterOptions = [
         </div>
       </div>
     </div>
-    <div class="flex flex-1 items-center justify-between">
-      <div class="flex items-center gap-6 max-w-96">
-        <div id="skills-icon" class="text-5xl md:text-8xl dark-opacity"></div>
+    <div
+      class="flex flex-col md:flex-row flex-1 gap-6 md:items-center justify-between"
+    >
+      <div class="hidden md:flex items-center gap-6 max-w-96">
+        <div id="skills-icon" class="text-7xl lg:text-8xl dark-opacity"></div>
         <div id="skills-title" class="title text-white text-balance"></div>
       </div>
       <div class="overflow-hidden">
@@ -70,7 +82,10 @@ const filterOptions = [
   import { Autoplay } from "swiper/modules";
 
   import { getSkillsData } from "../data/skills.data";
-  import { changeButtonState, translateIndicator } from "../scripts/filters.scripts";
+  import {
+    changeButtonState,
+    translateIndicator,
+  } from "../scripts/filters.scripts";
 
   const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
   const skillsData = getSkillsData(lang);
@@ -129,13 +144,37 @@ const filterOptions = [
   };
 
   const initializeSwiper = () => {
-		swiper?.destroy();
+    swiper?.destroy();
 
     swiper = new Swiper("#skills-swiper", {
-      slidesPerView: 6,
+      slidesPerView: 3,
       spaceBetween: 12,
       autoplay: true,
+      loop: true,
       modules: [Autoplay],
+      breakpoints: {
+        384: {
+          slidesPerView: 3.25,
+        },
+        512: {
+          slidesPerView: 4,
+        },
+        640: {
+          slidesPerView: 5,
+        },
+        768: {
+          slidesPerView: 3.25,
+        },
+        880: {
+          slidesPerView: 4,
+        },
+        992: {
+          slidesPerView: 5,
+        },
+        1218: {
+          slidesPerView: 6,
+        },
+      },
     });
 
     if (skillsData[selectedFilterIndex].skills.length < 6) {
@@ -151,7 +190,7 @@ const filterOptions = [
       selectedFilterIndex = parseInt(_selectedFilterIndex);
 
       changeButtonState(`skill-filter-${selectedFilterIndex}`, "skills-filter");
-      translateIndicator('skills-filter-indicator', selectedFilterIndex);
+      translateIndicator("skills-filter-indicator", selectedFilterIndex);
       changeIcon();
       changeTitle();
       changeSkills();

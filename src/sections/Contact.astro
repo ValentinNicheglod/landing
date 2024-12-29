@@ -4,25 +4,40 @@ import SocialLinks from "../components/SocialLinks.astro";
 import GradientBackground from "../components/ui/GradientBackground.astro";
 import contactTranslations from "../locales/contact.locales.json";
 import "../styles/buttons.scss";
+import SquareButton from "../components/SquareButton.astro";
+import { Emojis } from "../models/enums/emojis.enum";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = contactTranslations[lang];
 ---
 
 <section
   id="contact"
-  class="flex flex-col p-8 md:p-12 xl:p-16 relative overflow-hidden border-b-white border-b-4 bg-white"
+  class="flex flex-col p-6 md:p-12 xl:p-16 relative overflow-hidden border-b-white border-b-4 bg-white"
 >
   <GradientBackground sectionId="contact" />
-  <div class="grid gap-24 justify-items-center z-10">
-    <h2 class="title text-white">{translations.sectionTitle}</h2>
-    <div class="w-2/5">
+  <div class="grid gap-12 md:gap-12 lg:gap-24 sm:justify-items-center z-10">
+    <h2
+      class="hidden sm:block title text-white"
+    >
+      {translations.sectionTitle}
+    </h2>
+    <div class="flex sm:hidden items-center gap-6 max-w-96">
+      <div class="text-5xl dark-opacity" set:html={Emojis.Mail}></div>
+      <h2 class="title text-white text-balance">{translations.shortSectionTitle}</h2>
+    </div>
+
+    <div class="flex md:hidden justify-center">
+      <SocialLinks />
+    </div>
+    <div class="w-2/5 hidden md:block">
       <SocialLinks size="large" />
     </div>
+
     <div
-      class="inner-container grid w-4/5 justify-center gap-8 rounded-3xl px-16 py-8 text-center"
+      class="inner-container hidden sm:grid w-full lg:w-4/5 justify-center gap-8 rounded-3xl px-8 lg:px-12 xl:px-16 py-8 text-center"
     >
       <div class="grid gap-4">
-        <h3 class="text-xl md:text-3xl font-semibold">
+        <h3 class="text-3xl font-semibold">
           {translations.sectionSubtitle}
         </h3>
         <p class="text-balance opacity-90">
@@ -38,6 +53,21 @@ const translations = contactTranslations[lang];
           &nbsp;&nbsp;
         </div>
       </a>
+    </div>
+    <div
+      class="grid sm:hidden w-full justify-center gap-6 text-white"
+    >
+      <h3 class="text-xl font-semibold">
+        {translations.sectionSubtitle}
+      </h3>
+      <div class="flex gap-6">
+        <p class="text-sm text-balance opacity-90">
+          {translations.shortContent}
+        </p>
+        <a href="mailto:valentinnicheglod1@gmail.com" class="flex items-end">
+          <SquareButton image="Mail.png" label={translations.sendEmail} />
+        </a>
+      </div>
     </div>
   </div>
 </section>

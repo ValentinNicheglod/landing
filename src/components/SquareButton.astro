@@ -7,7 +7,7 @@ import "../styles/buttons.scss";
 
 <button
   class="square-button"
-  id={url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`}
+  id={project && (url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`)}
 >
   <div class="flex justify-between w-full">
     <img src={`src/images/${image}`} />

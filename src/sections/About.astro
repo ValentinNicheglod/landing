@@ -11,38 +11,40 @@ const translations = aboutTranslations[lang];
 <section
   class="flex items-center justify-center overflow-hidden p-8 md:p-12 xl:p-16"
 >
-  <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-12 font-medium">
-    <h2 class="title md:hidden">{translations["section-title"]}</h2>
-    <div class="flex flex-col md:flex-row gap-8 md:gap-12 xl:gap-16">
-      <div class="relative flex items-center justify-center">
-        <div
-          class="absolute grid place-items-center -z-10 inset-0 w-fit h-fit m-auto -mr-2 mt-0 scale-110 saturate-150 dark:saturate-100"
-        >
-          <BlurredCircle color="#0768eb75" size={200} />
+    <div
+      class="w-full flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-12 font-medium"
+    >
+      <h2 class="title md:hidden">{translations["section-title"]}</h2>
+      <div class="flex flex-col md:flex-row gap-8 md:gap-12 xl:gap-16">
+        <div class="relative flex items-center justify-center">
+          <div
+            class="absolute grid place-items-center -z-10 inset-0 w-fit h-fit m-auto -mr-2 mt-0 scale-110 saturate-150 dark:saturate-100"
+          >
+            <BlurredCircle color="#0768eb75" size={200} />
+          </div>
+          <UserCard />
+          <div
+            class="absolute grid place-items-center -z-10 inset-0 w-fit h-fit m-auto -ml-2 mb-0 scale-110 saturate-150 dark:saturate-100"
+          >
+            <BlurredCircle color="#0768eb75" size={200} />
+          </div>
         </div>
-        <UserCard />
-        <div
-          class="absolute grid place-items-center -z-10 inset-0 w-fit h-fit m-auto -ml-2 mb-0 scale-110 saturate-150 dark:saturate-100"
-        >
-          <BlurredCircle color="#0768eb75" size={200} />
+        <div class="flex flex-col gap-6 lg:gap-8">
+          <h2 class="title hidden md:block">{translations["section-title"]}</h2>
+          <div
+            class="flex flex-col gap-3 md:gap-4 font-light lg:text-lg text-balance m-auto"
+          >
+            <p set:html={translations["about-me-content-1"]} />
+            <p set:html={translations["about-me-content-2"]} />
+            <p set:html={translations["about-me-content-3"]} />
+          </div>
+          <div class="hidden lg:flex flex-1 items-end">
+            <Interests />
+          </div>
         </div>
       </div>
-      <div class="flex flex-col gap-6 lg:gap-8">
-        <h2 class="title hidden md:block">{translations["section-title"]}</h2>
-        <div
-          class="flex flex-col gap-3 md:gap-4 font-light lg:text-lg text-balance"
-        >
-          <p set:html={translations["about-me-content-1"]} />
-          <p set:html={translations["about-me-content-2"]} />
-          <p set:html={translations["about-me-content-3"]} />
-        </div>
-        <div class="hidden lg:flex flex-1 items-end">
-          <Interests />
-        </div>
+      <div class="lg:hidden overflow-hidden">
+        <Interests />
       </div>
     </div>
-    <div class="lg:hidden">
-      <Interests />
-    </div>
-  </div>
 </section>

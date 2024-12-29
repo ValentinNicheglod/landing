@@ -9,4 +9,5 @@ export enum Emojis {
     Photography = "&#x1F4F8;",
     Technology = "&#x1F5A5;",
     Travel = "&#x1F30E;",
+    Mail = "&#128232;",
 }

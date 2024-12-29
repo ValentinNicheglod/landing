@@ -1,15 +1,19 @@
 {
   "en": {
     "sectionTitle": "Let's keep in contact",
+    "shortSectionTitle": "Contacto",
     "sectionSubtitle": "¿Do you have any project on mind?",
     "content": "I value teamwork, collaborative ideas, and trust that together we can develop products that truly make a difference. If you're interested in collaborating, feel free to reach out!",
+    "shortContent": "I value teamwork, collaborative ideas, and trust that together we can develop products that truly make a difference.",
     "sendEmail": "Send me an email"
     
   },
   "es": {
     "sectionTitle": "Mantengámonos en contacto",
+    "shortSectionTitle": "Contacto",
     "sectionSubtitle": "¿Tienes algún proyecto en mente?",
     "content": "Valoro el trabajo en equipo, las ideas colaborativas y confío en que juntos podemos desarrollar productos que realmente marquen la diferencia, si te interesa colaborar, ¡no dudes en contactarme!",
+    "shortContent": "Valoro el trabajo en equipo, las ideas colaborativas y confío en que juntos podemos desarrollar productos que realmente marquen la diferencia.",
     "sendEmail": "Envíame un correo"
   }
 }
