@@ -1,15 +1,24 @@
 ---
-import { Icon } from "astro-icon/components";
+// Components
 import SocialLinks from "../components/SocialLinks.astro";
-import heroTranslations from "../locales/hero.locales.json";
+import { Icon } from "astro-icon/components";
+
+// Enums
 import { Emojis } from "../models/enums/emojis.enum";
+
+// Translations
+import heroTranslations from "../locales/hero.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = heroTranslations[lang];
+
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="container-background">
-  <div class="px-8 md:px-12 xl:px-16 pb-4">
-    <div class="flex flex-col md:flex-row justify-between md:items-center divide-y md:divide-none">
+<footer class="container-background border-t-white border-t-4">
+  <div class="px-8 md:px-12 xl:px-0 pb-4 xl:container xl:mx-auto">
+    <div
+      class="flex flex-col md:flex-row justify-between md:items-center divide-y md:divide-none"
+    >
       <div class="flex items-center gap-4 py-8 md:py-0">
         <div class="inner-container p-2 rounded-full bg-white h-fit">
           <img class="mr-1 mb-1 w-8 md:w-auto" src="/logo.svg" alt="" />
@@ -33,9 +42,8 @@ const translations = heroTranslations[lang];
               <SocialLinks size="small" />
             </div>
             <p class="text-xs md:text-sm">
-              {translations.madeWithLove} <strong>Astro</strong> y <strong
-                >Tailwind CSS</strong
-              >.
+              {translations.madeWithLove}
+              <strong>Astro</strong> y <strong>Tailwind CSS</strong>.
             </p>
           </div>
           <div class="flex pl-4">
@@ -48,8 +56,10 @@ const translations = heroTranslations[lang];
           </div>
         </div>
         <div class="flex justify-end">
-          <p class="text-xs opacity-50">
-            © {new Date().getFullYear()} Valentín Nicheglod | Portfolio
+          <p class="text-xs opacity-50" translate="no">
+            © {currentYear}
+            &nbsp;&bull;&nbsp;
+            Valentín Nicheglod | Portfolio
           </p>
         </div>
       </div>

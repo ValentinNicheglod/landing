@@ -43,8 +43,7 @@ span {
 }
 
 .thin-border {
-  @apply border-slate-200 dark:border-slate-700;
-  border-width: .5px;
+  @apply border-[.5px] border-slate-200 dark:border-slate-700;
 }
 
 .container-background {

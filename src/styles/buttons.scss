@@ -64,6 +64,10 @@
   }
 }
 
+.small-button {
+  @apply text-nowrap rounded-full bg-primary px-2 py-0.5 text-xs text-white;
+}
+
 .square-button,
 .chevron,
 .icon {

@@ -1,6 +1,10 @@
 // Typography
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
+:root {
+  @apply 2xl:text-lg;
+}
+
 body {
   font-family: "Outfit", sans-serif;
 }

@@ -1,72 +1,88 @@
 ---
+// Components
 import { Icon } from "astro-icon/components";
-import SocialLinks from "../components/SocialLinks.astro";
 import GradientBackground from "../components/ui/GradientBackground.astro";
-import contactTranslations from "../locales/contact.locales.json";
-import "../styles/buttons.scss";
+import SocialLinks from "../components/SocialLinks.astro";
 import SquareButton from "../components/SquareButton.astro";
+
+// Styles
+import "../styles/buttons.scss";
+
+// Enums
 import { Emojis } from "../models/enums/emojis.enum";
+
+// Translations
+import contactTranslations from "../locales/contact.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = contactTranslations[lang];
 ---
 
-<section
-  id="contact"
-  class="flex flex-col p-6 md:p-12 xl:p-16 relative overflow-hidden border-b-white border-b-4 bg-white"
->
-  <GradientBackground sectionId="contact" />
-  <div class="grid gap-12 md:gap-12 lg:gap-24 sm:justify-items-center z-10">
-    <h2
-      class="hidden sm:block title text-white"
-    >
-      {translations.sectionTitle}
-    </h2>
-    <div class="flex sm:hidden items-center gap-6 max-w-96">
-      <div class="text-5xl dark-opacity" set:html={Emojis.Mail}></div>
-      <h2 class="title text-white text-balance">{translations.shortSectionTitle}</h2>
-    </div>
-
-    <div class="flex md:hidden justify-center">
-      <SocialLinks />
-    </div>
-    <div class="w-2/5 hidden md:block">
-      <SocialLinks size="large" />
-    </div>
-
-    <div
-      class="inner-container hidden sm:grid w-full lg:w-4/5 justify-center gap-8 rounded-3xl px-8 lg:px-12 xl:px-16 py-8 text-center"
-    >
-      <div class="grid gap-4">
-        <h3 class="text-3xl font-semibold">
-          {translations.sectionSubtitle}
-        </h3>
-        <p class="text-balance opacity-90">
-          {translations.content}
-        </p>
-      </div>
-      <a href="mailto:valentinnicheglod1@gmail.com" class="contact-button">
-        <div class="p-1 rounded-full bg-white">
-          <Icon name="send" class="text-[#9155f6] mr-0.5 mt-0.5" />
+<section id="contact" class="relative overflow-hidden bg-white">
+  <div class="flex flex-col p-6 md:p-12 xl:p-16">
+    <GradientBackground sectionId="contact" />
+    <div class="relative xl:container xl:mx-auto">
+      <div class="grid gap-12 lg:gap-24 sm:justify-items-center">
+        <div class="hidden sm:block">
+          <h2 class="title text-white">
+            {translations.sectionTitle}
+          </h2>
         </div>
-        <div class="pb-0.5">
-          {translations.sendEmail}
-          &nbsp;&nbsp;
+        <div class="flex sm:hidden items-center gap-4">
+          <div class="text-5xl dark-opacity" set:html={Emojis.Mail} />
+          <h2 class="title text-white">
+            {translations.shortSectionTitle}
+          </h2>
         </div>
-      </a>
-    </div>
-    <div
-      class="grid sm:hidden w-full justify-center gap-6 text-white"
-    >
-      <h3 class="text-xl font-semibold">
-        {translations.sectionSubtitle}
-      </h3>
-      <div class="flex gap-6">
-        <p class="text-sm text-balance opacity-90">
-          {translations.shortContent}
-        </p>
-        <a href="mailto:valentinnicheglod1@gmail.com" class="flex items-end">
-          <SquareButton image="Mail.png" label={translations.sendEmail} />
-        </a>
+
+        <div class="flex md:hidden justify-center">
+          <SocialLinks />
+        </div>
+        <div class="w-2/5 hidden md:block">
+          <SocialLinks size="large" />
+        </div>
+
+        <div
+          class="inner-container hidden sm:block w-full lg:w-4/5 rounded-3xl"
+        >
+          <div class="grid gap-8 justify-center px-8 lg:px-12 xl:px-16 py-8">
+            <div class="grid gap-4">
+              <h3 class="text-3xl font-semibold text-center">
+                {translations.sectionSubtitle}
+              </h3>
+              <p class="text-balance opacity-75 text-center">
+                {translations.content}
+              </p>
+            </div>
+            <a
+              href="mailto:valentinnicheglod1@gmail.com"
+              class="contact-button"
+            >
+              <div class="p-1 rounded-full bg-white">
+                <Icon name="send" class="text-secondary mr-0.5 mt-0.5" />
+              </div>
+              <div class="pb-0.5">
+                {translations.sendEmail}
+                &nbsp;&nbsp;
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="grid sm:hidden w-full justify-center gap-6">
+          <h3 class="text-xl font-semibold text-white">
+            {translations.sectionSubtitle}
+          </h3>
+          <div class="flex gap-4">
+            <p class="text-sm text-pretty text-slate-200">
+              {translations.shortContent}
+            </p>
+            <a
+              href="mailto:valentinnicheglod1@gmail.com"
+              class="flex items-end"
+            >
+              <SquareButton image="Mail.png" label={translations.sendEmail} />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

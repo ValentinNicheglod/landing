@@ -1,72 +1,35 @@
 ---
 import GradientBackground from "../components/ui/GradientBackground.astro";
-import { SkillsFilters } from "../models/enums/filters.enum";
 
 import "../styles/skills.scss";
-import "../styles/filters.scss";
 import "swiper/css";
 
 import aboutTranslations from "../locales/about.locales.json";
 import { Emojis } from "../models/enums/emojis.enum";
+import SkillsFilters from "../components/SkillsFilters.astro";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
-
-const filterOptions = [
-  {
-    label: translations.skills.personal,
-    shortLabel: "Personales",
-    value: SkillsFilters.PERSONAL,
-  },
-  {
-    label: translations.skills.design,
-    shortLabel: "Diseño",
-    value: SkillsFilters.DESIGN,
-  },
-  {
-    label: translations.skills.dev,
-    shortLabel: "Desarrollo",
-    value: SkillsFilters.DEV,
-  },
-];
 ---
 
-<section id="skills" class="overflow-hidden relative bg-white">
+<section
+  id="skills"
+  class="relative 2xl:container 2xl:mx-auto 2xl:rounded-2xl overflow-hidden bg-white"
+>
   <GradientBackground sectionId="skills" />
-  <div class="relative flex flex-col gap-6 inset-0 p-6 md:p-8 xl:p-12">
-    <div class="flex md:hidden items-center gap-6 max-w-96">
-      <div class="text-6xl dark-opacity" set:html={Emojis.Personal}></div>
-      <div class="title text-white text-balance">Mis habilidades</div>
+  <div class="relative flex flex-col gap-6 p-6 sm:p-8 md:p-12">
+    <div class="flex md:hidden items-center gap-6 max-w-80">
+      <div class="text-6xl dark-opacity" set:html={Emojis.Personal} />
+      <div class="title text-white">{translations.skills.sectionTitle}</div>
     </div>
-    <div class="flex md:justify-end">
-      <div id="skills-filter" class="filters">
-        {
-          filterOptions.map((option) => (
-            <button
-              id={`skill-filter-${option.value}`}
-              data-value={option.value}
-            >
-              <div class="block md:hidden">
-                {option.shortLabel}
-              </div>
-              <div class="hidden md:block">
-                {option.label}
-              </div>
-            </button>
-          ))
-        }
-        <div class="absolute w-full h-full p-1">
-          <div id="skills-filter-indicator" class="indicator"></div>
-        </div>
-      </div>
-    </div>
+    <SkillsFilters />
     <div
-      class="flex flex-col md:flex-row flex-1 gap-6 md:items-center justify-between"
+      class="flex flex-col md:flex-row justify-between md:items-center gap-6"
     >
       <div class="hidden md:flex items-center gap-6 max-w-96">
         <div id="skills-icon" class="text-7xl lg:text-8xl dark-opacity"></div>
         <div id="skills-title" class="title text-white text-balance"></div>
       </div>
-      <div class="overflow-hidden">
+      <div>
         <div id="skills-swiper" class="swiper pb-4">
           <div id="skills-list" class="swiper-wrapper"></div>
         </div>
@@ -177,9 +140,9 @@ const filterOptions = [
       },
     });
 
-    if (skillsData[selectedFilterIndex].skills.length < 6) {
+    /* if (skillsData[selectedFilterIndex].skills.length < 6) {
       swiper.destroy();
-    }
+    } */
   };
 
   const handleFilter = (filter: Element) => {

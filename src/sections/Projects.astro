@@ -1,90 +1,50 @@
 ---
-import { Icon } from "astro-icon/components";
+// Components
 import ProjectCard from "../components/ProjectCard.astro";
 import ProjectGallery from "../components/ProjectGallery.astro";
-import { projectsData } from "../data/projects.data";
-import projectsTranslations from "../locales/projects.locales.json";
-import { ProjectFilters } from "../models/enums/filters.enum";
+import ProjectsFilters from "../components/ProjectsFilters.astro";
 
-import "../styles/filters.scss";
+// Styles
 import "../styles/dialog.scss";
 import "../styles/projects.scss";
 import "swiper/css";
 
+// Data
+import { projectsData } from "../data/projects.data";
+
+// Translations
+import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
-
-const filterOptions = [
-  {
-    label: "Todos",
-    shortLabel: "Todos",
-    value: ProjectFilters.ALL,
-  },
-  {
-    label: translations.design,
-    shortLabel: "Diseño",
-    value: ProjectFilters.DESIGN,
-  },
-  {
-    label: translations.dev,
-    shortLabel: "Desarrollo",
-    value: ProjectFilters.DEV,
-  },
-];
 ---
 
-<section id="projects" class="flex flex-col p-8 md:p-12 xl:p-16 gap-8 md:gap-12 xl:gap-16">
-  <div class="flex flex-col gap-4 md:gap-6 xl:gap-8 md:flex-row md:justify-between md:pt-12">
-    <h2 class="title">{translations.sectionTitle}</h2>
-    <div class="flex">
-      <div id="projects-filter" class="filters shadow-sm border-light">
-        {
-          filterOptions.map((option) => (
-            <button
-            id={`project-filter-${option.value}`}
-            class:list={{ selected: option.value === 0 }}
-            data-value={option.value}
-            >
-            <div class="block md:hidden">
-                {option.shortLabel}
-              </div>
-              <div class="hidden md:block">
-                {option.label}
-              </div>
-          </button>
-        ))
-      }
-      <div class="absolute w-full h-full p-1">
-        <div id="projects-filter-indicator" class="indicator"></div>
+<section id="projects" class="2xl:container 2xl:mx-auto">
+  <div class="p-6 sm:p-12 xl:p-16 2xl:px-0">
+    <div class="flex flex-col gap-8 sm:gap-12 md:gap-16 xl:gap-20">
+      <div class="flex flex-col md:flex-row md:justify-between gap-4">
+        <h2 class="title">{translations.sectionTitle}</h2>
+        <ProjectsFilters />
+      </div>
+      <div class="flex-1 content-center">
+        <div id="projects-swiper" class="swiper rounded-xl md:rounded-2xl">
+          <div class="swiper-wrapper">
+            {
+              projectsData.map((project, index) => (
+                <div class="swiper-slide" data-type={project.type}>
+                  <ProjectCard project={project} index={index} />
+                </div>
+                <dialog
+                  id={`${project.path}-gallery`}
+                  class="overflow-hidden rounded-2xl"
+                >
+                  <ProjectGallery project={project} />
+                </dialog>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-  <div class="flex-1 content-center">
-    <div id="projects-swiper" class="swiper">
-      <div class="swiper-wrapper">
-        {
-          projectsData.map((project, index) => (
-            <div class="swiper-slide" data-type={project.type}>
-              <ProjectCard project={project} index={index} />
-            </div>
-          ))
-        }
-      </div>
-    </div>
-    {
-      projectsData.map((project, index) => (
-        <dialog id={`${project.path}-gallery`} class="overflow-hidden rounded-2xl">
-          <button
-            id={`${project.path}-gallery-close-button`}
-            class="absolute right-4 top-4 text-red-400 hover:text-red-500 transition-all z-10"
-          >
-            <Icon name="close" class="text-2xl" />
-          </button>
-          <ProjectGallery project={project} />
-        </dialog>
-      ))
-    }
   </div>
 </section>
 <script src="../scripts/projects.scripts.ts"></script>
