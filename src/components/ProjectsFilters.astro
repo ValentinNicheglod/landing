@@ -1,0 +1,48 @@
+---
+// Styles
+import "../styles/filters.scss";
+
+// Enums
+import { ProjectFilters } from "../models/enums/filters.enum";
+
+// Translations
+import projectsTranslations from "../locales/projects.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = projectsTranslations[lang];
+
+const filterOptions = [
+  {
+    label: "Todos",
+    shortLabel: "Todos",
+    value: ProjectFilters.ALL,
+  },
+  {
+    label: translations.design,
+    shortLabel: "Diseño",
+    value: ProjectFilters.DESIGN,
+  },
+  {
+    label: translations.dev,
+    shortLabel: "Desarrollo",
+    value: ProjectFilters.DEV,
+  },
+];
+---
+
+<div id="projects-filter" class="filters md:shadow-sm">
+  {
+    filterOptions.map((option) => (
+      <button
+        id={`project-filter-${option.value}`}
+        class:list={{ selected: option.value === 0 }}
+        data-value={option.value}
+      >
+        <div class="block md:hidden">{option.shortLabel}</div>
+        <div class="hidden md:block">{option.label}</div>
+      </button>
+    ))
+  }
+  <div class="absolute w-full h-full p-1">
+    <div id="projects-filter-indicator" class="indicator"></div>
+  </div>
+</div>

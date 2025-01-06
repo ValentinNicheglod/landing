@@ -1,4 +1,4 @@
-export enum SkillsFilters {
+export enum SkillFilters {
     PERSONAL = 0,
     DESIGN = 1,
     DEV = 2,

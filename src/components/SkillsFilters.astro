@@ -1,0 +1,46 @@
+---
+// Styles
+import "../styles/filters.scss";
+
+// Enums
+import { SkillFilters } from "../models/enums/filters.enum";
+
+// Translations
+import skillsTranslations from "../locales/about.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = skillsTranslations[lang];
+
+const filterOptions = [
+  {
+    label: translations.skills.personal,
+    shortLabel: "Personales",
+    value: SkillFilters.PERSONAL,
+  },
+  {
+    label: translations.skills.design,
+    shortLabel: "Diseño",
+    value: SkillFilters.DESIGN,
+  },
+  {
+    label: translations.skills.dev,
+    shortLabel: "Desarrollo",
+    value: SkillFilters.DEV,
+  },
+];
+---
+
+<div class="flex md:justify-end">
+  <div id="skills-filter" class="filters">
+    {
+      filterOptions.map((option) => (
+        <button id={`skill-filter-${option.value}`} data-value={option.value}>
+          <div class="block md:hidden">{option.shortLabel}</div>
+          <div class="hidden md:block">{option.label}</div>
+        </button>
+      ))
+    }
+    <div class="absolute w-full h-full p-1">
+      <div id="skills-filter-indicator" class="indicator"></div>
+    </div>
+  </div>
+</div>
