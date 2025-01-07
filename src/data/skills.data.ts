@@ -1,12 +1,15 @@
 import aboutTranslations from "../locales/about.locales.json";
 import { Emojis } from "../models/enums/emojis.enum";
+import { SkillFilters } from "../models/enums/filters.enum";
+import type { Skill, SkillList } from "../models/types/skills.type";
 
 export const getSkillsData = (lang: "es" | "en") => {
   const translations = aboutTranslations[lang];
-  
+
   return [
     {
       title: translations.skills.personal,
+      type: SkillFilters.PERSONAL,
       icon: Emojis.Personal,
       skills: [
         {
@@ -37,6 +40,7 @@ export const getSkillsData = (lang: "es" | "en") => {
     },
     {
       title: translations.skills.design,
+      type: SkillFilters.DESIGN,
       icon: Emojis.Designer,
       skills: [
         {
@@ -74,10 +78,12 @@ export const getSkillsData = (lang: "es" | "en") => {
     {
       title: translations.skills.dev,
       icon: Emojis.Developer,
+      type: SkillFilters.DEV,
       skills: [
         {
           name: "Javascript",
           image: "JS",
+          type: SkillFilters.DEV,
         },
         {
           name: "Typescript",
@@ -200,9 +206,22 @@ export const getSkillsData = (lang: "es" | "en") => {
           name: "GitHub",
           image: "GitHub",
           customClass: "dark-invert",
-
         },
       ],
     },
   ];
+};
+
+export const getAllSkills = (lang: "es" | "en") => {
+  const skillsData = getSkillsData(lang);
+  return skillsData
+    .map((skillCategory) => {
+      return skillCategory.skills.map((skill) => {
+        return {
+          ...skill,
+          type: skillCategory.type,
+        };
+      });
+    })
+    .flat();
 };

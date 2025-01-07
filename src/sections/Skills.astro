@@ -1,14 +1,23 @@
 ---
+// Components
 import GradientBackground from "../components/ui/GradientBackground.astro";
+import Skill from "../components/Skill.astro";
+import SkillsFilters from "../components/SkillsFilters.astro";
 
-import "../styles/skills.scss";
+// Styles
 import "swiper/css";
 
-import aboutTranslations from "../locales/about.locales.json";
+// Enums
 import { Emojis } from "../models/enums/emojis.enum";
-import SkillsFilters from "../components/SkillsFilters.astro";
+
+// Translations
+import aboutTranslations from "../locales/about.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
+
+// Data
+import { getAllSkills } from "../data/skills.data";
+const allSkills = getAllSkills(lang);
 ---
 
 <section
@@ -29,144 +38,14 @@ const translations = aboutTranslations[lang];
         <div id="skills-icon" class="text-7xl lg:text-8xl dark-opacity"></div>
         <div id="skills-title" class="title text-white text-balance"></div>
       </div>
-      <div>
+      <div class="md:w-[max(550px,_50vw)] overflow-hidden">
         <div id="skills-swiper" class="swiper pb-4">
-          <div id="skills-list" class="swiper-wrapper"></div>
+          <div id="skills-list" class="swiper-wrapper">
+            {allSkills.map((_skill) => <Skill skill={_skill} />)}
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<script>
-  document.getElementById(`skill-filter-0`)?.classList.add("selected");
-</script>
-<script>
-  import Swiper from "swiper";
-  import { Autoplay } from "swiper/modules";
-
-  import { getSkillsData } from "../data/skills.data";
-  import {
-    changeButtonState,
-    translateIndicator,
-  } from "../scripts/filters.scripts";
-
-  const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
-  const skillsData = getSkillsData(lang);
-
-  let selectedFilterIndex = 0;
-  let swiper: Swiper;
-
-  const getSkillsElements = () => {
-    const skillElements = skillsData[selectedFilterIndex].skills.map(
-      (skill) => {
-        const skillElement = document.createElement("div");
-        skillElement.classList.add("swiper-slide", "inner-container");
-
-        const image = document.createElement("img");
-        image.classList.add("dark-opacity");
-        if (skill.customClass) image.classList.add(skill.customClass);
-        image.setAttribute("src", `src/images/skills/${skill.image}.png`);
-
-        const text = document.createElement("span");
-        text.style.color = "var(--text-color)";
-        text.innerText = skill.name;
-
-        skillElement.appendChild(image);
-        skillElement.appendChild(text);
-        return skillElement;
-      }
-    );
-    return skillElements;
-  };
-
-  const changeIcon = () => {
-    const skillsIcon = document.getElementById("skills-icon");
-
-    if (skillsIcon) {
-      skillsIcon.innerHTML = skillsData[selectedFilterIndex].icon;
-    }
-  };
-
-  const changeTitle = () => {
-    const skillsTitle = document.getElementById("skills-title");
-
-    if (skillsTitle) {
-      skillsTitle.innerHTML = skillsData[selectedFilterIndex].title;
-    }
-  };
-
-  const changeSkills = () => {
-    const skillsList = document.getElementById("skills-list");
-
-    if (skillsList) {
-      skillsList.innerHTML = "";
-      skillsList.append(...getSkillsElements());
-    }
-
-    initializeSwiper();
-  };
-
-  const initializeSwiper = () => {
-    swiper?.destroy();
-
-    swiper = new Swiper("#skills-swiper", {
-      slidesPerView: 3,
-      spaceBetween: 12,
-      autoplay: true,
-      loop: true,
-      modules: [Autoplay],
-      breakpoints: {
-        384: {
-          slidesPerView: 3.25,
-        },
-        512: {
-          slidesPerView: 4,
-        },
-        640: {
-          slidesPerView: 5,
-        },
-        768: {
-          slidesPerView: 3.25,
-        },
-        880: {
-          slidesPerView: 4,
-        },
-        992: {
-          slidesPerView: 5,
-        },
-        1218: {
-          slidesPerView: 6,
-        },
-      },
-    });
-
-    /* if (skillsData[selectedFilterIndex].skills.length < 6) {
-      swiper.destroy();
-    } */
-  };
-
-  const handleFilter = (filter: Element) => {
-    const _selectedFilterIndex =
-      filter.attributes.getNamedItem("data-value")?.value;
-
-    if (_selectedFilterIndex) {
-      selectedFilterIndex = parseInt(_selectedFilterIndex);
-
-      changeButtonState(`skill-filter-${selectedFilterIndex}`, "skills-filter");
-      translateIndicator("skills-filter-indicator", selectedFilterIndex);
-      changeIcon();
-      changeTitle();
-      changeSkills();
-    }
-  };
-
-  const filters = document.getElementById("skills-filter");
-
-  if (filters) {
-    for (const filter of filters.children) {
-      filter.addEventListener("click", () => handleFilter(filter));
-    }
-
-    handleFilter(filters.children[0]);
-  }
-</script>
+<script src="../scripts/skills.scripts.ts"></script>
