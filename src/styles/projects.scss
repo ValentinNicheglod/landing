@@ -1,33 +1,17 @@
-#projects {
-  @apply lg:h-[min(100dvh,_1000px)];
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  --swiper-navigation-size: 32px;
-}
-
 .project-card {
-  @apply relative rounded-xl md:rounded-2xl aspect-square overflow-hidden;
-  border-width: .5px;
-  background-size: cover !important;
-
   .wrapper {
-    @apply absolute flex flex-col w-full aspect-square;
-
-    .overlay-top {
+    .card-overlay {
       @apply h-0 md:h-3/4;
-      transition: 0.5s;
+      transition: height 0.5s;
     }
 
     .content {
-      @apply relative flex flex-col gap-2 aspect-square pb-4;
       background: #00000090;
 
       &::before {
         $height: 25px;
+
         content: "";
-        display: block;
         position: absolute;
         top: -$height;
         width: 100%;
@@ -35,23 +19,34 @@
         background: linear-gradient(180deg, transparent, #00000090);
       }
     }
-
-    .project-information {
-      @apply flex items-center gap-2 duration-75;
-    }
-
-    .view-more {
-     @apply text-xs text-white text-nowrap px-2 py-0.5 rounded-full bg-primary; 
-    }
   }
 
   &:hover {
-    .overlay-top {
+    .card-overlay {
       height: 0;
     }
 
     .content {
       background: #00000099;
+    }
+  }
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 32px;
+}
+
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    --swiper-navigation-size: 18px;
+    --swiper-navigation-sides-offset: 2px;
+  }
+
+  .project-card:hover {
+    .content {
+      background: #00000090;
     }
   }
 }

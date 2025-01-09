@@ -1,13 +1,11 @@
 import Swiper from "swiper";
 import { projectsData } from "../data/projects.data";
 import { Autoplay, Navigation } from "swiper/modules";
-import type { Project } from "../models/types/project.type";
+import type { Project, ProjectNames } from "../models/types/project.type";
 import { ProjectFilters } from "../models/enums/filters.enum";
 import { changeButtonState, translateIndicator } from "./filters.scripts";
 import type { SwiperSlide } from "swiper/element";
-
-let projectSwiper: Swiper | null = null;
-let selectedFilterIndex: ProjectFilters;
+import projectsTranslations from "../locales/projects.locales.json";
 
 const getProjectsGallerySwiperConfig = (project: Project) => ({
   slidesPerView: 1,
@@ -25,6 +23,7 @@ const getProjectsGallerySwiperConfig = (project: Project) => ({
 const getProjectsListSwiperConfig = () => ({
   slidesPerView: 1,
   spaceBetween: 16,
+  loop: true,
   autoplay: {
     pauseOnMouseEnter: true,
   },
@@ -41,11 +40,7 @@ const getProjectsListSwiperConfig = () => ({
     1218: {
       slidesPerView: 3,
     },
-    1792: {
-      slidesPerView: 4,
-    },
   },
-  loop: true,
   modules: [Autoplay],
 });
 
@@ -56,6 +51,7 @@ const initializeProjectsGallerySwiper = () => {
   });
 };
 
+let projectSwiper: Swiper | null = null;
 export const initializeProjectsSwiper = () => {
   projectSwiper = new Swiper("#projects-swiper", getProjectsListSwiperConfig());
 };
@@ -86,6 +82,11 @@ const addProjectCardButtonsListeners = () => {
     openProjectButton?.addEventListener("click", () => {
       window.open(project.url, "_blank");
     });
+
+    const viewMoreButton = document.getElementById(`view-more-${project.path}`);
+    viewMoreButton?.addEventListener("click", () =>
+      handleViewMoreClick(project.path),
+    );
 
     const openGalleryButton = document.getElementById(
       `${project.path}-gallery-button`,
@@ -127,15 +128,21 @@ const openGalleryModal = (projectPath: string) => {
 };
 
 const closeGalleryModal = (projectPath: string) => {
+  const ANIMATION_DURATION = 700;
   const galleryModal = document.getElementById(
     `${projectPath}-gallery`,
   ) as HTMLDialogElement;
 
-  projectSwiper?.autoplay?.start();
+  galleryModal.classList.add("closing");
 
-  galleryModal.close();
+  setTimeout(() => {
+    projectSwiper?.autoplay?.start();
+    galleryModal.classList.remove("closing");
+    galleryModal.close();
+  }, ANIMATION_DURATION);
 };
 
+let selectedFilterIndex: ProjectFilters;
 const handleFilter = (filter: Element) => {
   const selectedIndex = filter.attributes.getNamedItem("data-value")?.value;
 
@@ -151,24 +158,120 @@ const handleFilter = (filter: Element) => {
 };
 
 const setProjectSlides = () => {
-  const projectSlides = document.querySelectorAll('.swiper-slide') as unknown as SwiperSlide[];
+  const projectSlides = document.querySelectorAll(
+    ".project-slide",
+  ) as unknown as SwiperSlide[];
+
   projectSlides.forEach((slide) => {
     if (!slide.dataset.type) return;
 
     const projectType: ProjectFilters = parseInt(slide.dataset.type);
-    if (selectedFilterIndex === ProjectFilters.ALL || projectType === selectedFilterIndex) {
-      slide.style.display = 'block';
+    if (
+      selectedFilterIndex === ProjectFilters.ALL ||
+      projectType === selectedFilterIndex
+    ) {
+      slide.style.display = "block";
     } else {
-      slide.style.display = 'none';
+      slide.style.display = "none";
     }
   });
 
+  projectSwiper?.slideTo(0, 0);
+  projectSwiper?.autoplay?.start();
   projectSwiper?.update();
 };
 
+let isSmallCardLastResult = false;
+let translations: (typeof projectsTranslations)["en"];
+
+const setCardStyles = () => {
+  const projectCard = document.querySelector(".project-card") as HTMLElement;
+  const isSmallCard = projectCard.clientWidth < 400;
+
+  if (isSmallCard === isSmallCardLastResult) return;
+
+  isSmallCardLastResult = isSmallCard;
+
+  const buttonLabels = document.getElementsByClassName("button-label");
+  for (const labelRef of buttonLabels) {
+    labelRef.classList.toggle("text-sm");
+  }
+
+  const viewMoreButtons = document.getElementsByClassName("view-more");
+  for (const buttonRef of viewMoreButtons) {
+    buttonRef.classList.toggle("hidden");
+  }
+
+  projectsData.forEach((project) => {
+    const id = project.path;
+
+    const descriptionRef = document.getElementById(`description-${id}`);
+    if (!descriptionRef) return;
+
+    if (isSmallCard) {
+      const shortDescription = translations[id].description.split(".")[0];
+      descriptionRef.innerHTML = `${shortDescription}.`;
+    } else {
+      const fullDescription = translations[id].description;
+      descriptionRef.innerHTML = fullDescription;
+    }
+  });
+};
+
+const showFullDescription = {
+  lift: false,
+  meteor: false,
+  radley: false,
+  reconnect: false,
+};
+
+const handleViewMoreClick = (id: ProjectNames) => {
+  showFullDescription[id] = !showFullDescription[id];
+  const description = document.getElementById(`description-${id}`);
+  const viewMoreButton = document.getElementById(`view-more-${id}`);
+  const technologies = document.getElementById(`technologies-${id}`);
+  const fullDescription = translations[id].description;
+  const shortDescription = fullDescription.split(".")[0] + ".";
+
+  if (!viewMoreButton || !description || !technologies) return;
+
+  if (showFullDescription[id]) {
+    viewMoreButton.innerText = translations.less;
+    description.innerHTML = fullDescription;
+    setDescriptionReadingTime();
+  } else {
+    viewMoreButton.innerText = translations.more;
+    description.innerHTML = shortDescription;
+    projectSwiper?.autoplay.resume();
+  }
+  technologies.classList.toggle("hidden");
+};
+
+const setDescriptionReadingTime = () => {
+  const READING_TIME = 7000;
+  projectSwiper?.autoplay.pause();
+  setTimeout(() => projectSwiper?.autoplay.resume(), READING_TIME);
+};
+
+const addDescriptionReadingTimeOnClick = () => {
+  if (window.innerWidth < 768) {
+    for (const projectCard of document.getElementsByClassName("project-card")) {
+      projectCard.addEventListener("click", setDescriptionReadingTime);
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeProjectsSwiper();
-  addFiltersListeners();
   initializeProjectsGallerySwiper();
+
+  const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
+  translations = projectsTranslations[lang];
+
+  setCardStyles();
+  window.addEventListener("resize", setCardStyles);
+
+  addDescriptionReadingTimeOnClick();
+  addFiltersListeners();
   addProjectCardButtonsListeners();
 });

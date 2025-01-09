@@ -30,12 +30,12 @@ const translations = projectsTranslations[lang];
           <div class="swiper-wrapper">
             {
               projectsData.map((project, index) => (
-                <div class="swiper-slide" data-type={project.type}>
+                <div class="swiper-slide project-slide" data-type={project.type}>
                   <ProjectCard project={project} index={index} />
                 </div>
                 <dialog
                   id={`${project.path}-gallery`}
-                  class="overflow-hidden rounded-2xl"
+                  class="overflow-hidden md:rounded-2xl"
                 >
                   <ProjectGallery project={project} />
                 </dialog>

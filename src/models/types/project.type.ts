@@ -1,6 +1,6 @@
 import type { ProjectFilters } from "../enums/filters.enum";
 
-type ProjectNames = "lift" | "meteor" | "radley" | "reconnect";
+export type ProjectNames = "lift" | "meteor" | "radley" | "reconnect";
 
 export type Project = {
   path: ProjectNames;

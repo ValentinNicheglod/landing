@@ -1,14 +1,27 @@
 ---
-import type { Project } from "../models/types/project.type";
+// Components
+import { Icon } from "astro-icon/components";
 import ScrollableGallery from "./ScrollableGallery.astro";
 import SimpleGallery from "./SimpleGallery.astro";
 
-const { project } = Astro.props as { project: Project };
-
+// Styles
 import "swiper/css";
 import "swiper/css/navigation";
+
+// Types
+import type { Project } from "../models/types/project.type";
+
+const { project } = Astro.props as { project: Project };
 ---
 
+<button
+  id={`${project.path}-gallery-close-button`}
+  class="absolute right-4 top-4 z-10"
+>
+  <div class="text-red-400 hover:text-red-500 transition-colors">
+    <Icon name="close" class="text-2xl" />
+  </div>
+</button>
 <div id={`${project.path}-gallery-swiper`} class="swiper flex h-full">
   <div class="swiper-wrapper">
     {

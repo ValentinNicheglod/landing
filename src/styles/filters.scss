@@ -1,5 +1,5 @@
 .filters {
-  @apply relative grid grid-flow-col md:grid-cols-3 gap-2 rounded-full md:gap-0 md:px-2 md:py-1;
+  @apply relative grid grid-flow-col gap-2 rounded-full md:grid-cols-3 md:gap-0 md:px-2 md:py-1;
   @apply md:border-[.5px] md:border-slate-200 md:bg-[var(--bg-color-3)] md:dark:border-slate-700;
 
   button {
@@ -7,14 +7,15 @@
     @apply bg-[var(--bg-color-3)] md:bg-transparent;
     transition:
       opacity 500ms,
-      color 400ms;
+      color 400ms,
+      background-color 400ms;
 
     &:hover {
       @apply opacity-100;
     }
 
     &.selected {
-      @apply opacity-100 bg-primary outline md:outline-none text-white md:bg-transparent;
+      @apply bg-primary text-white opacity-100 md:bg-transparent;
     }
   }
 
@@ -23,6 +24,10 @@
     background-color: var(--primary-color);
     transition: 500ms;
   }
+}
+
+#projects-filter button:not(.selected) {
+  @apply bg-slate-200 outline-none dark:bg-slate-700;
 }
 
 @media (prefers-reduced-motion: no-preference) {

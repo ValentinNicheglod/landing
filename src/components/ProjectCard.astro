@@ -1,25 +1,31 @@
 ---
-import type { Project } from "../models/types/project.type";
-import projectsTranslations from "../locales/projects.locales.json";
-import ProjectLogo from "./ui/ProjectLogo.astro";
-import "../styles/projects.scss";
+// Components
+import ProjectLogo from "./ProjectLogo.astro";
 import SquareButton from "./SquareButton.astro";
 import Technologies from "./Technologies.astro";
 
+// Styles
+import "../styles/projects.scss";
+
+// Types
+import type { Project } from "../models/types/project.type";
+
+// Translations
+import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
 
-const { project, index } = Astro.props as { project: Project; index: number };
+const { project } = Astro.props as { project: Project };
 ---
 
 <div
-  class="project-card thin-border"
+  class="project-card thin-border bg-cover aspect-square overflow-hidden rounded-xl md:rounded-2xl"
   style={`background: url(src/images/projects/${project.path}/background.png)`}
 >
-  <div class="wrapper">
-    <div class="overlay-top"></div>
-    <div class="content">
-      <div class="project-information">
+  <div class="wrapper aspect-square">
+    <div class="card-overlay"></div>
+    <div class="content relative flex aspect-square flex-col gap-2 py-4">
+      <div class="flex items-center gap-4 px-4 sm:mb-6">
         <ProjectLogo project={project} />
         <div class="flex flex-col">
           <div class="font-semibold text-white text-2xl">
@@ -32,16 +38,19 @@ const { project, index } = Astro.props as { project: Project; index: number };
       </div>
       <div class="relative flex-1 px-4">
         <span
-          id={`description-${index}`}
+          id={`description-${project.path}`}
           class="text-slate-100 font-light text-pretty description"
           set:html={translations[project.path].description}
         />
         &nbsp;
-        <button id={`view-more-${index}`} class="view-more hidden">
+        <button
+          id={`view-more-${project.path}`}
+          class="small-button view-more hidden"
+        >
           {translations.more}
         </button>
       </div>
-      <div id={`technologies-${index}`} class="px-4">
+      <div id={`technologies-${project.path}`} class="px-4">
         <Technologies technologies={project.technologies} />
       </div>
       <div class="grid grid-cols-3 gap-1 sm:gap-3 px-4 zd">
@@ -84,68 +93,3 @@ const { project, index } = Astro.props as { project: Project; index: number };
     </div>
   </div>
 </div>
-<script define:vars={{ index, project, translations }}>
-  let showingFullDescription = false;
-
-  const setCardStyles = () => {
-    const cardWidth = document.querySelector(".project-card").clientWidth;
-    const isSmallCard = cardWidth < 400;
-
-    const labels = document.getElementsByClassName("button-label");
-    const viewMoreButtons = document.getElementsByClassName("view-more");
-
-    if (isSmallCard) {
-      [...labels].forEach((labelRef) => {
-        labelRef.classList.add("text-xs");
-      });
-
-      [...viewMoreButtons].forEach((buttonRef) => {
-        buttonRef.classList.remove("hidden");
-      });
-
-      const descriptionRef = document.getElementById(`description-${index}`);
-      const shortDescription = translations[project.path].description.split(".")[0];
-      descriptionRef.innerHTML = `${shortDescription}.`;
-      descriptionRef.classList.add("text-xs");
-    } else {
-      [...labels].forEach((labelRef) => {
-        labelRef.classList.add("text-xs");
-      });
-
-      [...viewMoreButtons].forEach((buttonRef) => {
-        buttonRef.classList.add("hidden");
-      });
-
-      const descriptionRef = document.getElementById(`description-${index}`);
-      const fullDescription = translations[project.path].description;
-      descriptionRef.innerHTML = fullDescription;
-      descriptionRef.classList.remove("text-xs");
-    }
-  };
-
-  const handleViewMoreClick = () => {
-    showingFullDescription = !showingFullDescription;
-    const description = document.getElementById(`description-${index}`);
-    const viewMoreButton = document.getElementById(`view-more-${index}`);
-    const technologies = document.getElementById(`technologies-${index}`);
-
-    if (showingFullDescription) {
-      viewMoreButton.innerText = translations.less;
-      description.innerHTML = translations[project.path].description;
-      technologies.classList.add("hidden");
-    } else {
-      viewMoreButton.innerText = translations.more;
-      description.innerHTML =
-        translations[project.path].description.split(".")[0] + ".";
-      technologies.classList.remove("hidden");
-    }
-  };
-
-  window.addEventListener("resize", setCardStyles);
-  window.addEventListener("DOMContentLoaded", () => {
-    setCardStyles();
-    document
-      .getElementById(`view-more-${index}`)
-      .addEventListener("click", handleViewMoreClick);
-  });
-</script>
