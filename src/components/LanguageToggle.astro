@@ -64,6 +64,10 @@ const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
   }
 </style>
 <script>
+  import tippy from "tippy.js";
+  import "tippy.js/dist/tippy.css";
+  import "tippy.js/animations/scale.css";
+
   const changeLanguage = () => {
     const spanishFlag = document.querySelector("#spanish-flag");
     spanishFlag?.classList.add("animate-duration-500");
@@ -83,6 +87,46 @@ const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
       location.pathname = selectedLanguage === "en" ? "/es" : "/en";
     }, ANIMATION_DURATION);
   };
+
+  const setTooltipData = () => {
+    const selectedLanguage = document
+      .querySelector("html")
+      ?.getAttribute("lang");
+
+    const content = `
+      <div class="px-2">
+        <div class="flex items-center gap-3 mt-2">
+          <div class="rounded-full p-1 bg-primary">
+            <img src="src/icons/translate.svg" class="w-6 h-6" />
+          </div>
+          <div>
+            <span class="text-xs font-extralight text-slate-300">
+              ${selectedLanguage === "en" ? "Current language" : "Idioma actual"}
+            </span>
+            <div class="text-base text-white">
+              ${selectedLanguage === "en" ? "English" : "Español"}
+            </div>
+          </div>
+        </div>
+        <hr class="my-2 border-slate-500" />
+        <div class="font-light text-slate-300 mb-2">
+          ${selectedLanguage === "en" ? "Press to switch to Spanish" : "Presiona para cambiar a Inglés"}
+        </div>
+      </div>
+    `;
+
+    tippy(`#language-toggle`, {
+      content,
+      allowHTML: true,
+      placement: "bottom",
+      arrow: false,
+      animation: "scale",
+      offset: [0, 16],
+      duration: 250,
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", setTooltipData);
 
   document
     .querySelector("#language-toggle")

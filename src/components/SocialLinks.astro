@@ -21,16 +21,14 @@ const contactLinks = [
 const { size } = Astro.props;
 ---
 
-<div
-  class="flex gap-4"
-  class:list={{ "justify-between": size === "large" }}
->
+<div class="flex gap-4" class:list={{ "justify-between": size === "large" }}>
   {
     contactLinks.map((link) => (
       <a
         href={link.href}
         target="_blank"
         rel="noreferrer noopener"
+        name={link.title}
         class="aspect-square transition-transform hover:scale-110 duration-500"
         class:list={{
           "w-11 md:w-12": !size,
@@ -47,3 +45,19 @@ const { size } = Astro.props;
     ))
   }
 </div>
+<script>
+  import tippy from "tippy.js";
+  import "tippy.js/dist/tippy.css";
+  import 'tippy.js/animations/scale.css';
+
+  const buttons = ["Behance", "Dribbble", "GitHub", "LinkedIn"];
+  buttons.forEach((title) => {
+    tippy(`[name="${title}"]`, {
+      content: title,
+      placement: 'bottom',
+      arrow: false,
+      animation: 'scale',
+      duration: 250
+    });
+  });
+</script>

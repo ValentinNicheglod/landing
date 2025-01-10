@@ -20,14 +20,15 @@ const iconHasOwnBackground = (techName: string) => {
   <span class="text-white xs:text-slate-600 text-sm font-light">
     {translations.technologies}
   </span>
-  <div class="flex gap-1 xs:gap-2">
+  <div class="flex gap-1 xs:gap-2" >
     {
       technologies.map((technology) => (
         <div
-          class="rounded-full overflow-hidden transition-transform hover:-translate-y-1"
+          class="technology rounded-full overflow-hidden transition-transform hover:-translate-y-1"
           class:list={{
             "p-1.5 bg-neutral-200": !iconHasOwnBackground(technology),
           }}
+          data-tooltip={technology}
         >
           <img
             src={`src/images/skills/${technology}.png`}

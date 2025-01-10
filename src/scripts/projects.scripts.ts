@@ -6,6 +6,9 @@ import { ProjectFilters } from "../models/enums/filters.enum";
 import { changeButtonState, translateIndicator } from "./filters.scripts";
 import type { SwiperSlide } from "swiper/element";
 import projectsTranslations from "../locales/projects.locales.json";
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/scale.css";
 
 const getProjectsGallerySwiperConfig = (project: Project) => ({
   slidesPerView: 1,
@@ -100,6 +103,26 @@ const addProjectCardButtonsListeners = () => {
     closeGalleryButton?.addEventListener("click", () =>
       closeGalleryModal(project.path),
     );
+  });
+};
+
+const addProjectTechnologiesTooltips = () => {
+  projectsData.forEach((project) => {
+    const technologies = document.getElementById(
+      `technologies-${project.path}`,
+    );
+    if (!technologies) return;
+
+    const technologiesList = technologies.getElementsByClassName("technology");
+    for (const technology of technologiesList) {
+      tippy(technology, {
+        content: technology.getAttribute("data-tooltip") || "",
+        placement: "bottom",
+        arrow: false,
+        animation: "scale",
+        duration: 250,
+      });
+    }
   });
 };
 
@@ -259,7 +282,7 @@ const addDescriptionReadingTimeOnClick = () => {
       projectCard.addEventListener("click", setDescriptionReadingTime);
     }
   }
-}
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeProjectsSwiper();
@@ -272,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", setCardStyles);
 
   addDescriptionReadingTimeOnClick();
+  addProjectTechnologiesTooltips();
   addFiltersListeners();
   addProjectCardButtonsListeners();
 });
