@@ -1,7 +1,9 @@
-import aboutTranslations from "../locales/about.locales.json";
 import { Emojis } from "../models/enums/emojis.enum";
 import { SkillFilters } from "../models/enums/filters.enum";
-import type { Skill, SkillList } from "../models/types/skills.type";
+
+import aboutTranslations from "../locales/about.locales.json";
+
+import * as skillsIcons from "../images/skills/_index";
 
 export const getSkillsData = (lang: "es" | "en") => {
   const translations = aboutTranslations[lang];
@@ -14,27 +16,27 @@ export const getSkillsData = (lang: "es" | "en") => {
       skills: [
         {
           name: translations.skills.commitment,
-          image: "Commitment",
+          image: skillsIcons.commitment,
         },
         {
           name: translations.skills.proactivity,
-          image: "Proactivity",
+          image: skillsIcons.proactivity,
         },
         {
           name: translations.skills.detailAttention,
-          image: "DetailAttention",
+          image: skillsIcons.detailAttention,
         },
         {
           name: translations.skills.creativity,
-          image: "Creativity",
+          image: skillsIcons.creativity,
         },
         {
           name: translations.skills.flexibility,
-          image: "Flexibility",
+          image: skillsIcons.flexibility,
         },
         {
           name: translations.skills.leadership,
-          image: "Leadership",
+          image: skillsIcons.leadership,
         },
       ],
     },
@@ -45,32 +47,32 @@ export const getSkillsData = (lang: "es" | "en") => {
       skills: [
         {
           name: "Adobe XD",
-          image: "XD",
+          image: skillsIcons.adobeXD,
           customClass: "dark-shadow",
         },
         {
           name: "Illustrator",
-          image: "Illustrator",
+          image: skillsIcons.illustrator,
           customClass: "dark-shadow",
         },
         {
           name: "Photoshop",
-          image: "Photoshop",
+          image: skillsIcons.photoshop,
           customClass: "dark-shadow",
         },
         {
           name: "Figma",
-          image: "Figma",
+          image: skillsIcons.figma,
           customClass: "dark-shadow",
         },
         {
           name: translations.skills.prototyping,
-          image: "Prototype",
+          image: skillsIcons.prototype,
           customClass: "dark-shadow",
         },
         {
           name: "WireFraming",
-          image: "Wireframe",
+          image: skillsIcons.wireframe,
           customClass: "dark-shadow",
         },
       ],
@@ -82,129 +84,129 @@ export const getSkillsData = (lang: "es" | "en") => {
       skills: [
         {
           name: "Javascript",
-          image: "JS",
+          image: skillsIcons.js,
           type: SkillFilters.DEV,
         },
         {
           name: "Typescript",
-          image: "TS",
+          image: skillsIcons.ts,
         },
         {
           name: "Python",
-          image: "Python",
+          image: skillsIcons.python,
         },
         {
           name: "HTML 5",
-          image: "HTML",
+          image: skillsIcons.html,
         },
         {
           name: "CSS 3",
-          image: "CSS",
+          image: skillsIcons.css,
         },
         {
           name: "GIT",
-          image: "GIT",
+          image: skillsIcons.git,
         },
         {
           name: "React",
-          image: "React",
+          image: skillsIcons.react,
         },
         {
           name: "Angular",
-          image: "Angular",
+          image: skillsIcons.angular,
         },
         {
           name: "Astro",
-          image: "Astro",
+          image: skillsIcons.astro,
           customClass: "dark-shadow",
         },
         {
           name: "Ionic",
-          image: "Ionic",
+          image: skillsIcons.ionic,
         },
         {
           name: "Expo",
-          image: "Expo",
+          image: skillsIcons.expo,
           customClass: "dark-invert",
         },
         {
           name: "Redux",
-          image: "Redux",
+          image: skillsIcons.redux,
         },
         {
           name: "Webpack",
-          image: "Webpack",
+          image: skillsIcons.webpack,
         },
         {
           name: "RxJS",
-          image: "Rxjs",
+          image: skillsIcons.rxjs,
         },
         {
           name: "Tailwind CSS",
-          image: "Tailwind",
+          image: skillsIcons.tailwind,
         },
         {
           name: "Sass",
-          image: "Sass",
+          image: skillsIcons.sass,
         },
         {
           name: "Less",
-          image: "Less",
+          image: skillsIcons.less,
           customClass: "dark-shadow",
         },
         {
           name: "Bootstrap",
-          image: "Bootstrap",
+          image: skillsIcons.bootstrap,
         },
         {
           name: "Node JS",
-          image: "Node",
+          image: skillsIcons.node,
         },
         {
           name: "Express",
-          image: "Express",
+          image: skillsIcons.express,
           customClass: "dark-invert",
         },
         {
           name: "NPM",
-          image: "NPM",
+          image: skillsIcons.npm,
         },
         {
           name: "Firebase",
-          image: "Firebase",
+          image: skillsIcons.firebase,
         },
         {
           name: "Eslint",
-          image: "Eslint",
+          image: skillsIcons.eslint,
         },
         {
           name: "Prettier",
-          image: "Prettier",
+          image: skillsIcons.prettier,
         },
         {
           name: "MongoDB",
-          image: "MongoDB",
+          image: skillsIcons.mongodb,
         },
         {
           name: "MySQL",
-          image: "MySQL",
+          image: skillsIcons.mysql,
           customClass: "dark-shadow",
         },
         {
           name: "PostgreSQL",
-          image: "PostgreSQL",
+          image: skillsIcons.postgresql,
         },
         {
           name: "Sequelize",
-          image: "Sequelize",
+          image: skillsIcons.sequelize,
         },
         {
           name: "Postman",
-          image: "Postman",
+          image: skillsIcons.postman,
         },
         {
           name: "GitHub",
-          image: "GitHub",
+          image: skillsIcons.github,
           customClass: "dark-invert",
         },
       ],
@@ -214,6 +216,7 @@ export const getSkillsData = (lang: "es" | "en") => {
 
 export const getAllSkills = (lang: "es" | "en") => {
   const skillsData = getSkillsData(lang);
+  console.log(skillsData);
   return skillsData
     .map((skillCategory) => {
       return skillCategory.skills.map((skill) => {

@@ -1,8 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import "../styles/buttons.scss";
 
 const { label, image, url, project, id } = Astro.props;
-import "../styles/buttons.scss";
 ---
 
 <button
@@ -10,7 +11,7 @@ import "../styles/buttons.scss";
   id={project && (url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`)}
 >
   <div class="flex justify-between w-full">
-    <img src={`src/images/${image}`} />
+    <Image src={image} alt="" />
     <div>
       <div class="chevron">
         {url && <Icon name="external-link" class="icon link-icon" />}

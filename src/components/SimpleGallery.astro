@@ -1,13 +1,15 @@
 ---
+import { Image } from "astro:assets";
+
 const { image, projectPath } = Astro.props as {
-  image: string;
+  image: ImageMetadata;
   projectPath: string;
 };
 ---
 
 <div class="gallery-image-container">
-  <img
-    src={`src/images/projects/${projectPath}/mockups/${image}.jpg`}
+  <Image
+    src={image}
     alt=""
     class="gallery-image"
   />

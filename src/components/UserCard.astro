@@ -1,7 +1,13 @@
 ---
-import { Icon } from "astro-icon/components";
+// Components
 import Location from "./Location.astro";
 import SocialLinks from "./SocialLinks.astro";
+
+// Images
+import { Image } from "astro:assets";
+import profilePic from "../images/ProfilePic.png";
+import UYFlag from "../images/flags/UY.png";
+import ARFlag from "../images/flags/AR.png";
 ---
 
 <div
@@ -10,7 +16,7 @@ import SocialLinks from "./SocialLinks.astro";
 >
   <div class="grid gap-3 lg:gap-4">
     <div class="profile-pic w-56 md:w-48 aspect-square rounded-full p-1 m-auto">
-      <img src="/images/ProfilePic.png" class="inner-container m-auto rounded-full" alt="" />
+      <Image src={profilePic} class="inner-container m-auto rounded-full" alt="" />
     </div>
     <div class="grid gap-1 items-center">
       <h4 class="font-semibold text-2xl text-center">Valentín Nicheglod</h4>
@@ -20,8 +26,8 @@ import SocialLinks from "./SocialLinks.astro";
     </div>
   </div>
   <div class="grid gap-1 lg:gap-2 md:min-w-[16rem] md:max-w-[40rem] m-auto">
-    <Location city="Paysandú" country="Uruguay" flag="UY" />
-    <Location city="Buenos Aires" country="Argentina" flag="AR" />
+    <Location city="Paysandú" country="Uruguay" flag={UYFlag} />
+    <Location city="Buenos Aires" country="Argentina" flag={ARFlag} />
   </div>
   <div class="flex flex-1 items-end justify-center">
     <SocialLinks />

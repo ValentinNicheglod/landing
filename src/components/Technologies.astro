@@ -1,13 +1,13 @@
 ---
-// Constants
 import { technologiesWithOwnBG } from "../models/constants";
+import { Image } from "astro:assets";
 
 // Translations
 import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
 
-const { technologies } = Astro.props as { technologies: string[] };
+const { technologies } = Astro.props as { technologies: { name: string, image: ImageMetadata }[] };
 
 const iconHasOwnBackground = (techName: string) => {
   return technologiesWithOwnBG.has(techName);
@@ -26,16 +26,16 @@ const iconHasOwnBackground = (techName: string) => {
         <div
           class="technology rounded-full overflow-hidden transition-transform hover:-translate-y-1"
           class:list={{
-            "p-1.5 bg-neutral-200": !iconHasOwnBackground(technology),
+            "p-1.5 bg-neutral-200": !iconHasOwnBackground(technology.name),
           }}
-          data-tooltip={technology}
+          data-tooltip={technology.name}
         >
-          <img
-            src={`src/images/skills/${technology}.png`}
+          <Image
+            src={technology.image}
             alt=""
             class:list={{
-              "w-5 h-5 sm:w-6 sm:h-6": !iconHasOwnBackground(technology),
-              "w-8 h-8 sm:w-9 sm:h-9": iconHasOwnBackground(technology),
+              "w-5 h-5 sm:w-6 sm:h-6": !iconHasOwnBackground(technology.name),
+              "w-8 h-8 sm:w-9 sm:h-9": iconHasOwnBackground(technology.name),
             }}
           />
         </div>

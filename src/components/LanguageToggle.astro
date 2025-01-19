@@ -1,6 +1,13 @@
 ---
+// Timezone Config
 import moment from "moment-timezone";
 import { getCountryForTimezone } from "countries-and-timezones";
+
+// Images
+import { Image } from "astro:assets";
+import USFlag from "../images/flags/US.png";
+import UKFlag from "../images/flags/UK.png";
+import ESFlag from "../images/flags/ES.png";
 
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 
@@ -8,19 +15,19 @@ const getUserCountry = () => {
   return getCountryForTimezone(moment.tz.guess());
 };
 
-const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
+const englishFlag = getUserCountry()?.id === "US" ? USFlag : UKFlag;
 ---
 
 <button id="language-toggle">
-  <img
+  <Image
     id="english-flag"
-    src={`/images/flags/${englishFlag}.png`}
+    src={englishFlag}
     class="outline-slate-300 rounded-full transition-transform"
     alt=""
   />
-  <img
+  <Image
     id="spanish-flag"
-    src={`/images/flags/ES.png`}
+    src={ESFlag}
     alt=""
     class="z-10 outline-slate-300 rounded-full transition-transform"
     class:list={{ hidden: lang !== "es" }}
@@ -97,7 +104,18 @@ const englishFlag = getUserCountry()?.id === "US" ? "US" : "GB";
       <div class="px-2">
         <div class="flex items-center gap-3 mt-2">
           <div class="rounded-full p-1 bg-primary">
-            <img src="src/icons/translate.svg" class="w-6 h-6" />
+            <svg
+              fill="none"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m3 5h12m-6-2v2m1.0482 9.5c-1.52737-1.5822-2.76747-3.4435-3.63633-5.5m6.08813 9h7m-8.5 3 5-10 5 10m-8.2489-16c-.968 5.7702-4.68141 10.6095-9.7511 13.129"
+                stroke="#FFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              />
+            </svg>
           </div>
           <div>
             <span class="text-xs font-extralight text-slate-300">

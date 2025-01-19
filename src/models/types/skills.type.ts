@@ -2,7 +2,7 @@ import type { SkillFilters } from "../enums/filters.enum";
 
 export interface Skill {
   name: string;
-  image: string;
+  image: ImageMetadata;
   type?: SkillFilters;
   customClass?: string;
 }

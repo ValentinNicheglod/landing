@@ -15,6 +15,12 @@ import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
 
+// Images
+import gitHubImage from "../images/social/GitHub.png";
+import behanceImage from "../images/social/Behance.png";
+import openImage from "../images/Open.png";
+import galleryImage from "../images/Gallery.png";
+
 const { project } = Astro.props as { project: Project };
 ---
 
@@ -58,7 +64,7 @@ const { project } = Astro.props as { project: Project };
           project.github && (
             <SquareButton
               id="github"
-              image="social/GitHub.png"
+              image={gitHubImage}
               label="GitHub"
               project={project}
               url={project.github}
@@ -69,7 +75,7 @@ const { project } = Astro.props as { project: Project };
           project.behance && (
             <SquareButton
               id="behance"
-              image="social/Behance.png"
+              image={behanceImage}
               label="Behance"
               project={project}
               url={project.behance}
@@ -78,13 +84,13 @@ const { project } = Astro.props as { project: Project };
         }
         <SquareButton
           id="gallery"
-          image="Gallery.png"
+          image={galleryImage}
           label={translations.images}
           project={project}
         />
         <SquareButton
           id="open"
-          image="Open.png"
+          image={openImage}
           label={translations.open}
           project={project}
           url={project.url}

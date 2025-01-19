@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 const { city, country, flag } = Astro.props;
 ---
 
@@ -11,7 +12,7 @@ const { city, country, flag } = Astro.props;
     <span class="text-slate-50 text-xs sm:text-sm font-light">
       {city}, <span class="text-slate-300">{country}</span>
     </span>
-    <img src={`/images/flags/${flag}.png`} class="w-4 h-4 ml-auto" alt="" />
+    <Image src={flag} class="w-4 h-4 ml-auto" alt="" />
   </div>
 </div>
 <style type="scss">

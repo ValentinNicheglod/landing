@@ -9,12 +9,17 @@ import { Emojis } from "../models/enums/emojis.enum";
 import heroTranslations from "../locales/hero.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = heroTranslations[lang];
+
+// Images
+import { Image } from "astro:assets";
+import background from "../images/HeroBackground.jpg"
 ---
 
 <section id="hero" class="relative flex flex-col">
   <h1 class="invisible text-xs">Valentín Nicheglod</h1>
 
   <ScrollInstruction lang={lang} />
+  <Image src={background} alt="" class="absolute w-screen h-screen object-cover -z-20" />
 
   <div class="container mx-auto flex flex-1 items-center p-8 md:p-0">
     <div class="flex flex-col gap-8 md:w-fit">
@@ -59,9 +64,7 @@ const translations = heroTranslations[lang];
   </div>
 </section>
 <style lang="scss">
-  section {
-    background-image: url(../images/HeroBackground.jpg);
-    background-size: cover;
+  #hero {
     min-height: 100dvh;
 
     &::after {

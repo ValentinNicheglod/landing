@@ -1,19 +1,30 @@
 ---
+import { Image } from "astro:assets";
+
+import behanceLogo from "../images/social/Behance.png";
+import dribbbleLogo from "../images/social/Dribbble.png";
+import githubLogo from "../images/social/GitHub.png";
+import linkedinLogo from "../images/social/LinkedIn.png";
+
 const contactLinks = [
   {
     title: "Behance",
+    image: behanceLogo,
     href: "http://www.behance.net/valentin_nicheglod",
   },
   {
     title: "Dribbble",
+    image: dribbbleLogo,
     href: "https://dribbble.com/valentin_nicheglod",
   },
   {
     title: "GitHub",
+    image: githubLogo,
     href: "https://github.com/ValentinNicheglod",
   },
   {
     title: "LinkedIn",
+    image: linkedinLogo,
     href: "https://www.linkedin.com/in/valentin-nicheglod/",
   },
 ];
@@ -36,8 +47,8 @@ const { size } = Astro.props;
           "w-14 md:w-15": size === "large",
         }}
       >
-        <img
-          src={`src/images/social/${link.title}.png`}
+        <Image
+          src={link.image}
           alt={`${link.title} icon`}
           class="dark-opacity"
         />

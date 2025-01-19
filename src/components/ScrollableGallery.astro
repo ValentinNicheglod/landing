@@ -7,16 +7,21 @@ import heroTranslations from "../locales/hero.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = heroTranslations[lang];
 
-const { image, projectPath } = Astro.props as {
-  image: string;
-  projectPath: string;
+const { image, project } = Astro.props as {
+  image: ImageMetadata;
+  project: Project;
 };
+
+import projectBackground from "../images/projects/project-background.png";
+import { Image } from "astro:assets";
+import type { Project } from "../models/types/project.type";
+
+if (!project.mockup) return;
 ---
 
 <div class="flex flex-col justify-center items-center h-full">
   <div
     class="w-fit mx-auto inset-0 mt-8"
-    class:list={{ "opacity-0": !image.includes("scroll") }}
   >
     <div
       class="flex items-center gap-2 px-2 py-1 rounded-full bg-white shadow-md animate-bounce animate-infinite"
@@ -28,19 +33,20 @@ const { image, projectPath } = Astro.props as {
     </div>
   </div>
   <div class="flex-1">
-    <img
-      src="src/images/projects/project-background.png"
+    <Image
+      src={projectBackground}
       class="background object-contain"
+      alt=""
     />
-    <img
-      src={`src/images/projects/${projectPath}/mockup-window.png`}
+    <Image
+      src={project.mockup}
       class="prototype-window"
+      alt=""
     />
     <div
       class="prototype-content"
-      class:list={{ "overflow-hidden": !image.includes("scroll") }}
     >
-      <img src={`src/images/projects/${projectPath}/mockups/${image}.jpg`} />
+      <Image src={image} alt="" />
     </div>
   </div>
 </div>

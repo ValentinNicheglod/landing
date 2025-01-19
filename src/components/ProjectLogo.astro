@@ -1,12 +1,13 @@
 ---
+import { Image } from "astro:assets";
 import type { Project } from "../models/types/project.type";
 
 const { project } = Astro.props as { project: Project };
 ---
 
 <div class="w-14 h-14 sm:w-18 sm:h-18 p-2 bg-white thin-border shadow-sm">
-  <img
-    src={`src/images/projects/${project.path}/logo.png`}
+  <Image
+    src={project.logo}
     alt={`${project.name} Logo`}
   />
 </div>

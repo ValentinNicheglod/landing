@@ -25,12 +25,12 @@ const { project } = Astro.props as { project: Project };
 <div id={`${project.path}-gallery-swiper`} class="swiper flex h-full">
   <div class="swiper-wrapper">
     {
-      project.galleryImages.map((imagePath) => (
+      project.galleryImages.map((image) => (
         <div class="swiper-slide h-full">
           {project.scrollablePrototype ? (
-            <ScrollableGallery image={imagePath} projectPath={project.path} />
+            <ScrollableGallery image={image} project={project} />
           ) : (
-            <SimpleGallery image={imagePath} projectPath={project.path} />
+            <SimpleGallery image={image} projectPath={project.path} />
           )}
         </div>
       ))

@@ -1,6 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import LanguageToggle from "../components/LanguageToggle.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+
+import logo from "../icons/logo.svg";
 ---
 
 <html>
@@ -13,7 +16,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
         <LanguageToggle />
       </div>
       <div class="logo-container shadow-md outline-slate-300 z-30">
-        <img src="/logo.svg" alt="" />
+        <Image src={logo} alt="" />
       </div>
     </div>
     <slot />
