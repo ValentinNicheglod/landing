@@ -1,3 +1,4 @@
+import background from "./background.png";
 import logo from "./logo.png";
 import login from "./mockups/login.jpg";
 import signUp from "./mockups/signup.jpg";
@@ -9,6 +10,7 @@ import cart from "./mockups/cart.jpg";
 import checkout from "./mockups/checkout.jpg";
 
 export {
+  background,
   logo,
   login,
   signUp,

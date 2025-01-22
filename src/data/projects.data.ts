@@ -23,7 +23,8 @@ export const projectsData: Project[] = [
       { name: "Scroll Reveal", image: technologyLogos.scrollReveal },
     ],
     type: ProjectFilters.DEV,
-    logo: radleyImages.logo,
+    logo: reconnectImages.logo,
+    background: reconnectImages.background
   },
   {
     path: "lift",
@@ -41,6 +42,7 @@ export const projectsData: Project[] = [
     type: ProjectFilters.DEV,
     logo: liftImages.logo,
     mockup: liftImages.mockup,
+    background: liftImages.background
   },
   {
     path: "radley",
@@ -66,6 +68,7 @@ export const projectsData: Project[] = [
     ],
     scrollablePrototype: true,
     mockup: radleyImages.mockup,
+    background: radleyImages.background
   },
   {
     path: "meteor",
@@ -89,5 +92,6 @@ export const projectsData: Project[] = [
       meteorImages.cart,
       meteorImages.checkout,
     ],
+    background: meteorImages.background
   },
 ];

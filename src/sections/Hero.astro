@@ -16,12 +16,12 @@ import background from "../images/HeroBackground.jpg"
 ---
 
 <section id="hero" class="relative flex flex-col">
-  <h1 class="invisible text-xs">Valentín Nicheglod</h1>
+  <h1 class="relative text-xs opacity-0 -z-30">Valentín Nicheglod</h1>
 
   <ScrollInstruction lang={lang} />
-  <Image src={background} alt="" class="absolute w-screen h-screen object-cover -z-20" />
+  <Image src={background} alt="" loading="eager" class="absolute w-screen h-screen object-cover" />
 
-  <div class="container mx-auto flex flex-1 items-center p-8 md:p-0">
+  <div class="container mx-auto flex flex-1 items-center p-8 md:p-0 z-10">
     <div class="flex flex-col gap-8 md:w-fit">
       <div class="inner-container rounded-xl sm:rounded-3xl bg-white">
         <div class="flex items-center gap-6 sm:gap-8 p-6 sm:p-8">

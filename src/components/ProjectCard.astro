@@ -20,14 +20,15 @@ import gitHubImage from "../images/social/GitHub.png";
 import behanceImage from "../images/social/Behance.png";
 import openImage from "../images/Open.png";
 import galleryImage from "../images/Gallery.png";
+import { Image } from "astro:assets";
 
 const { project } = Astro.props as { project: Project };
 ---
 
 <div
   class="project-card thin-border bg-cover aspect-square overflow-hidden rounded-xl md:rounded-2xl"
-  style={`background: url(src/images/projects/${project.path}/background.png)`}
 >
+  <Image class="absolute rounded-xl md:rounded-2xl" src={project.background} alt="" />
   <div class="wrapper aspect-square">
     <div class="card-overlay"></div>
     <div class="content relative flex aspect-square flex-col gap-2 py-4">

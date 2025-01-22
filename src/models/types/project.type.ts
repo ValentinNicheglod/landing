@@ -11,5 +11,6 @@ export type Project = {
   galleryImages: ImageMetadata[];
   scrollablePrototype?: boolean;
   mockup?: ImageMetadata,
+  background: ImageMetadata,
   technologies: { name: string, image: ImageMetadata }[];
 } & ({ github: string; behance?: never } | { behance: string; github?: never });

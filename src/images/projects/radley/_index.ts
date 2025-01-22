@@ -1,3 +1,4 @@
+import background from "./background.png";
 import logo from "./logo.png";
 import mockup from "./mockup-window.png";
 import home from "./mockups/home.scroll.jpg";
@@ -11,6 +12,7 @@ import checkout2 from "./mockups/checkout-2.scroll.jpg";
 import checkout3 from "./mockups/checkout-3.scroll.jpg";
 
 export {
+  background,
   logo,
   mockup,
   home,

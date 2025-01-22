@@ -22,13 +22,15 @@ const englishFlag = getUserCountry()?.id === "US" ? USFlag : UKFlag;
   <Image
     id="english-flag"
     src={englishFlag}
-    class="outline-slate-300 rounded-full transition-transform"
     alt=""
+    loading="eager"
+    class="outline-slate-300 rounded-full transition-transform"
   />
   <Image
     id="spanish-flag"
     src={ESFlag}
     alt=""
+    loading="eager"
     class="z-10 outline-slate-300 rounded-full transition-transform"
     class:list={{ hidden: lang !== "es" }}
   />
