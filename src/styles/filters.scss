@@ -1,9 +1,9 @@
 .filters {
-  @apply relative grid grid-flow-col gap-2 rounded-full md:grid-cols-3 md:gap-0 md:px-2 md:py-1;
-  @apply md:border-[.5px] md:border-slate-200 md:bg-[var(--bg-color-3)] md:dark:border-slate-700;
+  @apply relative gap-2 md:gap-0 grid md:grid-cols-3 grid-flow-col md:px-2 md:py-1 rounded-full;
+  @apply md:border-[.5px] md:border-slate-200 md:dark:border-slate-700 md:bg-[var(--bg-color-3)];
 
   button {
-    @apply z-10 flex justify-center rounded-full px-3 py-1 text-slate-700 opacity-75 dark:text-slate-300;
+    @apply z-10 flex justify-center opacity-75 px-3 py-1 rounded-full text-slate-700 dark:text-slate-300;
     @apply bg-[var(--bg-color-3)] md:bg-transparent;
     transition:
       opacity 500ms,
@@ -15,7 +15,7 @@
     }
 
     &.selected {
-      @apply bg-primary text-white opacity-100 md:bg-transparent;
+      @apply bg-primary md:bg-transparent opacity-100 text-white;
     }
   }
 
@@ -27,7 +27,8 @@
 }
 
 #projects-filter button:not(.selected) {
-  @apply bg-slate-200 outline-none dark:bg-slate-700;
+  @apply bg-slate-200 dark:bg-slate-700 outline-none;
+  @apply md:bg-transparent;
 }
 
 @media (prefers-reduced-motion: no-preference) {

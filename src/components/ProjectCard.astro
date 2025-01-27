@@ -26,9 +26,9 @@ const { project } = Astro.props as { project: Project };
 ---
 
 <div
-  class="project-card thin-border bg-cover aspect-square overflow-hidden rounded-xl md:rounded-2xl"
+  class="project-card relative thin-border aspect-square overflow-hidden rounded-xl md:rounded-2xl"
 >
-  <Image class="absolute rounded-xl md:rounded-2xl" src={project.background} alt="" />
+  <Image class="absolute" src={project.background} alt="" width={1000} />
   <div class="wrapper aspect-square">
     <div class="card-overlay"></div>
     <div class="content relative flex aspect-square flex-col gap-2 py-4">
@@ -52,7 +52,7 @@ const { project } = Astro.props as { project: Project };
         &nbsp;
         <button
           id={`view-more-${project.path}`}
-          class="small-button view-more hidden"
+          class="view-more hidden bg-primary px-2 py-0.5 rounded-full text-xs text-white text-nowrap"
         >
           {translations.more}
         </button>

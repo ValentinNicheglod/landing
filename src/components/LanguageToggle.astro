@@ -18,49 +18,30 @@ const getUserCountry = () => {
 const englishFlag = getUserCountry()?.id === "US" ? USFlag : UKFlag;
 ---
 
-<button id="language-toggle">
+<button
+  id="language-toggle"
+  class="relative w-14 aspect-square touch-manipulation group"
+>
   <Image
     id="english-flag"
     src={englishFlag}
     alt=""
     loading="eager"
-    class="outline-slate-300 rounded-full transition-transform"
+    class="outline-slate-300 rounded-full transition-transform duration-500 group-hover:scale-125"
   />
   <Image
     id="spanish-flag"
     src={ESFlag}
     alt=""
     loading="eager"
-    class="z-10 outline-slate-300 rounded-full transition-transform"
+    class="z-10 outline-slate-300 rounded-full transition-transform duration-500 group-hover:scale-125"
     class:list={{ hidden: lang !== "es" }}
   />
 </button>
 <style>
-  button {
-    position: relative;
-    outline-offset: 5px;
-
-    width: 50px;
-    height: 50px;
-    aspect-ratio: 1;
-
-    border-radius: 50%;
-    cursor: pointer;
-
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    transition: 0.5s;
-
-    &:hover {
-      img {
-        transform: scale(1.25);
-      }
-    }
-  }
-
   img,
   button::after {
-    --size: 25px;
+    --size: 1.75rem;
 
     position: absolute;
     top: calc(var(--size) / 2);

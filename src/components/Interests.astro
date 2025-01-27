@@ -37,18 +37,23 @@ const interests = [
   <h3 class="text-xl md:text-3xl font-semibold opacity-90">
     {translations.interests}
   </h3>
-  <div class="overflow-x-scroll md:overflow-visible pb-4 md:pb-0 flex gap-3 md:gap-4">
-    {
-      interests.map((interest) => (
-        <div class="flex flex-col gap-2">
-          <div class="inner-container p-4 rounded-md aspect-square">
-            <div class="text-4xl md:text-5xl dark-opacity" set:html={interest.emojiCode} />
+  <div class="overflow-x-scroll md:overflow-visible">
+    <div class="flex gap-3 md:gap-4 pb-4 md:pb-0">
+      {
+        interests.map((interest) => (
+          <div class="flex flex-col gap-2">
+            <div class="inner-container p-4 rounded-md aspect-square">
+              <div
+                class="text-4xl md:text-5xl dark:opacity-90"
+                set:html={interest.emojiCode}
+              />
+            </div>
+            <p class="text-center text-xs md:text-sm font-light select-none">
+              {interest.label}
+            </p>
           </div>
-          <p class="text-center text-xs md:text-sm font-light select-none">
-            {interest.label}
-          </p>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
   </div>
 </div>

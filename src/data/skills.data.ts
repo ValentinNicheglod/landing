@@ -48,32 +48,32 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Adobe XD",
           image: skillsIcons.adobeXD,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "Illustrator",
           image: skillsIcons.illustrator,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "Photoshop",
           image: skillsIcons.photoshop,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "Figma",
           image: skillsIcons.figma,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: translations.skills.prototyping,
           image: skillsIcons.prototype,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "WireFraming",
           image: skillsIcons.wireframe,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
       ],
     },
@@ -118,7 +118,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Astro",
           image: skillsIcons.astro,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "Ionic",
@@ -127,7 +127,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Expo",
           image: skillsIcons.expo,
-          customClass: "dark-invert",
+          customClass: "dark:invert dark:brightness-90 transition-all duration-500",
         },
         {
           name: "Redux",
@@ -152,7 +152,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Less",
           image: skillsIcons.less,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "Bootstrap",
@@ -165,7 +165,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Express",
           image: skillsIcons.express,
-          customClass: "dark-invert",
+          customClass: "dark:invert dark:brightness-90 transition-all duration-500",
         },
         {
           name: "NPM",
@@ -190,7 +190,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "MySQL",
           image: skillsIcons.mysql,
-          customClass: "dark-shadow",
+          customClass: "dark:drop-shadow-[0px_4px_8px_#FFFFFF25]",
         },
         {
           name: "PostgreSQL",
@@ -207,7 +207,7 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "GitHub",
           image: skillsIcons.github,
-          customClass: "dark-invert",
+          customClass: "dark:invert dark:brightness-90 transition-all duration-500",
         },
       ],
     },

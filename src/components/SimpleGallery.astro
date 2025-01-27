@@ -7,23 +7,21 @@ const { image, projectPath } = Astro.props as {
 };
 ---
 
-<div class="gallery-image-container">
+<div class="flex justify-center items-center gallery-image-container">
   <Image
     src={image}
     alt=""
-    class="gallery-image"
+    class="w-auto gallery-image"
   />
 </div>
 <style lang="scss">
   $max-height: min(800px, 95dvh);
 
   .gallery-image-container {
-    @apply flex items-center justify-center;
     height: $max-height;
   }
 
   .gallery-image {
     max-height: $max-height;
-    width: auto;
   }
 </style>

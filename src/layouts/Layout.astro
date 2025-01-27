@@ -5,56 +5,27 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 
 import logo from "../icons/logo.svg";
 ---
-
-<html>
-  <body>
-    <div class="header">
-      <div class="option outline-slate-300">
-        <ThemeToggle />
+  <>
+    <div id="header" class="flex gap-4 fixed top-8 right-0 h-14 z-30">
+      <div
+        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
+      >
+          <ThemeToggle />
       </div>
-      <div class="option outline-slate-300">
-        <LanguageToggle />
+      <div
+        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
+      >
+          <LanguageToggle />
       </div>
-      <div class="logo-container shadow-md outline-slate-300 z-30">
-        <Image src={logo} alt="" loading="eager" />
+      <div
+        class="bg-white thin-border border-r-0 shadow-md pr-8 pl-4 rounded-tl-full rounded-bl-full z-30"
+      >
+        <div class="flex items-center justify-center h-full">
+          <Image src={logo} alt="" loading="eager" />
+        </div>
       </div>
     </div>
     <slot />
-  </body>
-  <style type="scss">
-    .header {
-      position: fixed;
-      top: 2rem;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      height: 3.125rem;
-      gap: 1rem;
-    }
-
-    .logo-container {
-      padding-right: 2rem;
-      padding-left: 1rem;
-      border-radius: 3rem 0 0 3rem;
-      background-color: #fff;
-    }
-
-    .option {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 3.125rem;
-      height: 3.125rem;
-      border-radius: 9999px;
-      background-color: #fff;
-      transition: 1s;
-    }
-
-    .outline-slate-300 {
-      outline-width: .5px;
-      outline-style: solid;
-    }
-  </style>
   <script>
     const hero = document.querySelector("#hero");
     let intersectingHeroSection = true;
@@ -114,4 +85,4 @@ import logo from "../icons/logo.svg";
       );
     }
   </script>
-</html>
+  </>

@@ -11,32 +11,28 @@ const translations = heroTranslations[lang];
 ---
 
 <div
-  class="instructions flex items-center gap-2 py-2 px-2 md:px-4 right-4 md:right-16 z-10"
+  id="instructions"
+  class="invisible absolute bottom-8 right-4 md:right-16 rounded-full z-30 bg-white"
 >
-  <Icon
-    name="arrow-down"
-    class="text-primary animate-bounce animate-infinite mt-2"
-  />
-  <span class="content text-black">
-    {translations.instruction}
-  </span>
+  <div class="flex items-center gap-2 py-2 px-2 md:px-4">
+    <Icon
+      name="arrow-down"
+      class="text-primary animate-bounce animate-infinite mt-2"
+    />
+    <span class="content text-black">
+      {translations.instruction}
+    </span>
+  </div>
 </div>
-<style>
-  .instructions {
-    position: absolute;
-    bottom: 2rem;
-    visibility: hidden;
-    background-color: #fff;
-    border-radius: 9999px;
-  }
-</style>
 <script>
-  const instructions = document.querySelector(".instructions");
+  const instructions = document.getElementById("instructions");
   let timeout: any;
 
   const showInstructions = () => {
-    instructions?.classList.add("visible");
-    instructions?.classList.add(window.innerWidth > 768 ? "animate-jump-in" : "animate-fade");
+    instructions?.classList.add("opacity-100");
+    instructions?.classList.add(
+      window.innerWidth > 768 ? "animate-jump-in" : "animate-fade"
+    );
     document
       .querySelector(".instructions")
       ?.classList.add("animate-duration-1000");

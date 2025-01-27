@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 const { city, country, flag } = Astro.props;
 ---
 
-<div class="location rounded-full dark-opacity">
+<div class="location rounded-full dark:opacity-90">
   <div
     class="inner-container flex items-center gap-2 rounded-full px-3 py-1 bg-slate-700 m-0.5"
   >
@@ -15,7 +15,7 @@ const { city, country, flag } = Astro.props;
     <Image src={flag} class="w-4 h-4 ml-auto" alt="" />
   </div>
 </div>
-<style type="scss">
+<style lang="scss">
   .location {
     background: linear-gradient(45deg, #149bff, #2bfeff);
 
@@ -23,7 +23,7 @@ const { city, country, flag } = Astro.props;
       background: linear-gradient(45deg, #2bfeff, #149bff);
     }
 
-    > div {
+    .inner-container {
       border: 2px solid var(--bg-color-2);
     }
   }

@@ -7,6 +7,7 @@
 
     .content {
       background: #00000090;
+      transition: background .5s;
 
       &::before {
         $height: 25px;
@@ -27,7 +28,7 @@
     }
 
     .content {
-      background: #00000099;
+      background: #000000BB;
     }
   }
 }

@@ -2,48 +2,19 @@
 import BlurredCircle from "./BlurredCircle.astro";
 
 const { sectionId } = Astro.props;
+const colors = ["#9155f6", "#0df2f2", "#25a5fe", "#9155f6", "#0768eb"];
 ---
 
 <div
   id={`${sectionId}-gradient`}
-  class="background absolute overflow-hidden h-full w-full blur-xl scale-150"
+  class="bg-gradient absolute overflow-hidden h-full w-full blur-xl scale-150"
 >
-  <div class="gradient-circle">
-    <BlurredCircle color="#9155f6" />
-  </div>
-  <div class="gradient-circle">
-    <BlurredCircle color="#0df2f2" />
-  </div>
-  <div class="gradient-circle">
-    <BlurredCircle color="#25a5fe" />
-  </div>
-  <div class="gradient-circle">
-    <BlurredCircle color="#9155f6" />
-  </div>
-  <div class="gradient-circle">
-    <BlurredCircle color="#0768eb" />
-  </div>
+  {
+    colors.map(() => (
+      <div class="gradient-circle absolute inset-0 m-auto w-fit transition-transform duration-[10s] motion-reduce:hidden">
+        <BlurredCircle color="#9155f6" />
+      </div>
+    ))
+  }
 </div>
-<style lang="scss">
-  .background {
-    background: linear-gradient(90deg, #0768eb 20%, #00c5c5 70%, #25a5fe);
-    .gradient-circle {
-      @apply absolute inset-0 m-auto flex w-fit items-center;
-      will-change: transform;
-      transition: transform 10s linear;
-    }
-  }
-
-  :root[data-theme="dark"] {
-    .background {
-      filter: saturate(0.8);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .gradient-circle {
-      display: none;
-    }
-  }
-</style>
 <script src="/src/scripts/animations.scripts.ts"></script>

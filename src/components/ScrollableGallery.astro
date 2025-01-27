@@ -35,16 +35,16 @@ if (!project.mockup) return;
   <div class="flex-1">
     <Image
       src={projectBackground}
-      class="background object-contain"
+      class="background object-contain m-auto h-full -translate-y-8"
       alt=""
     />
     <Image
       src={project.mockup}
-      class="prototype-window"
+      class="prototype-window absolute inset-0 m-auto"
       alt=""
     />
     <div
-      class="prototype-content"
+      class="prototype-content absolute inset-0 z-50 m-auto overflow-y-auto"
     >
       <Image src={image} alt="" />
     </div>
@@ -62,19 +62,14 @@ if (!project.mockup) return;
   }
 
   .background {
-    margin: auto;
     width: calc(var(--base-prototype-width) * 1.05);
-    height: 100%;
-    transform: translateY(-2rem);
   }
 
   .prototype-window {
-    @apply absolute inset-0 m-auto;
     width: var(--base-prototype-width);
   }
 
   .prototype-content {
-    @apply absolute inset-0 z-50 m-auto overflow-y-auto;
     width: calc(var(--base-prototype-width) * 0.96);
     height: calc(var(--base-prototype-width) * 0.565);
     transform: translateY(calc(var(--base-prototype-width) * 0.0135));

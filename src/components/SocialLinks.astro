@@ -40,7 +40,7 @@ const { size } = Astro.props;
         target="_blank"
         rel="noreferrer noopener"
         name={link.title}
-        class="aspect-square transition-transform hover:scale-110 duration-500"
+        class="social aspect-square transition-transform hover:scale-110 duration-500"
         class:list={{
           "w-11 md:w-12": !size,
           "w-8 md:w-9": size === "small",
@@ -50,7 +50,7 @@ const { size } = Astro.props;
         <Image
           src={link.image}
           alt={`${link.title} icon`}
-          class="dark-opacity"
+          class="dark:opacity-90"
         />
       </a>
     ))

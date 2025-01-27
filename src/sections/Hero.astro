@@ -15,7 +15,7 @@ import { Image } from "astro:assets";
 import background from "../images/HeroBackground.jpg"
 ---
 
-<section id="hero" class="relative flex flex-col">
+<section id="hero" class="relative flex flex-col h-dvh">
   <h1 class="relative text-xs opacity-0 -z-30">Valentín Nicheglod</h1>
 
   <ScrollInstruction lang={lang} />
@@ -30,7 +30,7 @@ import background from "../images/HeroBackground.jpg"
             <span class="text-base sm:text-lg text-gray">
               {translations.presentation}
             </span>
-            <div class="title">Valentín</div>
+            <div class="text-3xl md:text-4xl font-bold text-primary">Valentín</div>
           </div>
         </div>
       </div>
@@ -62,18 +62,5 @@ import background from "../images/HeroBackground.jpg"
       </div>
     </div>
   </div>
+  <div class="absolute bottom-0 w-full h-1 bg-gradient"></div>
 </section>
-<style lang="scss">
-  #hero {
-    min-height: 100dvh;
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, #0768eb 60%, #1effff);
-    }
-  }
-</style>

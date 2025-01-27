@@ -12,7 +12,7 @@ const { skill } = Astro.props as { skill: Skill };
     <Image
       src={skill.image}
       alt=""
-      class="dark-opacity w-16 h-16"
+      class="dark:opacity-90 w-16 h-16"
       class:list={skill.customClass}
     />
     <span class="text-[var(--text-color)] text-sm text-nowrap">

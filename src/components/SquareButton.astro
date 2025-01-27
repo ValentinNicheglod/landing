@@ -7,19 +7,35 @@ const { label, image, url, project, id } = Astro.props;
 ---
 
 <button
-  class="square-button"
-  id={project && (url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`)}
+  class="group border-2 border-slate-300 hover:border-primary bg-slate-50 hover:bg-slate-200 rounded-lg transition-colors square-button"
+  id={project &&
+    (url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`)}
 >
-  <div class="flex justify-between w-full">
-    <Image src={image} alt="" />
-    <div>
-      <div class="chevron">
-        {url && <Icon name="external-link" class="icon link-icon" />}
-        <Icon name="chevron-right" class="icon" />
+  <div class="flex flex-col justify-between items-start gap-2 p-2 pl-3">
+    <div class="flex justify-between w-full">
+      <Image
+        src={image}
+        alt=""
+        class="drop-shadow-lg w-10 lg:w-12 h-10 lg:h-12"
+      />
+      <div>
+        <div
+          class="group-hover:bg-primary relative group-hover:shadow-md ml-2 p-1 rounded-full transition-all group-hover:animate-jump group-hover:animate-delay-500 group-hover:animate-iteration-2 group-hover:animate-duration-1000 overflow-hidden aspect-square"
+        >
+            {
+              url && (
+                <Icon
+                  name="external-link"
+                  class="group-hover:text-white top-1 absolute opacity-0 group-hover:opacity-100 text-lg text-slate-400 lg:text-xl transition-opacity link-icon"
+                />
+              )
+            }
+            <Icon name="chevron-right" class="group-hover:text-white text-lg text-slate-400 lg:text-xl transition-opacity icon" />
+        </div>
       </div>
     </div>
+    <span class="group-hover:text-primary font-medium text-zinc-500 whitespace-nowrap button-label">
+      {label}
+    </span>
   </div>
-  <span class="font-medium button-label">
-    {label}
-  </span>
 </button>
