@@ -9,21 +9,32 @@ import Contact from "../../sections/Contact.astro";
 import Skills from "../../sections/Skills.astro";
 ---
 
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
     <title>Valentín Nicheglod | Portfolio</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Welcome to my portfolio, here you will find information about me, my skills and my projects."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+    />
   </head>
   <body>
     <Layout>
-      <div id="loader" class="w-dvw h-dvh overflow-hidden absolute">
+      <div id="loader" class="absolute w-dvw h-dvh overflow-hidden theme-bg">
         <Loader />
       </div>
       <Hero />
@@ -37,8 +48,12 @@ import Skills from "../../sections/Skills.astro";
     </Layout>
   </body>
   <script>
-    import { showContent, initializeLanguage } from "../../scripts/index.js";
+    import {
+      initializeLanguage,
+      showContent,
+    } from "../../scripts/initialization.scripts.ts";
     import "../../styles/global.scss";
+
     showContent();
     initializeLanguage();
   </script>

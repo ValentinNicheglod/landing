@@ -1,14 +1,12 @@
 import Swiper from "swiper";
-import { projectsData } from "../data/projects.data";
 import { Autoplay, Navigation } from "swiper/modules";
+import { projectsData } from "../data/projects.data";
 import type { Project, ProjectNames } from "../models/types/project.type";
 import { ProjectFilters } from "../models/enums/filters.enum";
 import { changeButtonState, translateIndicator } from "./filters.scripts";
 import type { SwiperSlide } from "swiper/element";
 import projectsTranslations from "../locales/projects.locales.json";
-import tippy from "tippy.js";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/scale.css";
+import { setProjectTechnologiesTooltips } from "./tooltips.scripts";
 
 const getProjectsGallerySwiperConfig = (project: Project) => ({
   slidesPerView: 1,
@@ -55,7 +53,7 @@ const initializeProjectsGallerySwiper = () => {
 };
 
 let projectSwiper: Swiper | null = null;
-export const initializeProjectsSwiper = () => {
+const initializeProjectsSwiper = () => {
   projectSwiper = new Swiper("#projects-swiper", getProjectsListSwiperConfig());
 };
 
@@ -106,26 +104,6 @@ const addProjectCardButtonsListeners = () => {
   });
 };
 
-const addProjectTechnologiesTooltips = () => {
-  projectsData.forEach((project) => {
-    const technologies = document.getElementById(
-      `technologies-${project.path}`,
-    );
-    if (!technologies) return;
-
-    const technologiesList = technologies.getElementsByClassName("technology");
-    for (const technology of technologiesList) {
-      tippy(technology, {
-        content: technology.getAttribute("data-tooltip") || "",
-        placement: "bottom",
-        arrow: false,
-        animation: "scale",
-        duration: 250,
-      });
-    }
-  });
-};
-
 const addFiltersListeners = () => {
   const filters = document.getElementById("projects-filter");
 
@@ -142,7 +120,7 @@ const openGalleryModal = (projectPath: string) => {
   ) as HTMLDialogElement;
   const closeButton = document.getElementById(`${projectPath}-close-btn`);
 
-  projectSwiper?.autoplay?.stop();
+  projectSwiper?.disable();
 
   dialog?.showModal();
 
@@ -159,7 +137,7 @@ const closeGalleryModal = (projectPath: string) => {
   galleryModal.classList.add("closing");
 
   setTimeout(() => {
-    projectSwiper?.autoplay?.start();
+    projectSwiper?.enable();
     galleryModal.classList.remove("closing");
     galleryModal.close();
   }, ANIMATION_DURATION);
@@ -295,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", setCardStyles);
 
   addDescriptionReadingTimeOnClick();
-  addProjectTechnologiesTooltips();
+  setProjectTechnologiesTooltips(projectsData);
   addFiltersListeners();
   addProjectCardButtonsListeners();
 });

@@ -24,28 +24,4 @@ const translations = heroTranslations[lang];
     </span>
   </div>
 </div>
-<script>
-  const instructions = document.getElementById("instructions");
-  let timeout: any;
-
-  const showInstructions = () => {
-    instructions?.classList.add("opacity-100");
-    instructions?.classList.add(
-      window.innerWidth > 768 ? "animate-jump-in" : "animate-fade"
-    );
-    document
-      .querySelector(".instructions")
-      ?.classList.add("animate-duration-1000");
-  };
-
-  const clearInstructions = () => {
-    clearTimeout(timeout);
-    instructions?.classList.remove("animate-jump-in");
-    instructions?.classList.add("animate-reverse");
-    instructions?.classList.add("animate-fade");
-    window.removeEventListener("scroll", clearInstructions);
-  };
-
-  timeout = setTimeout(showInstructions, 5000);
-  window.addEventListener("scroll", clearInstructions);
-</script>
+<script src="../scripts/scroll-instruction.scripts.ts"></script>

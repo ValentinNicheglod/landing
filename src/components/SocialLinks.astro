@@ -57,18 +57,7 @@ const { size } = Astro.props;
   }
 </div>
 <script>
-  import tippy from "tippy.js";
-  import "tippy.js/dist/tippy.css";
-  import 'tippy.js/animations/scale.css';
+import { setSocialLinksTooltips } from "../scripts/tooltips.scripts";
 
-  const buttons = ["Behance", "Dribbble", "GitHub", "LinkedIn"];
-  buttons.forEach((title) => {
-    tippy(`[name="${title}"]`, {
-      content: title,
-      placement: 'bottom',
-      arrow: false,
-      animation: 'scale',
-      duration: 250
-    });
-  });
+  document.addEventListener("DOMContentLoaded", setSocialLinksTooltips)
 </script>

@@ -18,8 +18,26 @@ export const showContent = () => {
   const content = document.getElementById("content");
   const loader = document.getElementById("loader");
 
+  if (!loader) return;
+
   setTimeout(() => {
     content?.classList.remove("hidden");
     document.body.removeChild(loader);
   }, LOADER_DURATION);
+}
+
+export const removeLoader = () => {
+  const wrapper = document.querySelector(".wrapper");
+  const image = document.querySelector(".logo");
+  setTimeout(() => {
+    wrapper?.classList.remove("scale-150");
+    wrapper?.classList.add("scale-0");
+    image?.classList.add(
+      "animate-jump-out",
+      "animate-duration-[2000ms]",
+      "animate-ease-out",
+      "animate-delay-500",
+      "opacity-0"
+    );
+  }, 1000);
 }

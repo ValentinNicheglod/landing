@@ -1,92 +1,21 @@
 ---
-
+import { Image } from "astro:assets";
+import logo from "../icons/logo.svg";
 ---
 
 <>
-  <div class="wrapper absolute inset-0 z-40 m-auto bg-color overflow-hidden">
+  <div
+    class="z-40 absolute inset-0 m-auto rounded-full w-dvw transition-transform duration-[1.75s] overflow-hidden aspect-square ease-in scale-150 theme-bg wrapper"
+  >
   </div>
-  <img src="/logo.svg" alt="" class="logo absolute inset-0 m-auto z-50" />
+  <Image
+    src={logo}
+    alt=""
+    class="z-50 absolute inset-0 m-auto w-40 transition-opacity duration-1000 delay-1000 logo"
+  />
 </>
-<script is:inline>
-  const wrapper = document.querySelector(".wrapper");
-  setTimeout(() => {
-    wrapper?.classList.add("hide");
-    setTimeout(() => {
-      wrapper?.classList.add("opacity-0");
-    }, 1500);
-  }, 1000);
+<script>
+  import { removeLoader } from "../scripts/initialization.scripts.ts";
+  
+  removeLoader();
 </script>
-<style>
-  .wrapper {
-    width: 100vw;
-    height: 100vw;
-    border-radius: 100vw;
-    transition: 2s ease-in;
-    transform: scale(1.5);
-  }
-
-  .hide {
-    transform: scale(0);
-  }
-
-  img {
-    width: 150px;
-    transition: 1.25s ease-in;
-    animation: loading-logo 2s ease-in forwards .8s;
-  }
-
-  @keyframes loading-logo {
-    5% {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    10% {
-      transform: scale(1.1);
-    }
-
-    15% {
-      transform: scale(1.2);
-    }
-
-    20% {
-      transform: scale(1.3);
-    }
-
-    25% {
-      transform: scale(1.4);
-    }
-
-    30%,
-    40% {
-      transform: scale(1.5);
-    }
-
-    80% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-      transform: scale(0.25);
-    }
-  }
-
-  @keyframes loading-screen {
-    0% {
-      width: 100vw;
-      height: 1000vw;
-    }
-
-    99% {
-      height: 1px;
-      width: 1px;
-    }
-
-    100% {
-      height: 0;
-      width: 0;
-      display: none;
-    }
-  }
-</style>

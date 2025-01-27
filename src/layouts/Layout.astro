@@ -5,84 +5,28 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 
 import logo from "../icons/logo.svg";
 ---
-  <>
-    <div id="header" class="flex gap-4 fixed top-8 right-0 h-14 z-30">
-      <div
-        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
-      >
-          <ThemeToggle />
-      </div>
-      <div
-        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
-      >
-          <LanguageToggle />
-      </div>
-      <div
-        class="bg-white thin-border border-r-0 shadow-md pr-8 pl-4 rounded-tl-full rounded-bl-full z-30"
-      >
-        <div class="flex items-center justify-center h-full">
-          <Image src={logo} alt="" loading="eager" />
-        </div>
+
+<>
+  <div id="header" class="flex gap-4 fixed top-8 right-0 h-14 z-30">
+    <div
+      class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
+    >
+      <ThemeToggle />
+    </div>
+    <div
+      class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
+    >
+      <LanguageToggle />
+    </div>
+    <div
+      class="bg-white thin-border border-r-0 shadow-md pr-8 pl-4 rounded-tl-full rounded-bl-full z-30"
+    >
+      <div class="flex items-center justify-center h-full">
+        <Image src={logo} alt="" loading="eager" />
       </div>
     </div>
-    <slot />
-  <script>
-    const hero = document.querySelector("#hero");
-    let intersectingHeroSection = true;
+  </div>
 
-    if (hero) {
-      const header = document.querySelector(".header");
-      const options = document.getElementsByClassName("option");
-
-      const showOptions = () => {
-        const optionsArray = Array.from(options);
-        optionsArray.forEach((option) => {
-          option.setAttribute("style", "transform: translateX(0)");
-          option.classList.add("shadow-md");
-        });
-      };
-
-      const hideOptions = () => {
-        const optionsArray = Array.from(options);
-        optionsArray.reverse().forEach((option, index) => {
-          option.setAttribute(
-            "style",
-            `transform: translateX(${100 * (index + 1)}px)`
-          );
-          option.classList.remove("shadow-md");
-        });
-      };
-
-      const observe = () => {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              if (intersectingHeroSection === false) {
-                intersectingHeroSection = true;
-                showOptions();
-              }
-            } else {
-              if (intersectingHeroSection === true) {
-                intersectingHeroSection = false;
-                hideOptions();
-              }
-            }
-          });
-        });
-
-        observer.observe(hero);
-      };
-
-      document.addEventListener("scroll", observe);
-
-      header?.addEventListener(
-        "mouseenter",
-        () => intersectingHeroSection === false && showOptions()
-      );
-      header?.addEventListener(
-        "mouseleave",
-        () => intersectingHeroSection === false && hideOptions()
-      );
-    }
-  </script>
-  </>
+  <slot />
+</>
+<script src="../scripts/header.scripts.ts"></script>

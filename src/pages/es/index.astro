@@ -7,23 +7,39 @@ import Hero from "../../sections/Hero.astro";
 import Projects from "../../sections/Projects.astro";
 import Skills from "../../sections/Skills.astro";
 import Contact from "../../sections/Contact.astro";
+
+import aboutTranslations from "../../locales/about.locales.json";
+
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = aboutTranslations[lang];
 ---
 
-<html lang="es">
+<html lang="es" dir="ltr">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
     <title>Valentín Nicheglod | Portfolio</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Bienvenido a mi portfolio, aquí encontrarás más información sobre mí, mis habilidades y mis proyectos."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+    />
   </head>
   <body>
     <Layout>
-      <div id="loader" class="w-dvw h-dvh overflow-hidden absolute">
+      <div id="loader" class="absolute w-dvw h-dvh overflow-hidden">
         <Loader />
       </div>
       <Hero />
@@ -37,8 +53,9 @@ import Contact from "../../sections/Contact.astro";
     </Layout>
   </body>
   <script>
+    import { showContent } from "../../scripts/initialization.scripts.ts";
     import "../../styles/global.scss";
-    import { showContent } from "../../scripts/index.js";
+
     showContent();
   </script>
 </html>
