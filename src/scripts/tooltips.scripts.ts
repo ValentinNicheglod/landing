@@ -121,6 +121,28 @@ export const setSocialLinksTooltips = () => {
   });
 };
 
+let cmdTooltip: Instance;
+export const showCommandTooltip = (element: HTMLElement) => {
+    cmdTooltip = tippy(element, {
+      ...defaultConfig,
+      allowHTML: true,
+      trigger: 'manual',
+      sticky: 'reference',
+      plugins: [sticky],
+      content: `
+      <div class="flex items-center whitespace-nowrap">
+        Presiona &nbsp; <code class="px-1 bg-slate-600 rounded-sm">Ctrl + M</code> &nbsp; para mostrar u ocultar el menú
+      </div>`,
+    });
+
+    cmdTooltip.show();
+    setTimeout(() => hideCommandTooltip(), 5000);
+}
+
+export const hideCommandTooltip = () => {
+  cmdTooltip.hide();
+}
+
 export const setProjectTechnologiesTooltips = (data: Project[]) => {
   data.forEach((project) => {
     const technologies = document.getElementById(

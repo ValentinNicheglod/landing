@@ -1,3 +1,8 @@
+import { hideCommandTooltip, showCommandTooltip } from "./tooltips.scripts";
+
+const ANIMATION_DURATION = 1000;
+const COMMAND_TOOLTIP_SHOWN = { value: false };
+
 document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector("#hero");
   const header = document.getElementById("header");
@@ -7,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const options = document.getElementsByClassName("option");
 
     const showOptions = () => {
+      hideCommandTooltip();
+
       const optionsArray = Array.from(options);
       optionsArray.forEach((option) => {
         const optionButton = option.querySelector("button");
@@ -74,5 +81,21 @@ document.addEventListener("DOMContentLoaded", () => {
       "mouseleave",
       () => intersectingHeroSection === false && hideOptions(),
     );
+
+    document.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.key.toLowerCase() === "m") {
+        const isExpanded = header?.getAttribute("aria-expanded") === "true";
+
+        if (isExpanded) {
+          hideOptions();
+        } else {
+          showOptions();
+          setTimeout(
+            () => document.getElementById("theme-toggle")?.focus(),
+            ANIMATION_DURATION,
+          );
+        }
+      }
+    });
   }
 });
