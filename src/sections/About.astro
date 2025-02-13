@@ -18,9 +18,13 @@ const content: ("content_1" | "content_2" | "content_3")[] = [
 
 <section class="p-8 md:p-12 xl:p-16 xl:container xl:mx-auto">
   <div class="flex flex-col lg:flex-row w-full gap-6 sm:gap-8 md:gap-12">
-    <h2 class="text-3xl md:text-4xl font-bold text-primary md:hidden">{translations.sectionTitle}</h2>
+    <header class="md:hidden">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary">
+        {translations.sectionTitle}
+      </h2>
+    </header>
     <div class="flex flex-col md:flex-row gap-8 md:gap-12 xl:gap-16">
-      <div class="relative flex items-center justify-center">
+      <aside class="relative flex items-center justify-center">
         <div class="absolute -right-8 -top-4 -z-10">
           <div class="saturate-150 dark:saturate-100">
             <BlurredCircle color="#0768eb75" size={200} />
@@ -32,10 +36,17 @@ const content: ("content_1" | "content_2" | "content_3")[] = [
             <BlurredCircle color="#0768eb75" size={200} />
           </div>
         </div>
-      </div>
-      <div class="flex flex-col gap-6 lg:gap-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-primary hidden md:block">{translations.sectionTitle}</h2>
-        <div class="flex flex-col gap-3 lg:gap-4 m-auto max-w-[768px]">
+      </aside>
+      <section class="flex flex-col gap-6 lg:gap-8 outline-offset-8 rounded-md">
+        <header class="hidden md:block">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary">
+            {translations.sectionTitle}
+          </h2>
+        </header>
+        <div
+          class="flex flex-col gap-3 lg:gap-4 m-auto max-w-[768px]"
+          role="group"
+        >
           {
             content.map((key) => (
               <p
@@ -45,13 +56,13 @@ const content: ("content_1" | "content_2" | "content_3")[] = [
             ))
           }
         </div>
-        <div class="hidden lg:flex flex-1 items-end">
+        <footer class="hidden lg:flex flex-1 items-end">
           <Interests />
-        </div>
-      </div>
+        </footer>
+      </section>
     </div>
-    <div class="lg:hidden overflow-hidden">
+    <footer class="lg:hidden overflow-hidden">
       <Interests />
-    </div>
+    </footer>
   </div>
 </section>

@@ -8,36 +8,55 @@ import { Image } from "astro:assets";
 import profilePic from "../images/ProfilePic.png";
 import UYFlag from "../images/flags/UY.png";
 import ARFlag from "../images/flags/AR.png";
+
+// Translations
+import aboutTranslations from "../locales/about.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = aboutTranslations[lang];
 ---
 
-<div
-  id="user-card"
-  class="inner-container flex flex-col gap-6 lg:gap-8 my-6 md:my-0 py-6 lg:py-8 p-8 rounded-3xl"
+<article
+  class="flex flex-col gap-6 lg:gap-8 my-6 md:my-0 py-6 lg:py-8 p-8 rounded-3xl inner-container outline-offset-2"
+  tabindex="0"
+  role="group"
 >
-  <div class="grid gap-3 lg:gap-4">
-    <div class="profile-pic w-56 md:w-48 aspect-square rounded-full p-1 m-auto">
-      <Image src={profilePic} class="inner-container m-auto rounded-full" alt="" />
+  <div class="gap-3 lg:gap-4 grid">
+    <div class="m-auto p-1 rounded-full w-56 md:w-48 aspect-square profile-pic">
+      <Image
+        src={profilePic}
+        width={256}
+        class="m-auto rounded-full inner-container"
+        alt={translations.profilePicAltText}
+      />
     </div>
-    <div class="grid gap-1 items-center">
-      <h4 class="font-semibold text-2xl text-center">Valentín Nicheglod</h4>
-      <span class="text-center text-sm font-light">
+    <header class="grid items-center gap-1">
+      <h4
+        class="font-semibold text-2xl text-center dark:text-white"
+        translate="no"
+      >
+        Valentín Nicheglod
+      </h4>
+      <span
+        class="font-light text-center text-sm dark:text-slate-300"
+        lang="en"
+      >
         Full Stack Developer & UX/UI Designer
       </span>
-    </div>
+    </header>
   </div>
-  <div class="grid gap-1 lg:gap-2 md:min-w-[16rem] md:max-w-[40rem] m-auto">
+  <div class="gap-1 lg:gap-2 grid m-auto md:min-w-[16rem] md:max-w-[40rem]">
     <Location city="Paysandú" country="Uruguay" flag={UYFlag} />
     <Location city="Buenos Aires" country="Argentina" flag={ARFlag} />
   </div>
-  <div class="flex flex-1 items-end justify-center">
+  <footer class="flex flex-1 justify-center items-end">
     <SocialLinks />
-  </div>
-</div>
+  </footer>
+</article>
 <style lang="scss">
-    .profile-pic {
-      background: linear-gradient(45deg, #2bfeff, #149bff);
-      img {
-        border: 4px solid var(--bg-color-2);
-      }
+  .profile-pic {
+    background: linear-gradient(45deg, #2bfeff, #149bff);
+    img {
+      border: 4px solid var(--bg-color-2);
     }
+  }
 </style>

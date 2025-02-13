@@ -7,48 +7,83 @@ import { changeButtonState, translateIndicator } from "./filters.scripts";
 import type { SwiperSlide } from "swiper/element";
 import projectsTranslations from "../locales/projects.locales.json";
 import { setProjectTechnologiesTooltips } from "./tooltips.scripts";
+import type { SwiperOptions } from "swiper/types";
 
-const getProjectsGallerySwiperConfig = (project: Project) => ({
-  slidesPerView: 1,
-  centeredSlides: true,
-  navigation:
-    project.galleryImages.length > 1
-      ? {
-          nextEl: `#${project.path}-next`,
-          prevEl: `#${project.path}-prev`,
-        }
-      : false,
-  modules: [Navigation],
-});
+const getProjectsGallerySwiperConfig = (project: Project) => {
+  const options: SwiperOptions = {
+    slidesPerView: 1,
+    centeredSlides: true,
+    keyboard: true,
+    navigation:
+      project.galleryImages.length > 1
+        ? {
+            nextEl: `#${project.path}-next`,
+            prevEl: `#${project.path}-prev`,
+          }
+        : false,
+    modules: [Navigation],
+  };
+  return options;
+};
 
-const getProjectsListSwiperConfig = () => ({
-  slidesPerView: 1,
-  spaceBetween: 16,
-  loop: true,
-  autoplay: {
-    pauseOnMouseEnter: true,
-  },
-  breakpoints: {
-    704: {
-      slidesPerView: 1.25,
+const getProjectsListSwiperConfig = () => {
+  const options: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: true,
+    autoplay: {
+      pauseOnMouseEnter: true,
     },
-    768: {
-      slidesPerView: 2,
+    breakpoints: {
+      704: {
+        slidesPerView: 1.25,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      992: {
+        slidesPerView: 2.5,
+      },
+      1218: {
+        slidesPerView: 3,
+      },
     },
-    992: {
-      slidesPerView: 2.5,
-    },
-    1218: {
-      slidesPerView: 3,
-    },
-  },
-  modules: [Autoplay],
-});
+    modules: [Autoplay],
+  };
+  return options;
+};
 
 const initializeProjectsGallerySwiper = () => {
   projectsData.forEach((project) => {
-    const projectGallery = `#${project.path}-gallery-swiper`;
-    new Swiper(projectGallery, getProjectsGallerySwiperConfig(project));
+    const projectGallery = document.getElementById(
+      `${project.path}-gallery-swiper`,
+    );
+
+    if (!projectGallery) return;
+
+    const swiper = new Swiper(
+      projectGallery,
+      getProjectsGallerySwiperConfig(project),
+    );
+
+    const firstSlidePrototypeContent = projectGallery
+      ?.querySelector(`[data-slide="0"]`)
+      ?.querySelector(".prototype-content");
+    firstSlidePrototypeContent?.setAttribute("tabindex", "0");
+
+    swiper.on("beforeSlideChangeStart", () => {
+      const prototypeContent = projectGallery
+        ?.querySelector(`[data-slide="${swiper.activeIndex}"]`)
+        ?.querySelector(".prototype-content");
+      prototypeContent?.removeAttribute("tabindex");
+    });
+
+    swiper.on("activeIndexChange", () => {
+      const prototypeContent = projectGallery
+        ?.querySelector(`[data-slide="${swiper.activeIndex}"]`)
+        ?.querySelector(".prototype-content");
+      prototypeContent?.setAttribute("tabindex", "0");
+    });
   });
 };
 
@@ -262,6 +297,16 @@ const addDescriptionReadingTimeOnClick = () => {
   }
 };
 
+const disableAutoplayOnTab = () => {
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "Tab") {
+      projectSwiper?.autoplay.stop();
+      projectSwiper?.slideTo(0);
+      document.removeEventListener("keyup", disableAutoplayOnTab);
+    }
+  });
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeProjectsSwiper();
   initializeProjectsGallerySwiper();
@@ -276,4 +321,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setProjectTechnologiesTooltips(projectsData);
   addFiltersListeners();
   addProjectCardButtonsListeners();
+  disableAutoplayOnTab();
 });

@@ -29,6 +29,11 @@ span {
   color: var(--secondary-text-color);
 }
 
+b {
+  @apply font-medium;
+  color: var(--text-color); 
+}
+
 .thin-border {
   @apply border-[.5px] border-slate-200 dark:border-slate-700;
 }
@@ -63,11 +68,10 @@ span {
   }
 }
 
-.theme-toggle {
+#theme-toggle {
   --size: 2rem;
   inline-size: var(--size);
   block-size: var(--size);
 
   -webkit-tap-highlight-color: transparent;
-  outline-offset: 5px;
 }

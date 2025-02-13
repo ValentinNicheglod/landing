@@ -117,9 +117,20 @@ const getSwiperBreakpoints = () => {
   };
 };
 
+const disableAutoplayOnTab = () => {
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "Tab") {
+      skillsSwiper?.autoplay.stop();
+      skillsSwiper?.slideTo(0);
+      document.removeEventListener("keyup", disableAutoplayOnTab);
+    }
+  });
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
   skillsData = getSkillsData(lang);
   initializeSkillsSwiper();
   addFiltersListeners();
+  disableAutoplayOnTab();
 });

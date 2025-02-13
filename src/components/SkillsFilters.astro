@@ -27,16 +27,21 @@ const filterOptions = [
 ---
 
 <div class="flex md:justify-end">
-  <div id="skills-filter" class="filters">
+  <div id="skills-filter" class="filters" role="tablist">
     {
       filterOptions.map((option) => (
-        <button id={`skill-filter-${option.value}`} data-value={option.value}>
+        <button
+          id={`skill-filter-${option.value}`}
+          data-value={option.value}
+          aria-label={`${translations.filterBy} ${option.label}`}
+          role="tab"
+        >
           <div class="block md:hidden">{option.shortLabel}</div>
-          <div class="hidden md:block">{option.label}</div>
+          <div class="md:block hidden">{option.label}</div>
         </button>
       ))
     }
-    <div class="absolute w-full h-full p-1">
+    <div class="absolute p-1 w-full h-full">
       <div id="skills-filter-indicator" class="indicator"></div>
     </div>
   </div>

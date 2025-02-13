@@ -20,21 +20,27 @@ const englishFlag = getUserCountry()?.id === "US" ? USFlag : UKFlag;
 
 <button
   id="language-toggle"
-  class="relative w-14 aspect-square touch-manipulation group"
+  class="group relative rounded-full w-14 touch-manipulation aspect-square outline-offset-2"
+  aria-label={lang === "en"
+    ? "Press to switch to Spanish"
+    : "Presiona para cambiar a Inglés"}
+  aria-live="polite"
 >
   <Image
     id="english-flag"
     src={englishFlag}
     alt=""
+    aria-hidden="true"
     loading="eager"
-    class="outline-slate-300 rounded-full transition-transform duration-500 group-hover:scale-125"
+    class="group-hover:scale-125 rounded-full transition-transform duration-500 outline-slate-300"
   />
   <Image
     id="spanish-flag"
     src={ESFlag}
     alt=""
+    aria-hidden="true"
     loading="eager"
-    class="z-10 outline-slate-300 rounded-full transition-transform duration-500 group-hover:scale-125"
+    class="group-hover:scale-125 z-10 rounded-full transition-transform duration-500 outline-slate-300"
     class:list={{ hidden: lang !== "es" }}
   />
 </button>

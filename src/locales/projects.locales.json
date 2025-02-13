@@ -8,21 +8,56 @@
     "more": "+ View more",
     "less": "+ View less",
     "technologies": "Technologies used",
+    "next": "Next",
+    "previous": "Previous",
+    "filter": "Filter by project",
+    "filterBy": "Filter by",
+    "closeGallery": "Close images gallery",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
     "lift": {
       "subtitle": "Landing Page",
-      "description": "I designed and implemented a landing page for a fictional construction company which highlights the company identity and services.<br>This design aims to attract and convert visitors into customers, reflecting the essence of the company."
+      "description": "I designed and implemented a landing page for a fictional construction company which highlights the company identity and services.<br>This design aims to attract and convert visitors into customers, reflecting the essence of the company.",
+      "imagesAltText": {
+        "0": "Scrollable web page mockup for Lift Construcciones. Showcasing sections for services, featured projects, and contact."
+      }
     },
     "meteor": {
       "subtitle": "UX Case Study",
-      "description": "UX case study on an inclusive fashion e-commerce app. This app allows users to purchase products available in a wide variety of models and sizes."
+      "description": "UX case study on an inclusive fashion e-commerce app. This app allows users to purchase products available in a wide variety of models and sizes.",
+      "imagesAltText": {
+        "0": "Three mockups representing sections of the app: 'Home'. Including a promotional banner, access to favorites, main categories, and a list of current offers; 'Categories'. Including representative images of the different types of clothing available to explore; and 'Current Offers'. Presenting promotional products with their original and final prices.",
+        "1": "Mockup of the 'Login' section. Featuring a starry background and a welcome message for the user, below which is a white card with text fields for email and password, a button to log in, and another to reset the password.",
+        "2": "Three mockups following the login style, representing the registration flow: 'Registration Data'. Including text fields for entering email, password, and password confirmation; 'Personal Data'. Including fields for first name, last name, and phone number; and 'Gender and Preferences'. Including options to select the user's gender (optional) and clothing preferences by gender.",
+        "3": "Mockup of the 'User Profile' section. Showing the profile photo, name, email, phone number, and options like My Data, My Purchases, Addresses, Payment Methods, Settings, Help, and Log Out.",
+        "4": "Mockup of the 'Favorites' section. Displaying a card listing of the products the user has marked as favorites, each card with a button to remove the product from favorites.",
+        "5": "Mockup of the 'Product' section. Showing the name, images, reviews, colors, sizes, and price of the product. It also includes buttons to add the product to favorites or the shopping cart.",
+        "6": "Mockup of the 'Search' section. Showing a search bar, a 'Most Searched' section with a carousel of the most popular products, and 'Categories'. allowing access to them.",
+        "7": "Mockup of the 'Shopping Cart' section. Showing each of the added products with selected color and size, a quantity selector, and the final price of the product. Below, the total purchase amount and a button to proceed with it.",
+        "8": "Three mockups representing the purchase flow: 'Address'. Listing saved addresses and allowing new ones to be added; 'Payment'. listing saved cards and allowing new ones to be added; and 'Confirmation'. containing a carousel with the products, selected address, and payment method, below which are the total amount and a confirmation button."
+      }
     },
     "radley": {
       "subtitle": "Web Prototype",
-      "description": "Web prototype of a fashion e-commerce platform that allows users to browse, search, and purchase products. It includes categories for easy navigation and a shopping cart to manage selected items."
+      "description": "Web prototype of a fashion e-commerce platform that allows users to browse, search, and purchase products. It includes categories for easy navigation and a shopping cart to manage selected items.",
+      "imagesAltText": {
+        "0": "Scrollable mockup of the 'Home' section. Includes a banner promoting the new collection, access to categories, a trends list, newsletter subscription, recommended products, and new arrivals.",
+        "1": "Mockup of the 'Login' section. Consists of a modal with the header 'Login'. Includes text fields for email and password, and finally a button to log in.",
+        "2": "Mockup of the 'Sign Up' section. Consists of a modal with the header 'Sign Up'. Includes text fields to enter first name, last name, email, and password, and finally a button to sign up.",
+        "3": "Scrollable mockup of the 'Recommended Products' section. Showing a list with cards of products that the site deems suitable for the user.",
+        "4": "Scrollable mockup of the 'Product' section. Showing product name, images, reviews, colors, sizes, and price. Also includes buttons to add the product to favorites or the shopping bag. At the bottom of the content, it includes a list of similar products to the selected one.",
+        "6": "Scrollable mockup of the 'Shopping Bag' section. Divided into two columns. The first column includes a list of cards for each added product, with selected color and size, a quantity selector, and the final price of the product. The second column includes a card displaying a text field to apply a discount code to the order, the order details, and a button to complete the purchase.",
+        "7": "Scrollable mockup of 'Checkout Step 1': Order Shipping. Divided into two columns. The first column includes a list of cards for each added product. The second column includes a card with the header 'Order Shipping', a list of saved addresses, a form to add a new address, and a button to continue.",
+        "8": "Scrollable mockup of 'Checkout Step 2': Payment Method. Divided into two columns. The first column includes a list of cards for each added product. The second column includes a card with the header 'Payment Method', a list of saved cards, a form to add a new card, and a button to pay and confirm the order.",
+        "9": "Scrollable mockup of 'Checkout Step 3': Purchase Confirmed. Divided into two columns. The first column includes a list of cards for each added product. The second column includes a card with the purchase confirmation and order details."
+      }
     },
     "reconnect": {
       "subtitle": "Pricing Page",
-      "description": "Subscription page that offers various plans with specific features for different types of customers. I implemented a monthly or annual selection system, highlighting prices and features in a clear and appealing way."
+      "description": "Subscription page that offers various plans with specific features for different types of customers. I implemented a monthly or annual selection system, highlighting prices and features in a clear and appealing way.",
+      "imagesAltText": {
+        "0": "Web mockup of a pricing page. Featuring a catchy headline, an annual or monthly toggle, and a bottom section with four available plans: Free, Basic, Professional, and Enterprise. Each plan lists included features, plan price, and a button to select it."
+      }
     }
   },
   "es": {
@@ -34,21 +69,56 @@
     "more": "+ Ver mas",
     "less": "- Ver menos",
     "technologies": "Tecnologías utilizadas",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "filter": "Filtrar por proyecto",
+    "filterBy": "Filtrar por",
+    "closeGallery": "Cerrar galería de imágenes",
+    "prevImage": "Imagen anterior",
+    "nextImage": "Siguiente imagen",
     "lift": {
       "subtitle": "Landing Page",
-      "description": "Diseñé e implementé una landing page para una empresa de construcción ficticia que destaca su identidad y servicios.<br>Este diseño busca atraer y convertir a visitantes en clientes, reflejando la esencia de la empresa."
+      "description": "Diseñé e implementé una landing page para una empresa de construcción ficticia que destaca su identidad y servicios.<br>Este diseño busca atraer y convertir a visitantes en clientes, reflejando la esencia de la empresa.",
+      "imagesAltText": {
+        "0": "Mockup desplazable de página web para Lift Construcciones, mostrando secciones de servicios, proyectos destacados y contacto."
+      }
     },
     "meteor": {
       "subtitle": "Caso de Estudio UX",
-      "description": "Caso de estudio UX sobre una aplicación de e-commerce de moda centrada en la inclusividad. Esta app permite a los usuarios comprar productos disponibles en una amplia variedad de modelos y tallas."
+      "description": "Caso de estudio UX sobre una aplicación de e-commerce de moda centrada en la inclusividad. Esta app permite a los usuarios comprar productos disponibles en una amplia variedad de modelos y tallas.",
+      "imagesAltText": {
+        "0": "Tres mockups que representan secciones de la aplicación: 'Inicio'. Incluye un banner promocional, acceso a favoritos, categorías principales y una lista de ofertas actuales; 'Categorías'. Incluye imágenes representativas de los distintos tipos de prendas disponibles para explorar; y 'Ofertas actuales'. Que presenta productos en promoción con su precio original y precio final.",
+        "1": "Mockup de la sección 'Inicio de sesión'. Cuenta con un fondo estrellado y un mensaje de bienvenida al usuario, debajo, una card blanca con campos de texto para correo electrónico y contraseña, un botón para iniciar sesión y otro para restablecer contraseña.",
+        "2": "Tres mockups que siguen el estilo del inicio de sesión y representan el flujo de registro: 'Datos de registro'. Incluye campos de texto para ingresar correo electrónico, contraseña y confirmación de contraseña; 'Datos personales'. Incluye campos para nombre, apellido y número de teléfono; y 'Género y preferencias'. Incluye opciones para seleccionar el género del usuario (opcional) y las preferencias de ropa según género.",
+        "3": "Mockup de la sección 'Perfil de usuario'. mostrando la foto de perfil, nombre, correo, teléfono y opciones como Mis datos, Mis compras, Direcciones, Medios de pago, Configuración, Ayuda y Cerrar sesión.",
+        "4": "Mockup de la sección 'Favoritos'. mostrando un listado con cards de los productos que el usuario ha marcado como favoritos, cada card cuenta con un botón para eliminar el producto de favoritos.",
+        "5": "Mockup de la sección 'Producto'. mostrando nombre, imágenes, reseñas, colores, talles y precio del producto. También cuenta con botones para agregar el producto a favoritos o a la bolsa de compras.",
+        "6": "Mockup de la sección 'Buscar'. mostrando una barra de búsqueda, una sección 'Mas buscados'. que consta de un carrousel con los productos mas populares y 'Categorías'. que nos permite acceder a las mismas.",
+        "7": "Mockup de la sección 'Bolsa de compras'. mostrando cada uno de los productos agregados, con color y talle seleccionados, un selector de cantidad, y el precio final del producto. Debajo, el total de la compra y un botón para avanzar con la misma.",
+        "8": "Tres mockups que representan el flujo de compra: 'Dirección'. lista las direcciones guardas y permite agregar nuevas; 'Pago'. lista las tarjetas guardas y permite agregar nuevas; y 'Confirmación'. contiene un carrousel con los productos, la dirección y el método de pago seleccionados, debajo el total y un botón de confirmación."
+      }
     },
     "radley": {
       "subtitle": "Prototipo Web",
-      "description": "Prototipo web de un e-commerce de moda que permite a los usuarios visualizar, buscar y comprar productos. Incluye categorías para facilitar la navegación y una bolsa de compras para gestionar los artículos seleccionados."
+      "description": "Prototipo web de un e-commerce de moda que permite a los usuarios visualizar, buscar y comprar productos. Incluye categorías para facilitar la navegación y una bolsa de compras para gestionar los artículos seleccionados.",
+      "imagesAltText": {
+        "0": "Mockup desplazable de la sección 'Inicio'. incluye un banner promocionando la nueva colección, acceso a categorías, un listado de tendencias, suscripción al newsletter, productos recomendados y nuevos ingresos.",
+        "1": "Mockup de la sección 'Iniciar sesión'. Consta de un modal con el encabezado 'Iniciar sesión'. Incluye campos de texto para correo electrónico y contraseña, y por ultimo un botón para iniciar sesión.",
+        "2": "Mockup de la sección 'Registrarse'. Consta de un modal con el encabezado 'Registrarse'. Incluye campos de texto para ingresar nombre, apellido, correo electrónico y contraseña, y por ultimo un botón para registrarse.",
+        "3": "Mockup desplazable de la sección 'Productos recomendados'. Mostrando un listado con cards de los productos que el sitio considere adecuados para el usuario.",
+        "4": "Mockup desplazable de la sección 'Producto'. Mostrando nombre, imágenes, reseñas, colores, talles y precio del producto. También cuenta con botones para agregar el producto a favoritos o a la bolsa de compras. En la parte inferior del contenido, incluye un listado de productos similares al seleccionado.",
+        "6": "Mockup desplazable de la sección 'Bolsa de compras'. Dividido en dos columnas. La primer columna incluye un listado de cards de cada uno de los productos agregados, con color y talle seleccionados, un selector de cantidad, y el precio final del producto. La segunda columna incluye una card en la que se muestra un campo de texto para aplicar un código de descuento a la orden, el detalle de la orden y un botón para finalizar la compra.",
+        "7": "Mockup desplazable de la sección 'Paso 1 del Checkout': Envío de la orden. Dividido en dos columnas. La primer columna incluye un listado de cards de cada uno de los productos agregados. La segunda columna incluye una card con el encabezado 'Envío de la orden', un listado de direcciones guardadas, un formulario para agregar una nueva dirección, y un botón para continuar.",
+        "8": "Mockup desplazable de la sección 'Paso 2 del Checkout': Método de pago. Dividido en dos columnas. La primer columna incluye un listado de cards de cada uno de los productos agregados. La segunda columna incluye una card con el encabezado 'Método de pago', un listado de tarjetas guardadas, un formulario para agregar una nueva tarjeta, y un botón para pagar y confirmar la orden.",
+        "9": "Mockup desplazable de la sección 'Paso 3 del Checkout': Compra confirmada. Dividido en dos columnas. La primer columna incluye un listado de cards de cada uno de los productos agregados. La segunda columna incluye una card con la confirmación de la compra e información de la misma."
+      }
     },
     "reconnect": {
       "subtitle": "Suscripción a planes",
-      "description": "Página de suscripción que ofrece varios planes con funcionalidades específicas para distintos tipos de clientes. Implementé un sistema de selección mensual o anual, destacando precios y características de manera clara y atractiva."
+      "description": "Página de suscripción que ofrece varios planes con funcionalidades específicas para distintos tipos de clientes. Implementé un sistema de selección mensual o anual, destacando precios y características de manera clara y atractiva.",
+      "imagesAltText": {
+        "0": "Mockup web de una página de suscripción a planes, mostrando un titulo llamativo, un selector anual o mensual, y una sección inferior con los cuatro planes disponibles: Free, Basic, Professional, Enterprise. Cada plan lista las funcionalidades incluidas, el precio del plan y un botón para seleccionarlo."
+      }
     }
   }
 }

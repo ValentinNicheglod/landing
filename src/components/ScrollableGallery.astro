@@ -1,52 +1,59 @@
 ---
 // Components
 import { Icon } from "astro-icon/components";
+import { Image, imageConfig } from "astro:assets";
+
+// Types
+import type { Project } from "../models/types/project.type";
+
+// Images
+import projectBackground from "../images/projects/project-background.png";
 
 // Translations
-import heroTranslations from "../locales/hero.locales.json";
+import _heroTranslations from "../locales/hero.locales.json";
+import _projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
-const translations = heroTranslations[lang];
+const heroTranslations = _heroTranslations[lang];
+const projectsTranslations = _projectsTranslations[lang];
 
-const { image, project } = Astro.props as {
+const { image, project, index } = Astro.props as {
   image: ImageMetadata;
   project: Project;
+  index: "0" | "1" | "2" | "3" | "4" | "6" | "7" | "8";
 };
 
-import projectBackground from "../images/projects/project-background.png";
-import { Image } from "astro:assets";
-import type { Project } from "../models/types/project.type";
+const imagesAltText: Record<string, string> =
+  projectsTranslations[project.path].imagesAltText;
 
 if (!project.mockup) return;
 ---
 
 <div class="flex flex-col justify-center items-center h-full">
-  <div
-    class="w-fit mx-auto inset-0 mt-8"
-  >
+  <div class="inset-0 mx-auto mt-8 w-fit">
     <div
-      class="flex items-center gap-2 px-2 py-1 rounded-full bg-white shadow-md animate-bounce animate-infinite"
+      class="flex items-center gap-2 bg-white shadow-md px-2 py-1 rounded-full animate-bounce animate-infinite"
     >
       <Icon name="arrow-down" class="text-primary text-sm" />
       <span class="text-black text-sm">
-        {translations.instruction}
+        {heroTranslations.instruction}
       </span>
     </div>
   </div>
   <div class="flex-1">
     <Image
       src={projectBackground}
-      class="background object-contain m-auto h-full -translate-y-8"
+      class="m-auto h-full -translate-y-8 background object-contain"
       alt=""
+      aria-hidden="true"
     />
     <Image
       src={project.mockup}
-      class="prototype-window absolute inset-0 m-auto"
+      class="absolute inset-0 m-auto prototype-window"
       alt=""
+      aria-hidden="true"
     />
-    <div
-      class="prototype-content absolute inset-0 z-50 m-auto overflow-y-auto"
-    >
-      <Image src={image} alt="" />
+    <div class="z-50 absolute inset-0 m-auto overflow-y-auto prototype-content">
+      <Image src={image} alt={imagesAltText[index] || ""} />
     </div>
   </div>
 </div>

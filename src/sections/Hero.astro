@@ -12,55 +12,77 @@ const translations = heroTranslations[lang];
 
 // Images
 import { Image } from "astro:assets";
-import background from "../images/HeroBackground.jpg"
+import background from "../images/HeroBackground.jpg";
 ---
 
-<section id="hero" class="relative flex flex-col h-dvh">
-  <h1 class="relative text-xs opacity-0 -z-30">Valentín Nicheglod</h1>
+<section id="hero" class="relative flex flex-col h-dvh" role="banner">
+  <h1 class="relative -z-30 opacity-0 text-xs" aria-hidden="true">
+    Valentín Nicheglod
+  </h1>
 
   <ScrollInstruction lang={lang} />
-  <Image src={background} alt="" loading="eager" class="absolute w-screen h-screen object-cover" />
+  <Image
+    src={background}
+    alt={translations.bgAlt}
+    loading="eager"
+    class="absolute w-screen h-screen object-cover"
+  />
 
-  <div class="container mx-auto flex flex-1 items-center p-8 md:p-0 z-10">
+  <div class="z-10 flex flex-1 items-center mx-auto p-8 md:p-0 container">
     <div class="flex flex-col gap-8 md:w-fit">
-      <div class="inner-container rounded-xl sm:rounded-3xl bg-white">
+      <article
+        class="bg-white rounded-xl sm:rounded-3xl inner-container"
+        tabindex="0"
+      >
         <div class="flex items-center gap-6 sm:gap-8 p-6 sm:p-8">
           <div class="text-6xl sm:text-7xl" set:html={Emojis.HandWave} />
-          <div class="grid gap-3">
-            <span class="text-base sm:text-lg text-gray">
+          <div class="gap-3 grid">
+            <span class="text-base text-gray sm:text-lg">
               {translations.presentation}
             </span>
-            <div class="text-3xl md:text-4xl font-bold text-primary">Valentín</div>
+            <h2
+              class="font-bold text-3xl text-primary md:text-4xl"
+              translate="no"
+            >
+              Valentín
+            </h2>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="grid gap-4">
-        <div class="inner-container rounded-xl sm:rounded-3xl bg-white">
+      <div class="gap-4 grid">
+        <article
+          class="bg-white rounded-xl sm:rounded-3xl inner-container"
+          tabindex="0"
+        >
           <div class="flex items-center gap-6 px-6 sm:px-8 py-3 sm:py-4">
             <div
               class="text-3xl sm:text-4xl md:text-5xl"
               set:html={Emojis.Developer}
             />
-            <h2 class="text-lg sm:text-xl md:text-2xl text-slate-800">
+            <h3 class="text-lg text-slate-800 sm:text-xl md:text-2xl">
               {translations.developer}
-            </h2>
+            </h3>
           </div>
-        </div>
+        </article>
 
-        <div class="inner-container rounded-xl sm:rounded-3xl bg-white">
+        <article
+          class="bg-white rounded-xl sm:rounded-3xl inner-container"
+          tabindex="0"
+        >
           <div class="flex items-center gap-6 px-6 sm:px-8 py-3 sm:py-4">
             <div
               class="text-3xl sm:text-4xl md:text-5xl"
               set:html={Emojis.Designer}
             />
-            <h2 class="text-lg sm:text-xl md:text-2xl text-slate-800">
+            <h3 class="text-lg text-slate-800 sm:text-xl md:text-2xl">
               {translations.designer}
-            </h2>
+            </h3>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </div>
-  <div class="absolute bottom-0 w-full h-1 bg-gradient"></div>
+  <div class="bottom-0 absolute bg-gradient w-full h-1" aria-hidden="true">
+  </div>
 </section>

@@ -4,19 +4,21 @@ import type { Skill } from "../models/types/skills.type";
 const { skill } = Astro.props as { skill: Skill };
 ---
 
-<div
-  class="swiper-slide skill-slide inner-container rounded-md"
+<li
+  class="rounded-md inner-container skill-slide swiper-slide"
   data-type={skill.type}
+  tabindex="0"
 >
   <div class="flex flex-col items-center gap-3 py-3">
     <Image
       src={skill.image}
       alt=""
+      width={128}
       class="dark:opacity-90 w-16 h-16"
       class:list={skill.customClass}
     />
-    <span class="text-[var(--text-color)] text-sm text-nowrap">
+    <span class="text-[var(--text-color)] text-nowrap text-sm">
       {skill.name}
     </span>
   </div>
-</div>
+</li>

@@ -4,13 +4,19 @@
         "instruction": "Scroll down to see more content",
         "developer": "Full Stack Developer",
         "designer": "UX/UI Designer",
-        "madeWithLove": "Made with love using"
+        "madeWithLove": "Made with love using",
+        "goTop": "Go to top",
+        "bgAlt": "Abstract dark background with geometric lines and bright blue details resembling a technological circuit.",
+        "logoAlt": "Website logo"
     },
     "es": {
         "presentation": "Hola, soy",
         "instruction": "Desliza hacia abajo para ver mas contenido",
         "developer": "Desarrollador Full Stack",
         "designer": "Diseñador UX/UI",
-        "madeWithLove": "Hecho con amor utilizando"
+        "madeWithLove": "Hecho con amor utilizando",
+        "goTop": "Volver arriba",
+        "bgAlt": "Fondo abstracto oscuro con líneas geométricas y detalles brillantes en tonos azules que simulan un circuito tecnológico.",
+        "logoAlt": "Logo del sitio web"
     }
 }

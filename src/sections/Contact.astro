@@ -20,62 +20,71 @@ const translations = contactTranslations[lang];
 import mailImage from "../images/Mail.png";
 ---
 
-<section id="contact" class="relative overflow-hidden bg-white">
+<section id="contact" class="relative bg-white overflow-hidden">
   <div class="flex flex-col p-6 md:p-12 xl:p-16">
     <GradientBackground sectionId="contact" />
     <div class="relative xl:container xl:mx-auto">
-      <div class="grid gap-12 lg:gap-24 sm:justify-items-center">
-        <div class="hidden sm:block">
-          <h2 class="text-3xl md:text-4xl font-bold text-white">
-            {translations.sectionTitle}
-          </h2>
-        </div>
-        <div class="flex sm:hidden items-center gap-4">
-          <div class="text-5xl dark:opacity-90" set:html={Emojis.Mail} />
-          <h2 class="text-3xl md:text-4xl font-bold text-white">
-            {translations.shortSectionTitle}
-          </h2>
-        </div>
+      <div class="sm:justify-items-center gap-12 lg:gap-24 grid">
+        <header>
+          <div class="sm:block hidden">
+            <h2 class="font-bold text-3xl text-white md:text-4xl">
+              {translations.sectionTitle}
+            </h2>
+          </div>
+          <div class="flex items-center gap-4 sm:hidden">
+            <div class="dark:opacity-90 text-5xl" set:html={Emojis.Mail} />
+            <h2 class="font-bold text-3xl text-white md:text-4xl">
+              {translations.shortSectionTitle}
+            </h2>
+          </div>
+        </header>
 
-        <div class="flex md:hidden justify-center">
+        <div class="flex justify-center md:hidden">
           <SocialLinks />
         </div>
-        <div class="w-2/5 hidden md:block">
+        <div class="md:block hidden w-2/5">
           <SocialLinks size="large" />
         </div>
 
-        <div
-          class="inner-container hidden sm:block w-full lg:w-4/5 rounded-3xl"
+        <article
+          class="sm:block hidden rounded-3xl w-full lg:w-4/5 inner-container"
         >
-          <div class="grid gap-8 justify-center px-8 lg:px-12 xl:px-16 py-8">
-            <div class="grid gap-4">
-              <h3 class="text-3xl font-semibold text-center">
-                {translations.sectionSubtitle}
-              </h3>
-              <p class="text-balance opacity-75 text-center">
+          <div class="justify-center gap-8 grid px-8 lg:px-12 xl:px-16 py-8">
+            <div class="gap-4 grid">
+              <header>
+                <h3 class="font-semibold text-3xl text-center dark:text-white">
+                  {translations.sectionSubtitle}
+                </h3>
+              </header>
+              <span class="text-balance text-center dark:text-slate-300">
                 {translations.content}
-              </p>
+              </span>
             </div>
             <a
               href="mailto:valentinnicheglod1@gmail.com"
-              class="contact-button flex items-center m-auto gap-3 p-3 hover:pr-6 hover:gap-12 rounded-full"
+              class="flex items-center gap-3 hover:gap-12 focus-visible:gap-12 m-auto p-3 hover:pr-6 focus-visible:pr-6 rounded-full contact-button outline-offset-2"
             >
-              <div class="p-1 rounded-full bg-white">
-                <Icon name="send" class="text-secondary text-xl mr-0.5 mt-0.5" />
+              <div class="bg-white p-1 rounded-full">
+                <Icon
+                  name="send"
+                  class="mt-0.5 mr-0.5 text-secondary text-xl"
+                />
               </div>
-              <div class="text-xl font-medium text-white pb-0.5">
+              <div class="pb-0.5 font-medium text-white text-xl">
                 {translations.sendEmail}
                 &nbsp;&nbsp;
               </div>
             </a>
           </div>
-        </div>
-        <div class="grid sm:hidden w-full justify-center gap-6">
-          <h3 class="text-xl font-semibold text-white">
-            {translations.sectionSubtitle}
-          </h3>
+        </article>
+        <article class="justify-center gap-6 sm:hidden grid w-full">
+          <header>
+            <h3 class="font-semibold text-white text-xl">
+              {translations.sectionSubtitle}
+            </h3>
+          </header>
           <div class="flex gap-4">
-            <p class="text-sm text-pretty text-slate-200">
+            <p class="text-pretty text-slate-200 text-sm">
               {translations.shortContent}
             </p>
             <a
@@ -85,7 +94,7 @@ import mailImage from "../images/Mail.png";
               <SquareButton image={mailImage} label={translations.sendEmail} />
             </a>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </div>

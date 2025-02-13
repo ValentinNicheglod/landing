@@ -26,20 +26,21 @@ const filterOptions = [
 ];
 ---
 
-<div id="projects-filter" class="filters md:shadow-sm">
+<div id="projects-filter" class="md:shadow-sm filters" role="tablist">
   {
     filterOptions.map((option) => (
       <button
         id={`project-filter-${option.value}`}
-        class:list={{ selected: option.value === 0 }}
         data-value={option.value}
+        aria-label={`${translations.filterBy} ${option.label}`}
+        role="tab"
       >
         <div class="block md:hidden">{option.shortLabel}</div>
-        <div class="hidden md:block">{option.label}</div>
+        <div class="md:block hidden">{option.label}</div>
       </button>
     ))
   }
-  <div class="absolute w-full h-full p-1">
+  <div class="absolute p-1 w-full h-full">
     <div id="projects-filter-indicator" class="indicator"></div>
   </div>
 </div>

@@ -7,28 +7,35 @@ import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
 
-const { technologies } = Astro.props as { technologies: { name: string, image: ImageMetadata }[] };
+const { technologies, titleId } = Astro.props as {
+  technologies: { name: string; image: ImageMetadata }[];
+  titleId: string;
+};
 
 const iconHasOwnBackground = (techName: string) => {
   return technologiesWithOwnBG.has(techName);
 };
 ---
 
-<div
-  class="flex justify-between items-center xs:border-slate-300 xs:bg-slate-100 xs:rounded-lg xs:p-2 pb-1"
+<article
+  class="flex justify-between items-center xs:border-slate-300 xs:bg-slate-100 xs:p-2 pb-1 xs:rounded-lg"
+  aria-labelledby={titleId}
+  role="group"
 >
-  <span class="text-white xs:text-slate-600 text-sm font-light">
+  <h4 id={titleId} class="font-light text-sm text-white xs:text-slate-600">
     {translations.technologies}
-  </span>
-  <div class="flex gap-1 xs:gap-2" >
+  </h4>
+  <ul class="flex gap-1 xs:gap-2">
     {
       technologies.map((technology) => (
-        <div
-          class="technology rounded-full overflow-hidden transition-transform hover:-translate-y-1"
+        <li
+          class="rounded-full transition-transform hover:-translate-y-1 overflow-hidden technology"
           class:list={{
             "p-1.5 bg-neutral-200": !iconHasOwnBackground(technology.name),
           }}
           data-tooltip={technology.name}
+          aria-label={technology.name}
+          tabindex="0"
         >
           <Image
             src={technology.image}
@@ -38,8 +45,8 @@ const iconHasOwnBackground = (techName: string) => {
               "w-8 h-8 sm:w-9 sm:h-9": iconHasOwnBackground(technology.name),
             }}
           />
-        </div>
+        </li>
       ))
     }
-  </div>
-</div>
+  </ul>
+</article>

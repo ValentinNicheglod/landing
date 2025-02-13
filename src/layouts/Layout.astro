@@ -3,29 +3,40 @@ import { Image } from "astro:assets";
 import LanguageToggle from "../components/LanguageToggle.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 
+import heroTranslations from "../locales/hero.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = heroTranslations[lang];
+
 import logo from "../icons/logo.svg";
 ---
 
 <>
-  <div id="header" class="flex gap-4 fixed top-8 right-0 h-14 z-30">
-    <div
-      class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
-    >
-      <ThemeToggle />
-    </div>
-    <div
-      class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
-    >
-      <LanguageToggle />
-    </div>
-    <div
-      class="bg-white thin-border border-r-0 shadow-md pr-8 pl-4 rounded-tl-full rounded-bl-full z-30"
-    >
-      <div class="flex items-center justify-center h-full">
-        <Image src={logo} alt="" loading="eager" />
-      </div>
-    </div>
-  </div>
+  <menu>
+    <ul id="header" class="flex gap-4 fixed top-8 right-0 h-14 z-30">
+      <li
+        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
+      >
+        <ThemeToggle />
+      </li>
+      <li
+        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
+      >
+        <LanguageToggle />
+      </li>
+      <li
+        class="bg-white thin-border border-r-0 shadow-md pr-8 pl-4 rounded-tl-full rounded-bl-full z-30"
+      >
+        <div class="flex items-center justify-center h-full">
+          <Image
+            src={logo}
+            alt={translations.logoAlt}
+            loading="eager"
+            class="w-12"
+          />
+        </div>
+      </li>
+    </ul>
+  </menu>
 
   <slot />
 </>

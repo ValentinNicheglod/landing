@@ -1,9 +1,9 @@
 {
   "en": {
     "sectionTitle": "About me",
-    "content_1": "<strong class='font-medium'>Full Stack Developer</strong> with 3 years of experience in developing web and mobile applications.<br> My focus is on creating solutions that integrate intuitive design with efficient functionalities to ensure that each project not only meets its technical objectives but also provides an exceptional user experience.",
-    "content_2": "I specialize in technologies such as <strong class='font-medium'>JavaScript</strong>, <strong class='font-medium'>HTML</strong>, and <strong class='font-medium'>CSS</strong>, and I also have solid experience in well-known frameworks like <strong class='font-medium'>React</strong>, <strong class='font-medium'>Angular</strong>, <strong class='font-medium'>Ionic</strong>, and <strong class='font-medium'>Astro</strong>.",
-    "content_3": "Additionally, I have acquired technical and practical training in <strong class='font-medium'>UX/UI Design</strong>, which allows me to approach the creation of digital products from a more comprehensive and user centered perspective.",
+    "content_1": "<b>Full Stack Developer</b> with 3 years of experience in developing web and mobile applications.<br> My focus is on creating solutions that integrate intuitive design with efficient functionalities to ensure that each project not only meets its technical objectives but also provides an exceptional user experience.",
+    "content_2": "I specialize in technologies such as <b>JavaScript</b>, <b>HTML</b>, and <b>CSS</b>, and I also have solid experience in well-known frameworks like <b>React</b>, <b>Angular</b>, <b>Ionic</b>, and <b>Astro</b>.",
+    "content_3": "Additionally, I have acquired technical and practical training in <b>UX/UI Design</b>, which allows me to approach the creation of digital products from a more comprehensive and user centered perspective.",
     "interests": "My Interests",
     "architecture": "Architecture",
     "aviation": "Aviation",
@@ -11,6 +11,8 @@
     "photography": "Photography",
     "technology": "Technology",
     "travel": "Travel",
+    "profilePicAltText": "Valentín Nicheglod Photo",
+    "filterBy": "Filtrar por",
     "skills": {
       "sectionTitle": "My skills",
       "personal": "Personal skills",
@@ -27,9 +29,9 @@
   },
   "es": {
     "sectionTitle": "Sobre mí",
-    "content_1": "<strong class='font-medium'>Desarrollador Full Stack</strong> con 3 años de experiencia en el desarrollo de aplicaciones web y móviles.<br> Mi enfoque está en crear soluciones que integren un diseño intuitivo con funcionalidades eficientes para garantizar que cada proyecto no solo cumpla con sus objetivos técnicos, sino que también ofrezca una experiencia de usuario excepcional.",
-    "content_2": "Me especializo en tecnologías como <strong class='font-medium'>JavaScript</strong>, <strong class='font-medium'>HTML</strong> y <strong class='font-medium'>CSS</strong>, y también cuento con una sólida experiencia en frameworks reconocidos como <strong class='font-medium'>React</strong>, <strong class='font-medium'>Angular</strong>, <strong class='font-medium'>Ionic</strong> y <strong class='font-medium'>Astro</strong>.",
-    "content_3": "Además, he adquirido formación técnica y práctica en <strong class='font-medium'>Diseño UX/UI</strong>, lo que me permite abordar la creación de productos digitales desde una perspectiva más completa y centrada en el usuario.",
+    "content_1": "<b>Desarrollador Full Stack</b> con 3 años de experiencia en el desarrollo de aplicaciones web y móviles.<br> Mi enfoque está en crear soluciones que integren un diseño intuitivo con funcionalidades eficientes para garantizar que cada proyecto no solo cumpla con sus objetivos técnicos, sino que también ofrezca una experiencia de usuario excepcional.",
+    "content_2": "Me especializo en tecnologías como <b>JavaScript</b>, <b>HTML</b> y <b>CSS</b>, y también cuento con una sólida experiencia en frameworks reconocidos como <b>React</b>, <b>Angular</b>, <b>Ionic</b> y <b>Astro</b>.",
+    "content_3": "Además, he adquirido formación técnica y práctica en <b>Diseño UX/UI</b>, lo que me permite abordar la creación de productos digitales desde una perspectiva más completa y centrada en el usuario.",
     "interests": "Mis Intereses",
     "architecture": "Arquitectura",
     "aviation": "Aviación",
@@ -37,6 +39,8 @@
     "photography": "Fotografía",
     "technology": "Tecnología",
     "travel": "Viajes",
+    "profilePicAltText": "Foto de Valentín Nicheglod",
+    "filterBy": "Filter by",
     "skills": {
       "sectionTitle": "Mis habilidades",
       "personal": "Habilidades personales",

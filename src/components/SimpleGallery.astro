@@ -1,18 +1,24 @@
 ---
 import { Image } from "astro:assets";
 
-const { image, projectPath } = Astro.props as {
+// Translations
+import _projectsTranslations from "../locales/projects.locales.json";
+import type { ProjectNames } from "../models/types/project.type";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const projectsTranslations = _projectsTranslations[lang];
+
+const { image, projectPath, index } = Astro.props as {
   image: ImageMetadata;
-  projectPath: string;
+  projectPath: ProjectNames;
+  index: "0" | "1" | "2" | "3" | "4" | "6" | "7" | "8";
 };
+
+const imagesAltText: Record<string, string> =
+  projectsTranslations[projectPath].imagesAltText;
 ---
 
 <div class="flex justify-center items-center gallery-image-container">
-  <Image
-    src={image}
-    alt=""
-    class="w-auto gallery-image"
-  />
+  <Image src={image} alt={imagesAltText[index]} class="w-auto gallery-image" />
 </div>
 <style lang="scss">
   $max-height: min(800px, 95dvh);

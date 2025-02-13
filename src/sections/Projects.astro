@@ -16,18 +16,19 @@ import { projectsData } from "../data/projects.data";
 import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
+
 ---
 
 <section id="projects" class="2xl:container 2xl:mx-auto">
   <div class="p-6 sm:p-12 xl:p-16 2xl:px-0">
     <div class="flex flex-col gap-8 sm:gap-12 md:gap-16 xl:gap-20">
-      <div class="flex flex-col md:flex-row md:justify-between gap-4">
+      <header class="flex flex-col md:flex-row md:justify-between gap-4">
         <h2 class="text-3xl md:text-4xl font-bold text-primary">{translations.sectionTitle}</h2>
         <ProjectsFilters />
-      </div>
+      </header>
       <div class="flex-1 content-center">
-        <div id="projects-swiper" class="swiper rounded-xl md:rounded-2xl">
-          <div class="swiper-wrapper">
+        <div id="projects-swiper" class="swiper rounded-xl md:rounded-2xl p-1">
+          <section class="swiper-wrapper">
             {
               projectsData.map((project, index) => (
                 <div class="swiper-slide project-slide" data-type={project.type}>
@@ -41,7 +42,7 @@ const translations = projectsTranslations[lang];
                 </dialog>
               ))
             }
-          </div>
+          </section>
         </div>
       </div>
     </div>

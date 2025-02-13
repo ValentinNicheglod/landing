@@ -25,24 +25,30 @@ import { Image } from "astro:assets";
 const { project } = Astro.props as { project: Project };
 ---
 
-<div
-  class="project-card relative thin-border aspect-square overflow-hidden rounded-xl md:rounded-2xl"
+<article
+  class="project-card relative thin-border aspect-square overflow-hidden rounded-xl md:rounded-2xl outline-offset-2"
+  aria-labelledby={`title-${project.path}`}
+  tabindex="0"
+  role="group"
 >
   <Image class="absolute" src={project.background} alt="" width={1000} />
   <div class="wrapper aspect-square">
     <div class="card-overlay"></div>
     <div class="content relative flex aspect-square flex-col gap-2 py-4">
-      <div class="flex items-center gap-4 px-4 sm:mb-6">
+      <header class="flex items-center gap-4 px-4 sm:mb-6">
         <ProjectLogo project={project} />
         <div class="flex flex-col">
-          <div class="font-semibold text-white text-2xl">
+          <h3
+            id={`title-${project.path}`}
+            class="font-semibold text-white text-2xl"
+          >
             {project.name}
-          </div>
+          </h3>
           <span class="text-slate-300 text-sm md:text-base">
             {translations[project.path].subtitle}
           </span>
         </div>
-      </div>
+      </header>
       <div class="relative flex-1 px-4">
         <span
           id={`description-${project.path}`}
@@ -58,9 +64,12 @@ const { project } = Astro.props as { project: Project };
         </button>
       </div>
       <div id={`technologies-${project.path}`} class="px-4">
-        <Technologies technologies={project.technologies} />
+        <Technologies
+          technologies={project.technologies}
+          titleId={`technologies-title-${project.path}`}
+        />
       </div>
-      <div class="grid grid-cols-3 gap-1 sm:gap-3 px-4 zd">
+      <footer class="grid grid-cols-3 gap-1 sm:gap-3 px-4 zd">
         {
           project.github && (
             <SquareButton
@@ -96,7 +105,7 @@ const { project } = Astro.props as { project: Project };
           project={project}
           url={project.url}
         />
-      </div>
+      </footer>
     </div>
   </div>
-</div>
+</article>

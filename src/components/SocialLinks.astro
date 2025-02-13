@@ -32,32 +32,33 @@ const contactLinks = [
 const { size } = Astro.props;
 ---
 
-<div class="flex gap-4" class:list={{ "justify-between": size === "large" }}>
+<ul class="flex gap-4" class:list={{ "justify-between": size === "large" }}>
   {
     contactLinks.map((link) => (
-      <a
-        href={link.href}
-        target="_blank"
-        rel="noreferrer noopener"
-        name={link.title}
-        class="social aspect-square transition-transform hover:scale-110 duration-500"
-        class:list={{
-          "w-11 md:w-12": !size,
-          "w-8 md:w-9": size === "small",
-          "w-14 md:w-15": size === "large",
-        }}
-      >
-        <Image
-          src={link.image}
-          alt={`${link.title} icon`}
-          class="dark:opacity-90"
-        />
-      </a>
+      <li class="flex">
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noreferrer noopener"
+          name={link.title}
+          aria-label={link.title}
+          class="rounded-full transition-transform duration-500 aspect-square social hover:scale-110 focus-visible:scale-110 outline-offset-2"
+          class:list={{
+            "w-11 md:w-12": !size,
+            "w-8 md:w-9": size === "small",
+            "w-14 md:w-15": size === "large",
+            "dark:shadow-sm dark:shadow-slate-500":
+              link.href.includes("github"),
+          }}
+        >
+          <Image src={link.image} alt="" />
+        </a>
+      </li>
     ))
   }
-</div>
+</ul>
 <script>
-import { setSocialLinksTooltips } from "../scripts/tooltips.scripts";
+  import { setSocialLinksTooltips } from "../scripts/tooltips.scripts";
 
-  document.addEventListener("DOMContentLoaded", setSocialLinksTooltips)
+  document.addEventListener("DOMContentLoaded", setSocialLinksTooltips);
 </script>

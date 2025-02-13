@@ -6,8 +6,8 @@
     }
 
     .content {
-      background: #00000090;
-      transition: background .5s;
+      background: hsla(0, 0%, 0%, 0.6);
+      transition: background 0.5s;
 
       &::before {
         $height: 25px;
@@ -17,18 +17,19 @@
         top: -$height;
         width: 100%;
         height: $height;
-        background: linear-gradient(180deg, transparent, #00000090);
+        background: linear-gradient(180deg, transparent, hsla(0, 0%, 0%, 0.6));
       }
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     .card-overlay {
       height: 0;
     }
 
     .content {
-      background: #000000BB;
+      background: hsla(0, 0%, 0%, 0.75);
     }
   }
 }
@@ -45,9 +46,11 @@
     --swiper-navigation-sides-offset: 2px;
   }
 
-  .project-card:hover {
-    .content {
-      background: #00000090;
+  .project-card {
+    &:hover, &:focus-within {
+      .content {
+        background: #00000090;
+      }
     }
   }
 }

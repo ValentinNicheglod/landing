@@ -1,9 +1,14 @@
+---
+import themeTranslations from "../locales/theme.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = themeTranslations[lang];
+---
 
 <button
-  class="theme-toggle flex items-center justify-center touch-manipulation"
+  class="flex justify-center items-center rounded-full w-full h-full touch-manipulation outline-offset-2"
   id="theme-toggle"
-  aria-label="auto"
   aria-live="polite"
+  aria-label={translations.switchTheme}
 >
   <svg
     class="sun-and-moon"

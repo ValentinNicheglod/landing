@@ -1,0 +1,16 @@
+{
+  "en": {
+    "dark": "Dark",
+    "light": "Light",
+    "switchToLight": "Press to switch to light mode",
+    "switchToDark": "Press to switch to dark mode",
+    "switchTheme": "Switch theme"
+  },
+  "es": {
+    "dark": "Oscuro",
+    "light": "Claro",
+    "switchToLight": "Presiona para cambiar al modo claro",
+    "switchToDark": "Presiona para cambiar al modo oscuro",
+    "switchTheme": "Cambiar tema"
+  }
+}

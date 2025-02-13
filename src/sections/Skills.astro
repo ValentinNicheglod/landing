@@ -22,27 +22,35 @@ const allSkills = getAllSkills(lang);
 
 <section
   id="skills"
-  class="relative 2xl:container 2xl:mx-auto 2xl:rounded-2xl overflow-hidden bg-white"
+  class="relative 2xl:container 2xl:mx-auto 2xl:rounded-2xl overflow-hidden bg-white outline-none border-orange-500 focus-visible:border-2"
+  tabindex="0"
 >
   <GradientBackground sectionId="skills" />
   <div class="relative flex flex-col gap-6 p-6 sm:p-8 md:p-12">
-    <div class="flex md:hidden items-center gap-6 max-w-80">
+    <header class="flex md:hidden items-center gap-6 max-w-80">
       <div class="text-6xl dark:opacity-90" set:html={Emojis.Personal} />
-      <div class="text-3xl md:text-4xl font-bold text-white">{translations.skills.sectionTitle}</div>
-    </div>
+      <h3 class="text-3xl md:text-4xl font-bold text-white">
+        {translations.skills.sectionTitle}
+      </h3>
+    </header>
     <SkillsFilters />
     <div
       class="flex flex-col md:flex-row justify-between md:items-center gap-6"
     >
       <div class="hidden md:flex items-center gap-6 max-w-96">
-        <div id="skills-icon" class="text-7xl lg:text-8xl dark:opacity-90"></div>
-        <h2 id="skills-title" class="text-3xl md:text-4xl font-bold text-white text-balance"></h2>
+        <div id="skills-icon" class="text-7xl lg:text-8xl dark:opacity-90">
+        </div>
+        <h2
+          id="skills-title"
+          class="text-3xl md:text-4xl font-bold text-white text-balance"
+        >
+        </h2>
       </div>
       <div class="md:w-[max(550px,_50vw)] overflow-hidden">
-        <div id="skills-swiper" class="swiper pb-4">
-          <div id="skills-list" class="swiper-wrapper">
+        <div id="skills-swiper" class="swiper p-1 pb-4">
+          <ul id="skills-list" class="swiper-wrapper">
             {allSkills.map((_skill) => <Skill skill={_skill} />)}
-          </div>
+          </ul>
         </div>
       </div>
     </div>

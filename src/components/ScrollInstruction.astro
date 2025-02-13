@@ -18,8 +18,9 @@ const translations = heroTranslations[lang];
     <Icon
       name="arrow-down"
       class="text-primary animate-bounce animate-infinite mt-2"
+      aria-hidden="true"
     />
-    <span class="content text-black">
+    <span class="content text-black" aria-live="polite">
       {translations.instruction}
     </span>
   </div>

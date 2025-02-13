@@ -11,26 +11,47 @@ import "swiper/css/navigation";
 // Types
 import type { Project } from "../models/types/project.type";
 
+// Translations
+import projectsTranslations from "../locales/projects.locales.json";
+const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
+const translations = projectsTranslations[lang];
+
 const { project } = Astro.props as { project: Project };
 ---
 
 <button
   id={`${project.path}-gallery-close-button`}
-  class="absolute right-4 top-4 z-10"
+  class="top-4 right-4 z-10 absolute outline-offset-2 rounded-full text-red-400 hover:text-red-500 focus-visible:text-red-500 transition-colors"
+  aria-label={translations.closeGallery}
 >
-  <div class="text-red-400 hover:text-red-500 transition-colors">
-    <Icon name="close" class="text-2xl" />
-  </div>
+  <Icon name="close" class="text-2xl" />
 </button>
-<div id={`${project.path}-gallery-swiper`} class="swiper flex h-full">
+<div id={`${project.path}-gallery-swiper`} class="flex h-full swiper">
+  {
+    project.galleryImages.length > 1 && (
+      <button
+        class="ml-2 w-5 h-5 swiper-button-prev outline-offset-2"
+        id={`${project.path}-prev`}
+        aria-label={translations.prevImage}
+      />
+    )
+  }
   <div class="swiper-wrapper">
     {
-      project.galleryImages.map((image) => (
-        <div class="swiper-slide h-full">
+      project.galleryImages.map((image, index) => (
+        <div class="h-full swiper-slide" data-slide={index}>
           {project.scrollablePrototype ? (
-            <ScrollableGallery image={image} project={project} />
+            <ScrollableGallery
+              image={image}
+              project={project}
+              index={index.toString()}
+            />
           ) : (
-            <SimpleGallery image={image} projectPath={project.path} />
+            <SimpleGallery
+              image={image}
+              projectPath={project.path}
+              index={index.toString()}
+            />
           )}
         </div>
       ))
@@ -38,10 +59,11 @@ const { project } = Astro.props as { project: Project };
   </div>
   {
     project.galleryImages.length > 1 && (
-      <>
-        <button class="swiper-button-prev ml-2" id={`${project.path}-prev`} />
-        <button class="swiper-button-next mr-2" id={`${project.path}-next`} />
-      </>
+      <button
+        class="mr-2 w-5 h-5 swiper-button-next outline-offset-2"
+        id={`${project.path}-next`}
+        aria-label={translations.nextImage}
+      />
     )
   }
 </div>

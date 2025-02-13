@@ -1,5 +1,5 @@
 .square-button {
-  &:hover {
+  &:hover, &:focus-visible {
     .link-icon + .icon {
       @apply opacity-0;
     }
