@@ -19,7 +19,7 @@ import Skills from "../../sections/Skills.astro";
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,12 +49,14 @@ import Skills from "../../sections/Skills.astro";
       </main>
     </Layout>
   </body>
+  <style is:global>
+    @import url(../../styles/global.scss);
+  </style>
   <script>
     import {
       initializeLanguage,
       showContent,
     } from "../../scripts/initialization.scripts.ts";
-    import "../../styles/global.scss";
 
     showContent();
     initializeLanguage();

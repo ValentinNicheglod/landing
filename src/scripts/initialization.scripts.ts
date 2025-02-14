@@ -2,15 +2,15 @@ import { isProduction } from "../models/constants";
 
 /** If user navigator language is Spanish the page will be initialized in that language instead of English */
 export const initializeLanguage = () => {
-    const notLanguagePreferenceSaved = !sessionStorage.getItem("lang");
-    if (notLanguagePreferenceSaved) {
-      const navigatorLanguageIsSpanish = navigator.language.includes("es");
-      if (navigatorLanguageIsSpanish) {
-        location.pathname = "/es";
-        sessionStorage.setItem("lang", "es");
-      }
+  const notLanguagePreferenceSaved = !sessionStorage.getItem("lang");
+  if (notLanguagePreferenceSaved) {
+    const navigatorLanguageIsSpanish = navigator.language.includes("es");
+    if (navigatorLanguageIsSpanish) {
+      location.pathname = "/es";
+      sessionStorage.setItem("lang", "es");
     }
-}
+  }
+};
 
 /** Show page content when animation loading finished */
 export const showContent = () => {
@@ -22,9 +22,9 @@ export const showContent = () => {
 
   setTimeout(() => {
     content?.classList.remove("hidden");
-    document.body.removeChild(loader);
+    loader.remove();
   }, LOADER_DURATION);
-}
+};
 
 export const removeLoader = () => {
   const wrapper = document.querySelector(".wrapper");
@@ -37,7 +37,7 @@ export const removeLoader = () => {
       "animate-duration-[2000ms]",
       "animate-ease-out",
       "animate-delay-500",
-      "opacity-0"
+      "opacity-0",
     );
   }, 1000);
-}
+};

@@ -1,8 +1,15 @@
-import tippy from "tippy.js";
+// Tippy
+import tippy, { sticky } from "tippy.js";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
+
+// Types
 import type { Project } from "../models/types/project.type";
-import type { Placement } from "tippy.js";
+import type { Instance, Placement } from "tippy.js";
+
+// Translations
+import themeTranslations from "../locales/theme.locales.json";
+import heroTranslations from "../locales/hero.locales.json";
 
 const defaultConfig: {
   placement: Placement;
@@ -60,8 +67,13 @@ export const setLanguageTooltipData = () => {
   });
 };
 
-export const setThemeTooltipData = (theme: 'light' | 'dark') => {
-    const content = `
+export const setThemeTooltipData = (theme: "light" | "dark") => {
+  const selectedLanguage = document
+    .querySelector("html")
+    ?.getAttribute("lang") as "en" | "es";
+  const translations = themeTranslations[selectedLanguage];
+
+  const content = `
       <div class="px-2">
         <div class="flex items-center gap-3 mt-2">
           <div class="rounded-full p-1 bg-primary">
@@ -89,27 +101,27 @@ export const setThemeTooltipData = (theme: 'light' | 'dark') => {
               Tema actual
             </span>
             <div class="text-base text-white">
-              ${theme === "light" ? "Claro" : "Oscuro"}
+              ${theme === "light" ? translations.light : translations.dark}
             </div>
           </div>
         </div>
         <hr class="my-2 border-slate-500" />
         <div class="font-light text-slate-300 mb-2">
-          ${theme === "light" ? "Presiona para cambiar al modo oscuro" : "Presiona para cambiar al modo claro"}
+          ${theme === "light" ? translations.switchToDark : translations.switchToLight}
         </div>
       </div>
     `;
-  
-    tippy(`#theme-toggle`, {
-      content,
-      allowHTML: true,
-      placement: "bottom",
-      arrow: false,
-      animation: "scale",
-      offset: [0, 16],
-      duration: 250,
-    });
-  };
+
+  tippy(`#theme-toggle`, {
+    content,
+    allowHTML: true,
+    placement: "bottom",
+    arrow: false,
+    animation: "scale",
+    offset: [0, 16],
+    duration: 250,
+  });
+};
 
 export const setSocialLinksTooltips = () => {
   const buttons = ["Behance", "Dribbble", "GitHub", "LinkedIn"];
@@ -123,25 +135,25 @@ export const setSocialLinksTooltips = () => {
 
 let cmdTooltip: Instance;
 export const showCommandTooltip = (element: HTMLElement) => {
-    cmdTooltip = tippy(element, {
-      ...defaultConfig,
-      allowHTML: true,
-      trigger: 'manual',
-      sticky: 'reference',
-      plugins: [sticky],
-      content: `
+  cmdTooltip = tippy(element, {
+    ...defaultConfig,
+    allowHTML: true,
+    trigger: "manual",
+    sticky: "reference",
+    plugins: [sticky],
+    content: `
       <div class="flex items-center whitespace-nowrap">
         Presiona &nbsp; <code class="px-1 bg-slate-600 rounded-sm">Ctrl + M</code> &nbsp; para mostrar u ocultar el menú
       </div>`,
-    });
+  });
 
-    cmdTooltip.show();
-    setTimeout(() => hideCommandTooltip(), 5000);
-}
+  cmdTooltip.show();
+  setTimeout(() => hideCommandTooltip(), 5000);
+};
 
 export const hideCommandTooltip = () => {
   cmdTooltip.hide();
-}
+};
 
 export const setProjectTechnologiesTooltips = (data: Project[]) => {
   data.forEach((project) => {
@@ -157,5 +169,23 @@ export const setProjectTechnologiesTooltips = (data: Project[]) => {
         content: technology.getAttribute("data-tooltip") || "",
       });
     }
+  });
+};
+
+export const setGoUpButtonTooltipData = () => {
+  const goTopButton = document.getElementById("go-top-button");
+
+  const selectedLanguage = document
+    .querySelector("html")
+    ?.getAttribute("lang") as "en" | "es";
+  const translations = heroTranslations[selectedLanguage];
+
+  if (!goTopButton) return;
+
+  tippy(goTopButton, {
+    ...defaultConfig,
+    content: translations.goTop,
+    placement: "left",
+    offset: [0, 32],
   });
 };

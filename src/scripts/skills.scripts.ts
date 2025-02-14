@@ -1,13 +1,20 @@
+// Swiper
 import Swiper from "swiper";
 import { Autoplay } from "swiper/modules";
+
+// Data
 import { getSkillsData } from "../data/skills.data";
+
+// Types & Enums
+import type { SkillFilters } from "../models/enums/filters.enum";
+import type { SkillList } from "../models/types/skills.type";
+import type { SwiperSlide } from "swiper/element";
+
+// Scripts
 import {
   changeButtonState,
   translateIndicator,
 } from "../scripts/filters.scripts";
-import type { SkillFilters } from "../models/enums/filters.enum";
-import type { SwiperSlide } from "swiper/element";
-import type { SkillList } from "../models/types/skills.type";
 
 let skillsSwiper: Swiper | null = null;
 let selectedFilterIndex: SkillFilters = 0;

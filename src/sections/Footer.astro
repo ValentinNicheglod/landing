@@ -77,9 +77,12 @@ const currentYear = new Date().getFullYear();
   </div>
 </footer>
 <script>
+  import { setGoUpButtonTooltipData } from "../scripts/tooltips.scripts";
+
   const goTopButton = document.getElementById("go-top-button");
   goTopButton?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    (document.querySelector('#hero') as HTMLElement)?.focus();
+    (document.querySelector("#hero") as HTMLElement)?.focus();
   });
+  setGoUpButtonTooltipData();
 </script>

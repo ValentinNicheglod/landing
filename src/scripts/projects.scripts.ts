@@ -1,13 +1,22 @@
+// Swiper
 import Swiper from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
+
+// Data
 import { projectsData } from "../data/projects.data";
-import type { Project, ProjectNames } from "../models/types/project.type";
+
+// Types & Enums
 import { ProjectFilters } from "../models/enums/filters.enum";
-import { changeButtonState, translateIndicator } from "./filters.scripts";
-import type { SwiperSlide } from "swiper/element";
-import projectsTranslations from "../locales/projects.locales.json";
-import { setProjectTechnologiesTooltips } from "./tooltips.scripts";
 import type { SwiperOptions } from "swiper/types";
+import type { SwiperSlide } from "swiper/element";
+import type { Project, ProjectNames } from "../models/types/project.type";
+
+// Scripts
+import { changeButtonState, translateIndicator } from "./filters.scripts";
+import { setProjectTechnologiesTooltips } from "./tooltips.scripts";
+
+// Translations
+import projectsTranslations from "../locales/projects.locales.json";
 
 const getProjectsGallerySwiperConfig = (project: Project) => {
   const options: SwiperOptions = {
@@ -146,6 +155,8 @@ const addFiltersListeners = () => {
     for (const filter of filters.children) {
       filter.addEventListener("click", () => handleFilter(filter));
     }
+
+    handleFilter(filters.children[0]);
   }
 };
 
@@ -220,38 +231,42 @@ const setProjectSlides = () => {
 let isSmallCardLastResult = false;
 let translations: (typeof projectsTranslations)["en"];
 
+let timeout: NodeJS.Timeout;
 const setCardStyles = () => {
-  const projectCard = document.querySelector(".project-card") as HTMLElement;
-  const isSmallCard = projectCard.clientWidth < 400;
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    const projectCard = document.querySelector(".project-card") as HTMLElement;
+    const isSmallCard = projectCard.clientWidth < 400;
 
-  if (isSmallCard === isSmallCardLastResult) return;
+    if (isSmallCard === isSmallCardLastResult) return;
 
-  isSmallCardLastResult = isSmallCard;
+    isSmallCardLastResult = isSmallCard;
 
-  const buttonLabels = document.getElementsByClassName("button-label");
-  for (const labelRef of buttonLabels) {
-    labelRef.classList.toggle("text-sm");
-  }
-
-  const viewMoreButtons = document.getElementsByClassName("view-more");
-  for (const buttonRef of viewMoreButtons) {
-    buttonRef.classList.toggle("hidden");
-  }
-
-  projectsData.forEach((project) => {
-    const id = project.path;
-
-    const descriptionRef = document.getElementById(`description-${id}`);
-    if (!descriptionRef) return;
-
-    if (isSmallCard) {
-      const shortDescription = translations[id].description.split(".")[0];
-      descriptionRef.innerHTML = `${shortDescription}.`;
-    } else {
-      const fullDescription = translations[id].description;
-      descriptionRef.innerHTML = fullDescription;
+    const buttonLabels = document.getElementsByClassName("button-label");
+    for (const labelRef of buttonLabels) {
+      labelRef.classList.toggle("text-sm");
     }
-  });
+
+    const viewMoreButtons = document.getElementsByClassName("view-more");
+    for (const buttonRef of viewMoreButtons) {
+      buttonRef.classList.toggle("hidden");
+    }
+
+    projectsData.forEach((project) => {
+      const id = project.path;
+
+      const descriptionRef = document.getElementById(`description-${id}`);
+      if (!descriptionRef) return;
+
+      if (isSmallCard) {
+        const shortDescription = translations[id].description.split(".")[0];
+        descriptionRef.innerHTML = `${shortDescription}.`;
+      } else {
+        const fullDescription = translations[id].description;
+        descriptionRef.innerHTML = fullDescription;
+      }
+    });
+  }, 3000);
 };
 
 const showFullDescription = {

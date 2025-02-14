@@ -28,9 +28,9 @@ const reflectThemePreference = () => {
 };
 
 const theme: {
-  value: 'light' | 'dark'
+  value: "light" | "dark";
 } = {
-  value: getColorPreference() as 'light' | 'dark',
+  value: getColorPreference() as "light" | "dark",
 };
 
 reflectThemePreference();
