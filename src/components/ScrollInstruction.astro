@@ -1,13 +1,8 @@
 ---
+// Components
 import { Icon } from "astro-icon/components";
-import heroTranslations from "../locales/hero.locales.json";
 
-interface Props {
-  lang: "es" | "en";
-}
-
-const { lang } = Astro.props as Props;
-const translations = heroTranslations[lang];
+const { lang } = Astro.props as { lang: "es" | "en" };
 ---
 
 <div
@@ -21,7 +16,11 @@ const translations = heroTranslations[lang];
       aria-hidden="true"
     />
     <span class="content text-black" aria-live="polite">
-      {translations.instruction}
+      {
+        lang === "en"
+          ? "Scroll down to see more content"
+          : "Desliza hacia abajo para ver más contenido"
+      }
     </span>
   </div>
 </div>

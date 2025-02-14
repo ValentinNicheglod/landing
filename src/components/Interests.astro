@@ -1,7 +1,9 @@
 ---
-import aboutTranslations from "../locales/about.locales.json";
+// Enums
 import { Emojis } from "../models/enums/emojis.enum";
 
+// Translations
+import aboutTranslations from "../locales/about.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
 

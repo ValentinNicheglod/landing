@@ -15,12 +15,12 @@ import projectsTranslations from "../locales/projects.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = projectsTranslations[lang];
 
-// Images
+// Assets
+import { Image } from "astro:assets";
 import gitHubImage from "../images/social/GitHub.png";
 import behanceImage from "../images/social/Behance.png";
 import openImage from "../images/Open.png";
 import galleryImage from "../images/Gallery.png";
-import { Image } from "astro:assets";
 
 const { project } = Astro.props as { project: Project };
 ---

@@ -7,10 +7,10 @@ export type Project = {
   name: string;
   url: string;
   type: ProjectFilters;
-  logo: ImageMetadata,
+  logo: ImageMetadata;
   galleryImages: ImageMetadata[];
   scrollablePrototype?: boolean;
-  mockup?: ImageMetadata,
-  background: ImageMetadata,
-  technologies: { name: string, image: ImageMetadata }[];
+  mockup?: ImageMetadata;
+  background: ImageMetadata;
+  technologies: { name: string; image: ImageMetadata }[];
 } & ({ github: string; behance?: never } | { behance: string; github?: never });

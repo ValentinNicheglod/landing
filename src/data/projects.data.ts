@@ -24,7 +24,7 @@ export const projectsData: Project[] = [
     ],
     type: ProjectFilters.DEV,
     logo: reconnectImages.logo,
-    background: reconnectImages.background
+    background: reconnectImages.background,
   },
   {
     path: "lift",
@@ -42,7 +42,7 @@ export const projectsData: Project[] = [
     type: ProjectFilters.DEV,
     logo: liftImages.logo,
     mockup: liftImages.mockup,
-    background: liftImages.background
+    background: liftImages.background,
   },
   {
     path: "radley",
@@ -68,7 +68,7 @@ export const projectsData: Project[] = [
     ],
     scrollablePrototype: true,
     mockup: radleyImages.mockup,
-    background: radleyImages.background
+    background: radleyImages.background,
   },
   {
     path: "meteor",
@@ -92,6 +92,6 @@ export const projectsData: Project[] = [
       meteorImages.cart,
       meteorImages.checkout,
     ],
-    background: meteorImages.background
+    background: meteorImages.background,
   },
 ];

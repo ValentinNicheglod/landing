@@ -1,10 +1,12 @@
 ---
+// Assets
 import { Image } from "astro:assets";
-
 import behanceLogo from "../images/social/Behance.png";
 import dribbbleLogo from "../images/social/Dribbble.png";
 import githubLogo from "../images/social/GitHub.png";
 import linkedinLogo from "../images/social/LinkedIn.png";
+
+const { size } = Astro.props;
 
 const contactLinks = [
   {
@@ -28,8 +30,6 @@ const contactLinks = [
     href: "https://www.linkedin.com/in/valentin-nicheglod/",
   },
 ];
-
-const { size } = Astro.props;
 ---
 
 <ul class="flex gap-4" class:list={{ "justify-between": size === "large" }}>

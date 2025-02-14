@@ -1,13 +1,16 @@
 ---
-import { Image } from "astro:assets";
+// Components
 import LanguageToggle from "../components/LanguageToggle.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 
+// Assets
+import { Image } from "astro:assets";
+import logo from "../icons/logo.svg";
+
+// Translations
 import heroTranslations from "../locales/hero.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = heroTranslations[lang];
-
-import logo from "../icons/logo.svg";
 ---
 
 <>

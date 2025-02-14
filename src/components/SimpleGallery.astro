@@ -1,9 +1,12 @@
 ---
+// Assets
 import { Image } from "astro:assets";
+
+// Types
+import type { ProjectNames } from "../models/types/project.type";
 
 // Translations
 import _projectsTranslations from "../locales/projects.locales.json";
-import type { ProjectNames } from "../models/types/project.type";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const projectsTranslations = _projectsTranslations[lang];
 

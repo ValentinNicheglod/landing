@@ -127,7 +127,8 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Expo",
           image: skillsIcons.expo,
-          customClass: "dark:invert dark:brightness-90 transition-all duration-500",
+          customClass:
+            "dark:invert dark:brightness-90 transition-all duration-500",
         },
         {
           name: "Redux",
@@ -165,7 +166,8 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "Express",
           image: skillsIcons.express,
-          customClass: "dark:invert dark:brightness-90 transition-all duration-500",
+          customClass:
+            "dark:invert dark:brightness-90 transition-all duration-500",
         },
         {
           name: "NPM",
@@ -207,7 +209,8 @@ export const getSkillsData = (lang: "es" | "en") => {
         {
           name: "GitHub",
           image: skillsIcons.github,
-          customClass: "dark:invert dark:brightness-90 transition-all duration-500",
+          customClass:
+            "dark:invert dark:brightness-90 transition-all duration-500",
         },
       ],
     },
@@ -216,7 +219,7 @@ export const getSkillsData = (lang: "es" | "en") => {
 
 export const getAllSkills = (lang: "es" | "en") => {
   const skillsData = getSkillsData(lang);
-  console.log(skillsData);
+
   return skillsData
     .map((skillCategory) => {
       return skillCategory.skills.map((skill) => {

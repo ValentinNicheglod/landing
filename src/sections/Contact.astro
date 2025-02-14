@@ -5,6 +5,9 @@ import GradientBackground from "../components/ui/GradientBackground.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import SquareButton from "../components/SquareButton.astro";
 
+// Assets
+import mailImage from "../images/Mail.png";
+
 // Styles
 import "../styles/buttons.scss";
 
@@ -15,9 +18,6 @@ import { Emojis } from "../models/enums/emojis.enum";
 import contactTranslations from "../locales/contact.locales.json";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = contactTranslations[lang];
-
-// Images
-import mailImage from "../images/Mail.png";
 ---
 
 <section id="contact" class="relative bg-white overflow-hidden">

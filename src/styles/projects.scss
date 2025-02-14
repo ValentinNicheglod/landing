@@ -47,7 +47,8 @@
   }
 
   .project-card {
-    &:hover, &:focus-within {
+    &:hover,
+    &:focus-within {
       .content {
         background: #00000090;
       }

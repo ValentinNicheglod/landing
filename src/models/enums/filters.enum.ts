@@ -1,11 +1,11 @@
 export enum SkillFilters {
-    PERSONAL = 0,
-    DESIGN = 1,
-    DEV = 2,
+  PERSONAL = 0,
+  DESIGN = 1,
+  DEV = 2,
 }
 
 export enum ProjectFilters {
-    ALL = 0,
-    DESIGN = 1,
-    DEV = 2,
+  ALL = 0,
+  DESIGN = 1,
+  DEV = 2,
 }
