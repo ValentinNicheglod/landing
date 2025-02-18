@@ -1,0 +1,33 @@
+---
+// Enums
+import { ProjectFilters } from "../models/enums/filters.enum";
+import { Emojis } from "../models/enums/emojis.enum";
+
+const { projectType } = Astro.props as { projectType: ProjectFilters };
+---
+<div
+  class:list={{
+    "dev-indicator": projectType === ProjectFilters.DEV,
+    "design-indicator": projectType === ProjectFilters.DESIGN,
+  }}
+  class="absolute right-4 top-4 z-20 cursor-default"
+>
+  <div
+    class="flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white"
+  >
+    <div
+      aria-hidden="true"
+      set:html={projectType === ProjectFilters.DEV
+        ? Emojis.Developer
+        : Emojis.Designer}
+      class="text-2xl"
+    />
+  </div>
+</div>
+<script>
+    import { setProjectTypeTooltips } from "../scripts/tooltips.scripts";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        setProjectTypeTooltips();
+    })
+</script>
