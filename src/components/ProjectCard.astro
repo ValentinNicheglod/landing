@@ -21,6 +21,7 @@ import gitHubImage from "../images/social/GitHub.png";
 import behanceImage from "../images/social/Behance.png";
 import openImage from "../images/Open.png";
 import galleryImage from "../images/Gallery.png";
+import ProjectType from "./ProjectType.astro";
 
 const { project } = Astro.props as { project: Project };
 ---
@@ -32,6 +33,8 @@ const { project } = Astro.props as { project: Project };
   role="group"
 >
   <Image class="absolute" src={project.background} alt="" width={1000} />
+  <ProjectType projectType={project.type} />
+  
   <div class="wrapper aspect-square">
     <div class="card-overlay"></div>
     <div class="content relative flex aspect-square flex-col gap-2 py-4">

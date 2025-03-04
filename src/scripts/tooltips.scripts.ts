@@ -10,6 +10,7 @@ import type { Instance, Placement } from "tippy.js";
 // Translations
 import themeTranslations from "../locales/theme.locales.json";
 import heroTranslations from "../locales/hero.locales.json";
+import projectsTranslations from "../locales/projects.locales.json";
 
 const defaultConfig: {
   placement: Placement;
@@ -98,7 +99,7 @@ export const setThemeTooltipData = (theme: "light" | "dark") => {
           </div>
           <div>
             <span class="text-xs font-extralight text-slate-300">
-              Tema actual
+              ${selectedLanguage === "en" ? "Current theme" : "Tema actual"}
             </span>
             <div class="text-base text-white">
               ${theme === "light" ? translations.light : translations.dark}
@@ -205,3 +206,27 @@ export const setGoUpButtonTooltipData = () => {
     offset: [0, 32],
   });
 };
+
+export const setProjectTypeTooltips = () => {
+  const selectedLanguage = document.querySelector("html")?.getAttribute("lang") as "en" | "es";
+  const translations = projectsTranslations[selectedLanguage];
+
+  const developmentProjects = document.getElementsByClassName('dev-indicator');
+  const designProjects = document.getElementsByClassName('design-indicator');
+
+  for (const indicator of developmentProjects) {
+    tippy(indicator, {
+      ...defaultConfig,
+      content: translations.dev,
+      placement: "left",
+    });
+  }
+
+  for (const indicator of designProjects) {
+    tippy(indicator, {
+      ...defaultConfig,
+      content: translations.design,
+      placement: "left",
+    });
+  }
+}
