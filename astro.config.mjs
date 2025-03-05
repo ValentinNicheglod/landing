@@ -7,6 +7,9 @@ import icon from 'astro-icon';
 export default defineConfig({
   site: 'https://valentinnicheglod.github.io',
   base: 'landing',
+  build: {
+    format: 'preserve',
+  },
   integrations: [icon()],
   i18n: {
     defaultLocale: "en",
