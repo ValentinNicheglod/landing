@@ -164,6 +164,9 @@ export const showCommandTooltip = (element: HTMLElement) => {
       </div>`,
   });
 
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) return;
+
   cmdTooltip.show();
   setTimeout(() => hideCommandTooltip(), 5000);
 };

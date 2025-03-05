@@ -72,6 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("scroll", observe);
 
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      header.addEventListener(
+        "click",
+        () => {
+          const isExpanded = header?.getAttribute("aria-expanded") === "true";
+          isExpanded ? hideOptions() : showOptions();
+        },
+      );
+    }
+
     header.addEventListener(
       "mouseenter",
       () => intersectingHeroSection === false && showOptions(),
