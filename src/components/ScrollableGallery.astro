@@ -32,6 +32,7 @@ if (!project.mockup) return;
   <div class="inset-0 mx-auto mt-8 w-fit">
     <div
       class="flex items-center gap-2 bg-white shadow-md px-2 py-1 rounded-full animate-bounce animate-infinite"
+      class:list={{ hidden: !image.src.includes("scroll") }}
     >
       <Icon name="arrow-down" class="text-primary text-sm" />
       <span class="text-black text-sm">
@@ -52,7 +53,13 @@ if (!project.mockup) return;
       alt=""
       aria-hidden="true"
     />
-    <div class="z-50 absolute inset-0 m-auto overflow-y-auto prototype-content">
+    <div
+      class="z-50 absolute inset-0 m-auto prototype-content"
+      class:list={{
+        "overflow-y-auto": image.src.includes("scroll"),
+        "overflow-y-hidden": !image.src.includes("scroll"),
+      }}
+    >
       <Image src={image} alt={imagesAltText[index] || ""} />
     </div>
   </div>
