@@ -5,7 +5,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://valentinnicheglod.github.io',
+  site: 'https://valentin-nicheglod.is-a.dev',
   build: {
     format: 'preserve',
   },
