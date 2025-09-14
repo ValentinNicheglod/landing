@@ -1,8 +1,12 @@
 {
   "en": {
     "sectionTitle": "My projects",
+    "all": "All projects",
+    "allShort": "All",
     "design": "UX/UI Design",
+    "designShort": "Design",
     "dev": "Web Development",
+    "devShort": "Development",
     "images": "Image gallery",
     "open": "Open project",
     "more": "+ View more",
@@ -63,7 +67,11 @@
   "es": {
     "sectionTitle": "Mis proyectos",
     "design": "Diseño UX/UI",
+    "designShort": "Diseño",
     "dev": "Desarrollo Web",
+    "devShort": "Desarrollo",
+    "all": "Todos",
+    "allShort": "Todos",
     "images": "Imágenes",
     "open": "Ver proyecto",
     "more": "+ Ver mas",

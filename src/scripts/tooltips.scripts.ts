@@ -11,6 +11,7 @@ import type { Instance, Placement } from "tippy.js";
 import themeTranslations from "../locales/theme.locales.json";
 import heroTranslations from "../locales/hero.locales.json";
 import projectsTranslations from "../locales/projects.locales.json";
+import aboutTranslations from "../locales/about.locales.json";
 
 const defaultConfig: {
   placement: Placement;
@@ -152,6 +153,11 @@ export const setSocialLinksTooltips = () => {
 
 let cmdTooltip: Instance;
 export const showCommandTooltip = (element: HTMLElement) => {
+  const selectedLanguage = document
+    .querySelector("html")
+    ?.getAttribute("lang") as "en" | "es";
+  const translations = aboutTranslations[selectedLanguage];
+
   cmdTooltip = tippy(element, {
     ...defaultConfig,
     allowHTML: true,
@@ -160,7 +166,7 @@ export const showCommandTooltip = (element: HTMLElement) => {
     plugins: [sticky],
     content: `
       <div class="flex items-center whitespace-nowrap">
-        Presiona &nbsp; <code class="px-1 bg-slate-600 rounded-sm">Ctrl + M</code> &nbsp; para mostrar u ocultar el menú
+        ${translations.cmd}
       </div>`,
   });
 

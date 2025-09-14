@@ -1,7 +1,7 @@
 {
   "en": {
     "sectionTitle": "About me",
-    "content_1": "<b>Full Stack Developer</b> with 3 years of experience in developing web and mobile applications.<br> My focus is on creating solutions that integrate intuitive design with efficient functionalities to ensure that each project not only meets its technical objectives but also provides an exceptional user experience.",
+    "content_1": "<b>Full Stack Developer</b> with 4 years of experience in developing web and mobile applications.<br> My focus is on creating solutions that integrate intuitive design with efficient functionalities to ensure that each project not only meets its technical objectives but also provides an exceptional user experience.",
     "content_2": "I specialize in technologies such as <b>JavaScript</b>, <b>HTML</b>, and <b>CSS</b>, and I also have solid experience in well-known frameworks like <b>React</b>, <b>Angular</b>, <b>Ionic</b>, and <b>Astro</b>.",
     "content_3": "Additionally, I have acquired technical and practical training in <b>UX/UI Design</b>, which allows me to approach the creation of digital products from a more comprehensive and user centered perspective.",
     "interests": "My Interests",
@@ -12,7 +12,8 @@
     "technology": "Technology",
     "travel": "Travel",
     "profilePicAltText": "Valentín Nicheglod Photo",
-    "filterBy": "Filtrar por",
+    "filterBy": "Filter by ",
+    "cmd": "Press &nbsp; <code class='px-1 bg-slate-600 rounded-sm'>Ctrl + M</code> &nbsp; to show or hide the menu",
     "skills": {
       "sectionTitle": "My skills",
       "personal": "Personal skills",
@@ -29,7 +30,7 @@
   },
   "es": {
     "sectionTitle": "Sobre mí",
-    "content_1": "<b>Desarrollador Full Stack</b> con 3 años de experiencia en el desarrollo de aplicaciones web y móviles.<br> Mi enfoque está en crear soluciones que integren un diseño intuitivo con funcionalidades eficientes para garantizar que cada proyecto no solo cumpla con sus objetivos técnicos, sino que también ofrezca una experiencia de usuario excepcional.",
+    "content_1": "<b>Desarrollador Full Stack</b> con 4 años de experiencia en el desarrollo de aplicaciones web y móviles.<br> Mi enfoque está en crear soluciones que integren un diseño intuitivo con funcionalidades eficientes para garantizar que cada proyecto no solo cumpla con sus objetivos técnicos, sino que también ofrezca una experiencia de usuario excepcional.",
     "content_2": "Me especializo en tecnologías como <b>JavaScript</b>, <b>HTML</b> y <b>CSS</b>, y también cuento con una sólida experiencia en frameworks reconocidos como <b>React</b>, <b>Angular</b>, <b>Ionic</b> y <b>Astro</b>.",
     "content_3": "Además, he adquirido formación técnica y práctica en <b>Diseño UX/UI</b>, lo que me permite abordar la creación de productos digitales desde una perspectiva más completa y centrada en el usuario.",
     "interests": "Mis Intereses",
@@ -40,7 +41,8 @@
     "technology": "Tecnología",
     "travel": "Viajes",
     "profilePicAltText": "Foto de Valentín Nicheglod",
-    "filterBy": "Filter by",
+    "filterBy": "Filtrar por ",
+    "cmd": "Presiona &nbsp; <code class='px-1 bg-slate-600 rounded-sm'>Ctrl + M</code> &nbsp; para mostrar u ocultar el menú",
     "skills": {
       "sectionTitle": "Mis habilidades",
       "personal": "Habilidades personales",
