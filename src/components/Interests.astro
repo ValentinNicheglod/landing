@@ -46,9 +46,9 @@ const interests = [
       {
         interests.map((interest) => (
           <li class="flex flex-col gap-2 outline-offset-4">
-            <div class="p-4 rounded-md aspect-square inner-container">
+            <div class="flex p-4 rounded-md aspect-square inner-container">
               <div
-                class="dark:opacity-90 text-4xl md:text-5xl"
+                class="m-auto dark:opacity-90 text-4xl md:text-5xl"
                 set:html={interest.emojiCode}
               />
             </div>
