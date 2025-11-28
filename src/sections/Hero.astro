@@ -16,10 +16,6 @@ import background from "../images/HeroBackground.jpg";
 ---
 
 <section id="hero" class="relative flex flex-col h-dvh" role="banner">
-  <h1 class="relative -z-30 opacity-0 text-xs" aria-hidden="true">
-    Valentín Nicheglod
-  </h1>
-
   <ScrollInstruction lang={lang} />
   <Image
     src={background}
@@ -30,20 +26,21 @@ import background from "../images/HeroBackground.jpg";
 
   <div class="z-10 flex flex-1 items-center mx-auto p-8 container">
     <div class="flex flex-col gap-8 md:w-fit">
-      <article
-        class="bg-white rounded-xl sm:rounded-3xl inner-container"
-      >
+      <article class="bg-white rounded-xl sm:rounded-3xl inner-container">
         <div class="flex items-center gap-6 sm:gap-8 p-6 sm:p-8">
           <div class="text-6xl sm:text-7xl" set:html={Emojis.HandWave} />
           <div class="gap-3 grid">
             <span class="text-base text-gray sm:text-lg">
               {translations.presentation}
             </span>
-            <h2
+            <h1
               class="font-bold text-3xl text-primary md:text-4xl"
               translate="no"
             >
-              Valentín
+              Valentín Nicheglod
+            </h1>
+            <h2 class="sr-only">
+              {translations.developer} & {translations.designer}
             </h2>
           </div>
         </div>

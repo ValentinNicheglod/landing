@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valentin-nicheglod.is-a.dev/sitemap.xml

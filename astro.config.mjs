@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import icon from 'astro-icon';
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,7 +10,7 @@ export default defineConfig({
   build: {
     format: 'preserve',
   },
-  integrations: [icon()],
+  integrations: [icon(), sitemap()],
   i18n: {
     defaultLocale: "en",
     locales: ["es", "en"],
