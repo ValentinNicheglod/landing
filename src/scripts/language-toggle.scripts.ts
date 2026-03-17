@@ -16,7 +16,7 @@ const changeLanguage = () => {
 
   const ANIMATION_DURATION = 500;
   setTimeout(() => {
-    location.pathname = selectedLanguage === "en" ? "/es" : "/en";
+    location.pathname = selectedLanguage === "en" ? "/es" : "/";
   }, ANIMATION_DURATION);
 };
 
