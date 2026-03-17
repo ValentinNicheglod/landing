@@ -68,7 +68,7 @@ const currentYear = new Date().getFullYear();
         </div>
         <div class="flex justify-end" aria-disabled="true">
           <small class="opacity-50 text-xs" translate="no">
-            © {currentYear}
+            © <span id="footer-year">{currentYear}</span>
             &nbsp;&bull;&nbsp; Valentín Nicheglod | Portfolio
           </small>
         </div>
@@ -84,5 +84,10 @@ const currentYear = new Date().getFullYear();
     window.scrollTo({ top: 0, behavior: "smooth" });
     (document.querySelector("#hero") as HTMLElement)?.focus();
   });
+
+  const yearElement = document.getElementById("footer-year");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear().toString();
+  }
   setGoUpButtonTooltipData();
 </script>

@@ -55,7 +55,7 @@ const { project } = Astro.props as { project: Project };
       <div class="relative flex-1 px-4">
         <span
           id={`description-${project.path}`}
-          class="text-slate-100 font-light text-pretty description"
+          class="text-slate-100 font-light text-pretty description text-sm"
           set:html={translations[project.path].description}
         />
         &nbsp;
