@@ -1,4 +1,4 @@
-export const isProduction = false;
+export const isProduction = import.meta.env.PROD;
 export const technologiesWithOwnBG = new Set([
   "Angular",
   "Bootstrap",

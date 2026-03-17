@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       observer.observe(hero);
     };
 
-    document.addEventListener("scroll", observe);
+    observe();
 
     const isMobile = window.innerWidth < 768;
     if (isMobile) {
@@ -95,16 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("keydown", (event) => {
       if (event.ctrlKey && event.key.toLowerCase() === "m") {
+        event.preventDefault();
         const isExpanded = header?.getAttribute("aria-expanded") === "true";
 
         if (isExpanded) {
           hideOptions();
         } else {
           showOptions();
-          setTimeout(
-            () => document.getElementById("theme-toggle")?.focus(),
-            ANIMATION_DURATION,
-          );
+          setTimeout(() => header?.focus(), ANIMATION_DURATION);
         }
       }
     });
