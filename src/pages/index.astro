@@ -58,6 +58,7 @@ const websiteSchema = {
     url: canonicalUrl,
   },
 };
+const showLoader = !import.meta.env.PROD;
 ---
 
 <html lang="en" dir="ltr">
@@ -143,9 +144,13 @@ const websiteSchema = {
   </head>
   <body>
     <Layout>
-      <div id="loader" class="absolute w-dvw h-dvh overflow-hidden theme-bg">
-        <Loader />
-      </div>
+      {
+        showLoader && (
+          <div id="loader" class="absolute w-dvw h-dvh overflow-hidden theme-bg">
+            <Loader />
+          </div>
+        )
+      }
       <Hero />
       <main id="content">
         <About />
@@ -160,12 +165,8 @@ const websiteSchema = {
     @import url(../styles/global.scss);
   </style>
   <script>
-    import {
-      initializeLanguage,
-      showContent,
-    } from "../scripts/initialization.scripts.ts";
+    import { showContent } from "../scripts/initialization.scripts.ts";
 
     showContent();
-    initializeLanguage();
   </script>
 </html>

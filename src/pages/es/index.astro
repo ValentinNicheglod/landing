@@ -58,6 +58,7 @@ const websiteSchema = {
     url: canonicalUrl,
   },
 };
+const showLoader = !import.meta.env.PROD;
 ---
 
 <html lang="es" dir="ltr">
@@ -146,9 +147,13 @@ const websiteSchema = {
   </head>
   <body>
     <Layout>
-      <div id="loader" class="absolute w-dvw h-dvh overflow-hidden">
-        <Loader />
-      </div>
+      {
+        showLoader && (
+          <div id="loader" class="absolute w-dvw h-dvh overflow-hidden">
+            <Loader />
+          </div>
+        )
+      }
       <Hero />
       <main id="content">
         <About />
