@@ -3,6 +3,7 @@
 import GradientBackground from "../components/ui/GradientBackground.astro";
 import Skill from "../components/Skill.astro";
 import SkillsFilters from "../components/SkillsFilters.astro";
+import { Icon } from "astro-icon/components";
 
 // Styles
 import "swiper/css";
@@ -16,8 +17,10 @@ const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = aboutTranslations[lang];
 
 // Data
-import { getAllSkills } from "../data/skills.data";
+import { getAllSkills, getSkillsData } from "../data/skills.data";
 const allSkills = getAllSkills(lang);
+const skillsData = getSkillsData(lang);
+const initialSkill = skillsData[0];
 ---
 
 <section
@@ -38,22 +41,47 @@ const allSkills = getAllSkills(lang);
       class="flex flex-col md:flex-row justify-between md:items-center gap-6"
     >
       <div class="hidden md:flex items-center gap-6 max-w-96">
-        <div id="skills-icon" class="text-7xl lg:text-8xl dark:opacity-90">
-        </div>
+        <div
+          id="skills-icon"
+          class="text-7xl lg:text-8xl dark:opacity-90"
+          set:html={initialSkill.icon}
+        />
         <h2
           id="skills-title"
           class="text-3xl md:text-4xl font-bold text-white text-balance"
         >
+          {initialSkill.title}
         </h2>
       </div>
-      <div class="md:w-[max(550px,_50vw)] overflow-hidden">
-        <div id="skills-swiper" class="swiper p-1 pb-4">
-          <ul id="skills-list" class="swiper-wrapper">
-            {allSkills.map((_skill) => <Skill skill={_skill} />)}
-          </ul>
+      <div class="flex items-center gap-3 md:w-[max(550px,_50vw)]">
+        <div class="flex-1 overflow-hidden">
+          <div id="skills-swiper" class="swiper relative z-0 p-1 pb-4">
+            <ul id="skills-list" class="swiper-wrapper">
+              {allSkills.map((_skill) => <Skill skill={_skill} />)}
+            </ul>
+          </div>
         </div>
+        <button
+          id="skills-next"
+          type="button"
+          class="skills-nav-button shrink-0 rounded-full bg-white/90 p-1 shadow-md transition-opacity duration-300 hover:opacity-100 focus-visible:opacity-100 opacity-80 outline-offset-2"
+          aria-label={translations.skills.next}
+        >
+          <Icon name="chevron-right" size="28" class="text-primary" />
+        </button>
       </div>
     </div>
   </div>
 </section>
+<style>
+  #skills-next {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    #skills-next.is-visible {
+      display: inline-flex;
+    }
+  }
+</style>
 <script src="../scripts/skills.scripts.ts"></script>

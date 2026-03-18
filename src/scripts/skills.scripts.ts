@@ -20,16 +20,22 @@ let skillsSwiper: Swiper | null = null;
 let selectedFilterIndex: SkillFilters = 0;
 
 let skillsData: SkillList[] = [];
+let nextButton: HTMLElement | null = null;
 
 const initializeSkillsSwiper = () => {
   skillsSwiper?.destroy();
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   skillsSwiper = new Swiper("#skills-swiper", {
     slidesPerView: 3,
     spaceBetween: 12,
-    autoplay: {
-      pauseOnMouseEnter: true,
-    },
+    autoplay: prefersReducedMotion
+      ? false
+      : {
+          pauseOnMouseEnter: true,
+        },
     modules: [Autoplay],
     breakpoints: getSwiperBreakpoints(),
   });
@@ -94,9 +100,10 @@ const setSkillSlides = () => {
   });
 
   skillsSwiper?.slideTo(0, 0);
-  skillsSwiper?.autoplay?.start();
   skillsSwiper?.update();
+  updateNavButtonsVisibility();
 };
+
 
 const getSwiperBreakpoints = () => {
   return {
@@ -124,14 +131,35 @@ const getSwiperBreakpoints = () => {
   };
 };
 
-const disableAutoplayOnTab = () => {
-  document.addEventListener("keyup", (event) => {
-    if (event.key === "Tab") {
-      skillsSwiper?.autoplay.stop();
-      skillsSwiper?.slideTo(0);
-      document.removeEventListener("keyup", disableAutoplayOnTab);
+const getCurrentSlidesPerView = () => {
+  let slidesPerView = 3;
+  const breakpoints = getSwiperBreakpoints();
+  const width = window.innerWidth;
+  const sizes = Object.keys(breakpoints)
+    .map((size) => parseInt(size))
+    .sort((a, b) => a - b);
+
+  for (const size of sizes) {
+    if (width >= size) {
+      slidesPerView = breakpoints[size].slidesPerView;
     }
-  });
+  }
+
+  return slidesPerView;
+};
+
+const updateNavButtonsVisibility = () => {
+  if (!nextButton) return;
+
+  const currentSkillsCount =
+    skillsData[selectedFilterIndex]?.skills.length ?? 0;
+  const slidesPerView = getCurrentSlidesPerView();
+
+  if (currentSkillsCount > slidesPerView) {
+    nextButton.classList.add("is-visible");
+  } else {
+    nextButton.classList.remove("is-visible");
+  }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -139,5 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
   skillsData = getSkillsData(lang);
   initializeSkillsSwiper();
   addFiltersListeners();
-  disableAutoplayOnTab();
+
+  nextButton = document.getElementById("skills-next");
+  nextButton?.addEventListener("click", () => {
+    skillsSwiper?.slideNext();
+  });
+
+  updateNavButtonsVisibility();
+  window.addEventListener("resize", () => {
+    updateNavButtonsVisibility();
+  });
 });

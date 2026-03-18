@@ -7,8 +7,8 @@ export const changeButtonState = (id: string, parentId: string) => {
 
   const elementToSelect = document.getElementById(id);
   elementToSelect?.classList.add("selected");
-  elementToSelect?.blur();
   elementToSelect?.setAttribute("aria-selected", "true");
+  elementToSelect?.blur();
   elementToSelect?.setAttribute("tabindex", "-1");
 };
 
