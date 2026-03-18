@@ -1,6 +1,5 @@
 ---
 // Timezone Config
-import moment from "moment-timezone";
 import { getCountryForTimezone } from "countries-and-timezones";
 
 // Assets
@@ -12,7 +11,9 @@ import ESFlag from "../images/flags/ES.png";
 const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 
 const getUserCountry = () => {
-  return getCountryForTimezone(moment.tz.guess());
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if (!timezone) return undefined;
+  return getCountryForTimezone(timezone);
 };
 
 const englishFlag = getUserCountry()?.id === "US" ? USFlag : UKFlag;
