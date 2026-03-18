@@ -86,7 +86,7 @@ export const setLanguageTooltipData = async () => {
               </svg>
             </div>
             <div>
-              <span class="text-xs font-extralight text-slate-300">
+              <span class="text-xs font-light text-slate-300">
                 ${selectedLanguage === "en" ? "Current language" : "Idioma actual"}
               </span>
               <div class="text-base text-white">
@@ -140,7 +140,7 @@ export const setThemeTooltipData = async (theme: "light" | "dark") => {
             </svg>
           </div>
           <div>
-            <span class="text-xs font-extralight text-slate-300">
+            <span class="text-xs font-light text-slate-300">
               ${selectedLanguage === "en" ? "Current theme" : "Tema actual"}
             </span>
             <div class="text-base text-white">
