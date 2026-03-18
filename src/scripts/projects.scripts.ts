@@ -16,7 +16,10 @@ import {
   changeButtonState,
   translateIndicator,
 } from "./filters.scripts";
-import { setProjectTechnologiesTooltips } from "./tooltips.scripts";
+import {
+  setProjectTechnologiesTooltips,
+  setProjectTypeTooltips,
+} from "./tooltips.scripts";
 
 // Translations
 import projectsTranslations from "../locales/projects.locales.json";
@@ -139,24 +142,41 @@ const initializeProjectsSwiper = () => {
 };
 
 const addProjectCardButtonsListeners = () => {
-  projectsData.forEach((project) => {
-    const viewMoreButton = document.getElementById(`view-more-${project.path}`);
-    viewMoreButton?.addEventListener("click", () =>
-      handleViewMoreClick(project.path),
-    );
+  const viewMoreButtons = document.querySelectorAll<HTMLButtonElement>(
+    ".view-more",
+  );
+  viewMoreButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest<HTMLElement>(".project-card");
+      const projectId = card?.dataset.project as ProjectNames | undefined;
+      if (!projectId) return;
+      handleViewMoreClick(projectId);
+    });
+  });
 
-    const openGalleryButton = document.getElementById(
-      `${project.path}-gallery-button`,
-    );
-    const closeGalleryButton = document.getElementById(
-      `${project.path}-gallery-close-button`,
-    );
-    openGalleryButton?.addEventListener("click", () =>
-      openGalleryModal(project.path, openGalleryButton as HTMLElement),
-    );
-    closeGalleryButton?.addEventListener("click", () =>
-      closeGalleryModal(project.path),
-    );
+  const openGalleryButtons = document.querySelectorAll<HTMLElement>(
+    '[id$="-gallery-button"]',
+  );
+  openGalleryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest<HTMLElement>(".project-card");
+      const projectId = card?.dataset.project as ProjectNames | undefined;
+      if (!projectId) return;
+      openGalleryModal(projectId, button);
+    });
+  });
+
+  const closeGalleryButtons = document.querySelectorAll<HTMLElement>(
+    '[id$="-gallery-close-button"]',
+  );
+  closeGalleryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const projectId = button.id.replace(
+        /-gallery-close-button$/,
+        "",
+      ) as ProjectNames;
+      closeGalleryModal(projectId);
+    });
   });
 };
 
@@ -459,17 +479,40 @@ const setCardStyles = () => {
 
   projectsData.forEach((project) => {
     const id = project.path;
+    const cards = document.querySelectorAll<HTMLElement>(
+      `.project-card[data-project="${id}"]`,
+    );
+    if (!cards.length) return;
 
-    const descriptionRef = document.getElementById(`description-${id}`);
-    if (!descriptionRef) return;
+    const fullDescription = translations[id].description;
+    const shortDescriptionBase = fullDescription.split(".")[0];
+    const shortDescription = shortDescriptionBase
+      ? `${shortDescriptionBase}.`
+      : fullDescription;
+    const showFull = isSmallCard ? showFullDescription[id] : true;
+    const descriptionText = showFull ? fullDescription : shortDescription;
+    const viewMoreText = showFullDescription[id]
+      ? translations.less
+      : translations.more;
+    const hideTechnologies = isSmallCard ? showFullDescription[id] : false;
 
-    if (isSmallCard) {
-      const shortDescription = translations[id].description.split(".")[0];
-      descriptionRef.innerHTML = `${shortDescription}.`;
-    } else {
-      const fullDescription = translations[id].description;
-      descriptionRef.innerHTML = fullDescription;
-    }
+    cards.forEach((card) => {
+      const descriptionRef = card.querySelector<HTMLElement>(".description");
+      const viewMoreButton = card.querySelector<HTMLButtonElement>(".view-more");
+      const technologies = card.querySelector<HTMLElement>(
+        ".project-technologies",
+      );
+
+      if (descriptionRef) {
+        descriptionRef.innerHTML = descriptionText;
+      }
+      if (viewMoreButton) {
+        viewMoreButton.innerText = viewMoreText;
+      }
+      if (technologies) {
+        technologies.classList.toggle("hidden", hideTechnologies);
+      }
+    });
   });
 };
 
@@ -487,22 +530,34 @@ const showFullDescription = {
 
 const handleViewMoreClick = (id: ProjectNames) => {
   showFullDescription[id] = !showFullDescription[id];
-  const description = document.getElementById(`description-${id}`);
-  const viewMoreButton = document.getElementById(`view-more-${id}`);
-  const technologies = document.getElementById(`technologies-${id}`);
   const fullDescription = translations[id].description;
-  const shortDescription = fullDescription.split(".")[0] + ".";
+  const shortDescriptionBase = fullDescription.split(".")[0];
+  const shortDescription = shortDescriptionBase
+    ? `${shortDescriptionBase}.`
+    : fullDescription;
+  const cards = document.querySelectorAll<HTMLElement>(
+    `.project-card[data-project="${id}"]`,
+  );
 
-  if (!viewMoreButton || !description || !technologies) return;
+  cards.forEach((card) => {
+    const description = card.querySelector<HTMLElement>(".description");
+    const viewMoreButton = card.querySelector<HTMLButtonElement>(".view-more");
+    const technologies = card.querySelector<HTMLElement>(
+      ".project-technologies",
+    );
 
-  if (showFullDescription[id]) {
-    viewMoreButton.innerText = translations.less;
-    description.innerHTML = fullDescription;
-  } else {
-    viewMoreButton.innerText = translations.more;
-    description.innerHTML = shortDescription;
-  }
-  technologies.classList.toggle("hidden");
+    if (!viewMoreButton || !description || !technologies) return;
+
+    if (showFullDescription[id]) {
+      viewMoreButton.innerText = translations.less;
+      description.innerHTML = fullDescription;
+      technologies.classList.add("hidden");
+    } else {
+      viewMoreButton.innerText = translations.more;
+      description.innerHTML = shortDescription;
+      technologies.classList.remove("hidden");
+    }
+  });
 };
 
 const onReady = () => {
@@ -524,6 +579,7 @@ const onReady = () => {
   window.addEventListener("resize", scheduleCardStyles);
 
   setProjectTechnologiesTooltips(projectsData);
+  setProjectTypeTooltips();
   addFiltersListeners();
   addProjectCardButtonsListeners();
 

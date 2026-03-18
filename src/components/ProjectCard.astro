@@ -31,6 +31,7 @@ const { project } = Astro.props as { project: Project };
   aria-labelledby={`title-${project.path}`}
   tabindex="0"
   role="group"
+  data-project={project.path}
 >
   <Image class="absolute" src={project.background} alt="" width={1000} />
   <ProjectType projectType={project.type} />
@@ -66,7 +67,10 @@ const { project } = Astro.props as { project: Project };
           {translations.more}
         </button>
       </div>
-      <div id={`technologies-${project.path}`} class="px-4">
+      <div
+        id={`technologies-${project.path}`}
+        class="px-4 project-technologies"
+      >
         <Technologies
           technologies={project.technologies}
           titleId={`technologies-title-${project.path}`}
