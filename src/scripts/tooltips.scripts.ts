@@ -21,8 +21,40 @@ const defaultConfig: {
 };
 
 let tippyLoader: Promise<typeof import("tippy.js")> | null = null;
+let interactionPromise: Promise<void> | null = null;
+
+const waitForFirstInteraction = () => {
+  if (interactionPromise) return interactionPromise;
+
+  interactionPromise = new Promise((resolve) => {
+    const events: Array<keyof WindowEventMap> = [
+      "pointerdown",
+      "pointermove",
+      "keydown",
+      "wheel",
+      "touchstart",
+    ];
+
+    const onFirstInteraction = () => {
+      events.forEach((event) =>
+        window.removeEventListener(event, onFirstInteraction),
+      );
+      resolve();
+    };
+
+    events.forEach((event) =>
+      window.addEventListener(event, onFirstInteraction, {
+        passive: true,
+        once: true,
+      }),
+    );
+  });
+
+  return interactionPromise;
+};
 
 const loadTippy = async () => {
+  await waitForFirstInteraction();
   if (!tippyLoader) {
     tippyLoader = (async () => {
       return import("tippy.js");
