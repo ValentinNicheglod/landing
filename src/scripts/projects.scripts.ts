@@ -112,8 +112,6 @@ const initializeProjectsGallerySwiper = () => {
 };
 
 let projectSwiper: Swiper | null = null;
-let nextButton: HTMLElement | null = null;
-let prevButton: HTMLElement | null = null;
 let mobilePrevButton: HTMLElement | null = null;
 let mobileNextButton: HTMLElement | null = null;
 let projectsIndicator: HTMLElement | null = null;
@@ -121,6 +119,7 @@ let allowAutoplay = false;
 let isGalleryOpen = false;
 let lastInputWasKeyboard = false;
 let lastGalleryCard: HTMLElement | null = null;
+let galleryOpenedWithKeyboard = false;
 
 const suppressProjectHover = () => {
   document.body.classList.add("suppress-project-hover");
@@ -183,11 +182,12 @@ const openGalleryModal = (projectPath: string, trigger?: HTMLElement) => {
 
   lastGalleryTrigger = trigger ?? null;
   lastGalleryCard = trigger?.closest(".project-card") as HTMLElement | null;
+  galleryOpenedWithKeyboard = lastInputWasKeyboard;
 
   projectSwiper?.disable();
   isGalleryOpen = true;
   setProjectsAutoplay(false);
-  if (lastInputWasKeyboard) {
+  if (galleryOpenedWithKeyboard) {
     lastGalleryCard?.classList.add("is-expanded");
   }
 
@@ -199,12 +199,13 @@ const openGalleryModal = (projectPath: string, trigger?: HTMLElement) => {
       isGalleryOpen = false;
       lastGalleryCard?.classList.remove("is-expanded");
       lastGalleryCard = null;
-      if (lastInputWasKeyboard) {
+      if (galleryOpenedWithKeyboard) {
         lastGalleryTrigger?.focus();
       } else {
         lastGalleryTrigger?.blur();
         suppressProjectHover();
       }
+      galleryOpenedWithKeyboard = false;
     },
     { once: true },
   );
@@ -262,7 +263,6 @@ const setProjectSlides = () => {
 
   projectSwiper?.slideTo(0, 0);
   projectSwiper?.update();
-  updateProjectsNavButtonsVisibility();
   updateMobileNavVisibility();
   updateProjectSlidesFocusability();
 };
@@ -292,21 +292,6 @@ const getVisibleProjectsCount = () => {
 
   return projectsData.filter((project) => project.type === selectedFilterIndex)
     .length;
-};
-
-const updateProjectsNavButtonsVisibility = () => {
-  if (!nextButton || !prevButton) return;
-
-  const visibleProjects = getVisibleProjectsCount();
-  const slidesPerView = getCurrentSlidesPerView();
-
-  if (visibleProjects > slidesPerView) {
-    nextButton.classList.add("is-visible");
-    prevButton.classList.add("is-visible");
-  } else {
-    nextButton.classList.remove("is-visible");
-    prevButton.classList.remove("is-visible");
-  }
 };
 
 const getVisibleSlideIndices = () => {
@@ -439,10 +424,11 @@ const updateMobileNavVisibility = () => {
   if (!mobileNav || !projectsIndicator) return;
 
   const visibleProjects = getVisibleProjectsCount();
-  if (visibleProjects > 1) {
-    mobileNav.classList.remove("invisible");
+  const slidesPerView = getCurrentSlidesPerView();
+  if (visibleProjects > slidesPerView) {
+    mobileNav.classList.remove("hidden");
   } else {
-    mobileNav.classList.add("invisible");
+    mobileNav.classList.add("hidden");
   }
 
   updateProjectsIndicator();
@@ -539,17 +525,9 @@ document.addEventListener("DOMContentLoaded", () => {
   addFiltersListeners();
   addProjectCardButtonsListeners();
 
-  nextButton = document.getElementById("projects-next");
-  prevButton = document.getElementById("projects-prev");
   mobilePrevButton = document.getElementById("projects-prev-mobile");
   mobileNextButton = document.getElementById("projects-next-mobile");
   projectsIndicator = document.getElementById("projects-indicator");
-  nextButton?.addEventListener("click", () => {
-    projectSwiper?.slideNext();
-  });
-  prevButton?.addEventListener("click", () => {
-    projectSwiper?.slidePrev();
-  });
   mobileNextButton?.addEventListener("click", () => {
     projectSwiper?.slideNext();
   });
@@ -557,7 +535,6 @@ document.addEventListener("DOMContentLoaded", () => {
     projectSwiper?.slidePrev();
   });
 
-  updateProjectsNavButtonsVisibility();
   updateMobileNavVisibility();
   updateProjectSlidesFocusability();
   addProjectsAutoplayGuards();
@@ -572,7 +549,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ).matches
       ? false
       : window.innerWidth >= 768;
-    updateProjectsNavButtonsVisibility();
     updateMobileNavVisibility();
     updateProjectSlidesFocusability();
     setProjectsAutoplay(allowAutoplay);

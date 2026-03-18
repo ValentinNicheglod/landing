@@ -11,7 +11,7 @@ const { project } = Astro.props as { project: Project };
 <div
   class="bg-white shadow-sm p-2 thin-border w-14 sm:w-18 h-14 sm:h-18 project-logo"
 >
-  <Image src={project.logo} alt="" />
+  <Image src={project.logo} alt={`${project.name} logo`} />
 </div>
 <style>
   @import url("../styles/minified/project-logo.min.scss");

@@ -8,6 +8,56 @@ import Hero from "../../sections/Hero.astro";
 import Projects from "../../sections/Projects.astro";
 import Skills from "../../sections/Skills.astro";
 import Contact from "../../sections/Contact.astro";
+
+const lang = (Astro.currentLocale ?? "en") as "en" | "es";
+const siteUrl =
+  Astro.site ?? new URL("https://valentin-nicheglod.is-a.dev");
+const localePath = lang === "en" ? "/en" : "/es";
+const canonicalUrl = new URL(localePath, siteUrl).toString();
+const alternateEn = new URL("/en", siteUrl).toString();
+const alternateEs = new URL("/es", siteUrl).toString();
+const ogImageUrl = new URL("/og-image.jpg", siteUrl).toString();
+const profileImageUrl = new URL("/profile-pic.png", siteUrl).toString();
+const siteUrlString = siteUrl.toString();
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Valentín Nicheglod",
+  alternateName: "Valentin Nicheglod",
+  jobTitle: "Desarrollador Full Stack & Diseñador UI/UX",
+  url: canonicalUrl,
+  image: profileImageUrl,
+  description:
+    "Desarrollador Full Stack y diseñador UI/UX de Uruguay. Creo productos digitales modernos, rápidos y accesibles utilizando Angular, React, Next.js, Astro y Firebase.",
+  nationality: "Uruguayo",
+  knowsLanguage: ["Español", "Inglés"],
+  sameAs: [
+    "https://www.linkedin.com/in/valentin-nicheglod/",
+    "https://github.com/ValentinNicheglod",
+    "https://www.behance.net/valentin_nicheglod",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Freelance / Vorello Agency",
+  },
+};
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Portafolio de Valentín Nicheglod",
+  url: siteUrlString,
+  inLanguage: "es",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://www.google.com/search?q=Valentín+Nicheglod+{search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Valentín Nicheglod",
+    url: canonicalUrl,
+  },
+};
 ---
 
 <html lang="es" dir="ltr">
@@ -28,7 +78,10 @@ import Contact from "../../sections/Contact.astro";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="canonical" href="https://valentin-nicheglod.is-a.dev/es" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={alternateEn} />
+    <link rel="alternate" hreflang="es" href={alternateEs} />
+    <link rel="alternate" hreflang="x-default" href={alternateEn} />
     <meta
       name="google-site-verification"
       content="uxdgTOSDIn_Rz8nYNcT7cyEe0I_jeQOpw5rsM9OtFFk"
@@ -52,10 +105,14 @@ import Contact from "../../sections/Contact.astro";
       property="og:description"
       content="Portafolio de Valentín Nicheglod, desarrollador full stack y diseñador UI/UX en Uruguay. Proyectos, habilidades y contacto."
     />
-    <meta property="og:url" content="https://valentin-nicheglod.is-a.dev/es" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta
       property="og:image"
-      content="https://valentin-nicheglod.is-a.dev/apple-touch-icon.png"
+      content={ogImageUrl}
+    />
+    <meta
+      property="og:image:alt"
+      content="Fondo abstracto con lineas geometricas y detalles azules."
     />
 
     <!-- Twitter Cards -->
@@ -70,49 +127,17 @@ import Contact from "../../sections/Contact.astro";
     />
     <meta
       name="twitter:image"
-      content="https://valentin-nicheglod.is-a.dev/apple-touch-icon.png"
+      content={ogImageUrl}
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Fondo abstracto con lineas geometricas y detalles azules."
     />
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Valentín Nicheglod",
-        "alternateName": "Valentin Nicheglod",
-        "jobTitle": "Desarrollador Full Stack & Diseñador UI/UX",
-        "url": "https://valentin-nicheglod.is-a.dev/es",
-        "image": "https://media.licdn.com/dms/image/v2/C4D03AQEbe-Jd__LqIw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1649257735848?e=1766016000&v=beta&t=YPu9BDPh1W-SzhoSdsnjNPWBsdosbvEj7b53RV_Oc0g",
-        "description": "Desarrollador Full Stack y diseñador UI/UX de Uruguay. Creo productos digitales modernos, rápidos y accesibles utilizando Angular, React, Next.js, Astro y Firebase.",
-        "nationality": "Uruguayo",
-        "knowsLanguage": ["Español", "Inglés"],
-        "sameAs": [
-          "https://www.linkedin.com/in/valentin-nicheglod/",
-          "https://github.com/ValentinNicheglod",
-          "https://www.behance.net/valentin_nicheglod"
-        ],
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Freelance / Vorello Agency"
-        }
-      }
+      {JSON.stringify(personSchema)}
     </script>
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Portafolio de Valentín Nicheglod",
-        "url": "https://valentin-nicheglod.is-a.dev",
-        "inLanguage": "es",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.google.com/search?q=Valentín+Nicheglod+{search_term_string}",
-          "query-input": "required name=search_term_string"
-        },
-        "publisher": {
-          "@type": "Person",
-          "name": "Valentín Nicheglod",
-          "url": "https://valentin-nicheglod.is-a.dev/es"
-        }
-      }
+      {JSON.stringify(websiteSchema)}
     </script>
   </head>
   <body>
@@ -121,7 +146,7 @@ import Contact from "../../sections/Contact.astro";
         <Loader />
       </div>
       <Hero />
-      <main id="content" class="hidden">
+      <main id="content">
         <About />
         <Skills />
         <Projects />

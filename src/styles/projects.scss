@@ -49,14 +49,6 @@
   --swiper-navigation-size: 32px;
 }
 
-.projects-nav-button {
-  display: none;
-}
-
-.projects-nav-button.is-visible {
-  display: none;
-}
-
 .projects-nav {
   @apply mt-3 flex items-center justify-center gap-4;
 }

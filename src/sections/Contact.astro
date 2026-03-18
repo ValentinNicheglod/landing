@@ -25,18 +25,12 @@ const translations = contactTranslations[lang];
     <GradientBackground sectionId="contact" />
     <div class="relative xl:container xl:mx-auto">
       <div class="sm:justify-items-center gap-12 lg:gap-24 grid">
-        <header>
-          <div class="sm:block hidden">
-            <h2 class="font-bold text-3xl text-white md:text-4xl">
-              {translations.sectionTitle}
-            </h2>
-          </div>
-          <div class="flex items-center gap-4 sm:hidden">
-            <div class="dark:opacity-90 text-5xl" set:html={Emojis.Mail} />
-            <h2 class="font-bold text-3xl text-white md:text-4xl">
-              {translations.shortSectionTitle}
-            </h2>
-          </div>
+        <header class="flex items-center gap-4">
+          <div class="dark:opacity-90 text-5xl sm:hidden" set:html={Emojis.Mail} />
+          <h2 class="font-bold text-3xl md:text-4xl">
+            <span class="sm:hidden text-white">{translations.shortSectionTitle}</span>
+            <span class="hidden sm:inline text-white">{translations.sectionTitle}</span>
+          </h2>
         </header>
 
         <div class="flex justify-center md:hidden">
