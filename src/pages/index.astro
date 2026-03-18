@@ -130,12 +130,16 @@ const websiteSchema = {
       name="twitter:image:alt"
       content="Hero background with geometric lines and blue highlights."
     />
-    <script type="application/ld+json">
-      {JSON.stringify(personSchema)}
-    </script>
-    <script type="application/ld+json">
-      {JSON.stringify(websiteSchema)}
-    </script>
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(personSchema)}
+    ></script>
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(websiteSchema)}
+    ></script>
   </head>
   <body>
     <Layout>
