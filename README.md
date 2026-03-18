@@ -1,47 +1,27 @@
-# Astro Starter Kit: Minimal
+# Valentín Nicheglod | Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Este es mi portfolio personal. La idea es simple: mostrar quién soy, qué hago y algunos de mis trabajos, de forma clara y agradable de recorrer.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## ¿Para qué está pensado?
+Para que cualquier persona pueda conocer mi perfil en pocos minutos: mi enfoque, mis habilidades y el tipo de proyectos en los que he trabajado.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ¿Qué vas a encontrar?
+- Presentación breve sobre mí y lo que hago.
+- Mis habilidades principales.
+- Proyectos seleccionados con imágenes y enlaces.
+- Un formulario de contacto para escribirme.
 
-## 🚀 Project Structure
+## Idiomas
+El sitio está en español e inglés. Se adapta automáticamente al idioma del navegador, pero podés cambiarlo manualmente desde el menú.
 
-Inside of your Astro project, you'll see the following folders and files:
+## ¿Cómo se ve?
+Es una web visual, moderna y responsiva (se ve bien en celular, tablet y desktop), con pequeñas animaciones para que la experiencia sea más fluida.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Navegación rápida
+La página está dividida en secciones claras para que encuentres lo que buscás sin vueltas: sobre mí, habilidades, proyectos y contacto.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Contenido y actualizaciones
+Voy actualizando el portfolio a medida que termino nuevos proyectos o aprendo herramientas nuevas. Si ves algo que te interesa, siempre podés escribirme.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Contacto
+Si querés conversar sobre un proyecto, colaborar o simplemente saludar, el formulario de contacto está al final de la página.
