@@ -1,5 +1,7 @@
 // Theme
 @import url("./theme.scss");
+@import "tippy.js/dist/tippy.css";
+@import "tippy.js/animations/scale.css";
 
 // Tailwind
 @tailwind base;

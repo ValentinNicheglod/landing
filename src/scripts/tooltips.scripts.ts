@@ -25,8 +25,6 @@ let tippyLoader: Promise<typeof import("tippy.js")> | null = null;
 const loadTippy = async () => {
   if (!tippyLoader) {
     tippyLoader = (async () => {
-      await import("tippy.js/dist/tippy.css");
-      await import("tippy.js/animations/scale.css");
       return import("tippy.js");
     })();
   }

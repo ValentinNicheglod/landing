@@ -28,11 +28,13 @@ const filterOptions = [
 
 <div id="projects-filter" class="md:shadow-sm filters" role="tablist">
   {
-    filterOptions.map((option) => (
+    filterOptions.map((option, index) => (
       <button
         id={`project-filter-${option.value}`}
         data-value={option.value}
         aria-label={`${translations.filterBy} ${option.label}`}
+        aria-selected={index === 0 ? "true" : "false"}
+        class:list={{ selected: index === 0 }}
         role="tab"
       >
         <div class="block md:hidden">{option.shortLabel}</div>

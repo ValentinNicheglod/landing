@@ -29,11 +29,13 @@ const filterOptions = [
 <div class="flex md:justify-end">
   <div id="skills-filter" class="filters" role="tablist">
     {
-      filterOptions.map((option) => (
+      filterOptions.map((option, index) => (
         <button
           id={`skill-filter-${option.value}`}
           data-value={option.value}
           aria-label={`${translations.filterBy} ${option.label}`}
+          aria-selected={index === 0 ? "true" : "false"}
+          class:list={{ selected: index === 0 }}
           role="tab"
         >
           <div class="block md:hidden">{option.shortLabel}</div>
