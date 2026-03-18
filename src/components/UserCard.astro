@@ -24,7 +24,10 @@ const translations = aboutTranslations[lang];
     <div class="m-auto p-1 rounded-full w-56 md:w-48 aspect-square profile-pic">
       <Image
         src={profilePic}
-        width={256}
+        width={224}
+        height={224}
+        widths={[176, 192, 224, 256]}
+        sizes="(min-width: 768px) 192px, 224px"
         class="m-auto rounded-full inner-container"
         alt={translations.profilePicAltText}
       />
