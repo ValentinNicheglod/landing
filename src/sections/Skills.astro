@@ -84,4 +84,24 @@ const initialSkill = skillsData[0];
     }
   }
 </style>
-<script src="../scripts/skills.scripts.ts"></script>
+<script>
+  const loadSkills = () => import("../scripts/skills.scripts.ts");
+  const skillsSection = document.getElementById("skills");
+
+  if (!skillsSection) {
+    loadSkills();
+  } else if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          loadSkills();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(skillsSection);
+  } else {
+    loadSkills();
+  }
+</script>

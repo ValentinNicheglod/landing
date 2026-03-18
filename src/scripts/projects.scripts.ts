@@ -505,7 +505,7 @@ const handleViewMoreClick = (id: ProjectNames) => {
   technologies.classList.toggle("hidden");
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+const onReady = () => {
   document.addEventListener("keydown", (event) => {
     if (event.metaKey || event.altKey || event.ctrlKey) return;
     lastInputWasKeyboard = true;
@@ -555,4 +555,10 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProjectSlidesFocusability();
     setProjectsAutoplay(allowAutoplay);
   });
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", onReady);
+} else {
+  onReady();
+}

@@ -1,8 +1,3 @@
-// Tippy
-import tippy from "tippy.js";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/scale.css";
-
 // Types
 import type { Project } from "../models/types/project.type";
 import type { Instance, Placement } from "tippy.js";
@@ -25,7 +20,22 @@ const defaultConfig: {
   duration: 250,
 };
 
-export const setLanguageTooltipData = () => {
+let tippyLoader: Promise<typeof import("tippy.js")> | null = null;
+
+const loadTippy = async () => {
+  if (!tippyLoader) {
+    tippyLoader = (async () => {
+      await import("tippy.js/dist/tippy.css");
+      await import("tippy.js/animations/scale.css");
+      return import("tippy.js");
+    })();
+  }
+
+  return tippyLoader;
+};
+
+export const setLanguageTooltipData = async () => {
+  const { default: tippy } = await loadTippy();
   const selectedLanguage = document.querySelector("html")?.getAttribute("lang");
 
   const content = `
@@ -69,7 +79,8 @@ export const setLanguageTooltipData = () => {
   });
 };
 
-export const setThemeTooltipData = (theme: "light" | "dark") => {
+export const setThemeTooltipData = async (theme: "light" | "dark") => {
+  const { default: tippy } = await loadTippy();
   const selectedLanguage = document
     .querySelector("html")
     ?.getAttribute("lang") as "en" | "es";
@@ -125,7 +136,8 @@ export const setThemeTooltipData = (theme: "light" | "dark") => {
   });
 };
 
-export const setSocialLinksTooltips = () => {
+export const setSocialLinksTooltips = async () => {
+  const { default: tippy } = await loadTippy();
   const buttons = ["Behance", "Dribbble", "GitHub", "LinkedIn"];
   buttons.forEach((title) => {
     const content = `
@@ -151,8 +163,9 @@ export const setSocialLinksTooltips = () => {
   });
 };
 
-let cmdTooltip: Instance;
-export const showCommandTooltip = (element: HTMLElement) => {
+let cmdTooltip: Instance | null = null;
+export const showCommandTooltip = async (element: HTMLElement) => {
+  const { default: tippy } = await loadTippy();
   const selectedLanguage = document
     .querySelector("html")
     ?.getAttribute("lang") as "en" | "es";
@@ -185,10 +198,11 @@ export const showCommandTooltip = (element: HTMLElement) => {
 };
 
 export const hideCommandTooltip = () => {
-  cmdTooltip.hide();
+  cmdTooltip?.hide();
 };
 
-export const setProjectTechnologiesTooltips = (data: Project[]) => {
+export const setProjectTechnologiesTooltips = async (data: Project[]) => {
+  const { default: tippy } = await loadTippy();
   data.forEach((project) => {
     const technologies = document.getElementById(
       `technologies-${project.path}`,
@@ -205,7 +219,8 @@ export const setProjectTechnologiesTooltips = (data: Project[]) => {
   });
 };
 
-export const setGoUpButtonTooltipData = () => {
+export const setGoUpButtonTooltipData = async () => {
+  const { default: tippy } = await loadTippy();
   const goTopButton = document.getElementById("go-top-button");
 
   const selectedLanguage = document
@@ -223,7 +238,8 @@ export const setGoUpButtonTooltipData = () => {
   });
 };
 
-export const setProjectTypeTooltips = () => {
+export const setProjectTypeTooltips = async () => {
+  const { default: tippy } = await loadTippy();
   const selectedLanguage = document.querySelector("html")?.getAttribute("lang") as "en" | "es";
   const translations = projectsTranslations[selectedLanguage];
 

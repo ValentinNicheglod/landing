@@ -164,7 +164,7 @@ const updateNavButtonsVisibility = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+const onReady = () => {
   const lang = document.firstElementChild?.getAttribute("lang") as "en" | "es";
   skillsData = getSkillsData(lang);
   initializeSkillsSwiper();
@@ -179,4 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     updateNavButtonsVisibility();
   });
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", onReady);
+} else {
+  onReady();
+}

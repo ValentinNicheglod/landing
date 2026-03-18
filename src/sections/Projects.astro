@@ -75,4 +75,24 @@ const translations = projectsTranslations[lang];
     </div>
   </div>
 </section>
-<script src="../scripts/projects.scripts.ts"></script>
+<script>
+  const loadProjects = () => import("../scripts/projects.scripts.ts");
+  const projectsSection = document.getElementById("projects");
+
+  if (!projectsSection) {
+    loadProjects();
+  } else if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          loadProjects();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(projectsSection);
+  } else {
+    loadProjects();
+  }
+</script>
