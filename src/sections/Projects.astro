@@ -3,6 +3,7 @@
 import ProjectCard from "../components/ProjectCard.astro";
 import ProjectGallery from "../components/ProjectGallery.astro";
 import ProjectsFilters from "../components/ProjectsFilters.astro";
+import { Icon } from "astro-icon/components";
 
 // Styles
 import "../styles/dialog.scss";
@@ -26,23 +27,65 @@ const translations = projectsTranslations[lang];
         <h2 class="text-3xl md:text-4xl font-bold text-primary">{translations.sectionTitle}</h2>
         <ProjectsFilters />
       </header>
-      <div class="flex-1 content-center">
-        <div id="projects-swiper" class="swiper rounded-xl md:rounded-2xl p-1">
-          <section class="swiper-wrapper">
-            {
-              projectsData.map((project, index) => (
-                <div class="swiper-slide project-slide" data-type={project.type}>
-                  <ProjectCard project={project} index={index} />
-                </div>
-                <dialog
-                  id={`${project.path}-gallery`}
-                  class="overflow-hidden md:rounded-2xl"
-                >
-                  <ProjectGallery project={project} />
-                </dialog>
-              ))
-            }
-          </section>
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <button
+            id="projects-prev"
+            type="button"
+            class="projects-nav-button shrink-0 rounded-full bg-white/90 p-1 shadow-md transition-opacity duration-300 hover:opacity-100 focus-visible:opacity-100 opacity-80 outline-offset-2"
+            aria-label={translations.previous}
+          >
+            <Icon name="chevron-right" size="28" class="text-primary rotate-180" />
+          </button>
+          <div class="flex-1 min-w-0 overflow-hidden content-center">
+            <div id="projects-swiper" class="swiper rounded-xl md:rounded-2xl p-1">
+              <section class="swiper-wrapper">
+                {
+                  projectsData.map((project, index) => (
+                    <div class="swiper-slide project-slide" data-type={project.type}>
+                      <ProjectCard project={project} index={index} />
+                    </div>
+                    <dialog
+                      id={`${project.path}-gallery`}
+                      class="overflow-hidden md:rounded-2xl"
+                    >
+                      <ProjectGallery project={project} />
+                    </dialog>
+                  ))
+                }
+              </section>
+            </div>
+          </div>
+          <button
+            id="projects-next"
+            type="button"
+            class="projects-nav-button shrink-0 rounded-full bg-white/90 p-1 shadow-md transition-opacity duration-300 hover:opacity-100 focus-visible:opacity-100 opacity-80 outline-offset-2"
+            aria-label={translations.next}
+          >
+            <Icon name="chevron-right" size="28" class="text-primary" />
+          </button>
+        </div>
+      <div
+        id="projects-mobile-nav"
+        class="projects-nav"
+      >
+        <button
+          id="projects-prev-mobile"
+          type="button"
+          class="projects-nav-button"
+          aria-label={translations.previous}
+        >
+          <Icon name="chevron-right" size="24" class="text-primary rotate-180" />
+        </button>
+        <div id="projects-indicator" class="projects-nav-indicator"></div>
+        <button
+          id="projects-next-mobile"
+          type="button"
+          class="projects-nav-button"
+          aria-label={translations.next}
+        >
+            <Icon name="chevron-right" size="24" class="text-primary" />
+          </button>
         </div>
       </div>
     </div>

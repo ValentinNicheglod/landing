@@ -22,7 +22,7 @@
     }
   }
 
-  &:hover,
+  body:not(.suppress-project-hover) &:hover,
   &:focus-within {
     .card-overlay {
       height: 0;
@@ -34,9 +34,72 @@
   }
 }
 
+.project-card.is-expanded {
+  .card-overlay {
+    height: 0;
+  }
+
+  .content {
+    background: hsla(0, 0%, 0%, 0.75);
+  }
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   --swiper-navigation-size: 32px;
+}
+
+.projects-nav-button {
+  display: none;
+}
+
+.projects-nav-button.is-visible {
+  display: none;
+}
+
+.projects-nav {
+  @apply mt-3 flex items-center justify-center gap-4;
+}
+
+.projects-nav-button {
+  @apply flex items-center justify-center rounded-full bg-white/90 p-1 shadow-md transition-opacity duration-300 hover:opacity-100 focus-visible:opacity-100 opacity-80 outline-offset-2;
+}
+
+.projects-nav-indicator {
+  @apply flex items-center gap-2;
+
+  span {
+    @apply rounded-full bg-primary/50 transition-all duration-300;
+    height: 6px;
+    width: 6px;
+  }
+
+  span.is-active {
+    @apply bg-primary;
+    width: 18px;
+    animation: indicator-pulse 900ms ease-out infinite;
+  }
+}
+
+@keyframes indicator-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-nav-indicator span.is-active {
+    animation: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -52,6 +115,12 @@
       .content {
         background: #00000090;
       }
+    }
+  }
+
+  .project-card.is-expanded {
+    .content {
+      background: #00000090;
     }
   }
 }

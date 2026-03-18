@@ -12,7 +12,10 @@ import type { SwiperSlide } from "swiper/element";
 import type { Project, ProjectNames } from "../models/types/project.type";
 
 // Scripts
-import { changeButtonState, translateIndicator } from "./filters.scripts";
+import {
+  changeButtonState,
+  translateIndicator,
+} from "./filters.scripts";
 import { setProjectTechnologiesTooltips } from "./tooltips.scripts";
 
 // Translations
@@ -36,30 +39,42 @@ const getProjectsGallerySwiperConfig = (project: Project) => {
 };
 
 const getProjectsListSwiperConfig = () => {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const isMobile = window.innerWidth < 768;
+  allowAutoplay = !(prefersReducedMotion || isMobile);
   const options: SwiperOptions = {
-    slidesPerView: 1,
+    slidesPerView: 1.1,
     spaceBetween: 16,
     loop: true,
-    autoplay: {
-      pauseOnMouseEnter: true,
-    },
-    breakpoints: {
-      704: {
-        slidesPerView: 1.25,
-      },
-      768: {
-        slidesPerView: 2,
-      },
-      992: {
-        slidesPerView: 2.5,
-      },
-      1218: {
-        slidesPerView: 3,
-      },
-    },
+    watchSlidesProgress: true,
+    autoplay: allowAutoplay
+      ? {
+          pauseOnMouseEnter: true,
+        }
+      : false,
+    breakpoints: getProjectsListBreakpoints(),
     modules: [Autoplay],
   };
   return options;
+};
+
+const getProjectsListBreakpoints = () => {
+  return {
+    704: {
+      slidesPerView: 1.25,
+    },
+    768: {
+      slidesPerView: 2,
+    },
+    992: {
+      slidesPerView: 2.5,
+    },
+    1218: {
+      slidesPerView: 3,
+    },
+  };
 };
 
 const initializeProjectsGallerySwiper = () => {
@@ -97,37 +112,33 @@ const initializeProjectsGallerySwiper = () => {
 };
 
 let projectSwiper: Swiper | null = null;
+let nextButton: HTMLElement | null = null;
+let prevButton: HTMLElement | null = null;
+let mobilePrevButton: HTMLElement | null = null;
+let mobileNextButton: HTMLElement | null = null;
+let projectsIndicator: HTMLElement | null = null;
+let allowAutoplay = false;
+let isGalleryOpen = false;
+let lastInputWasKeyboard = false;
+let lastGalleryCard: HTMLElement | null = null;
+
+const suppressProjectHover = () => {
+  document.body.classList.add("suppress-project-hover");
+
+  const clearSuppression = () => {
+    document.body.classList.remove("suppress-project-hover");
+  };
+
+  document.addEventListener("pointermove", clearSuppression, { once: true });
+  document.addEventListener("keydown", clearSuppression, { once: true });
+};
+
 const initializeProjectsSwiper = () => {
   projectSwiper = new Swiper("#projects-swiper", getProjectsListSwiperConfig());
 };
 
 const addProjectCardButtonsListeners = () => {
   projectsData.forEach((project) => {
-    if (project.type === ProjectFilters.DEV) {
-      const githubButton = document.getElementById(
-        `${project.path}-github-button`,
-      );
-      githubButton?.addEventListener("click", () =>
-        window.open(project.github, "_blank"),
-      );
-    }
-
-    if (project.type === ProjectFilters.DESIGN) {
-      const behanceButton = document.getElementById(
-        `${project.path}-behance-button`,
-      );
-      behanceButton?.addEventListener("click", () =>
-        window.open(project.behance, "_blank"),
-      );
-    }
-
-    const openProjectButton = document.getElementById(
-      `${project.path}-open-button`,
-    );
-    openProjectButton?.addEventListener("click", () => {
-      window.open(project.url, "_blank");
-    });
-
     const viewMoreButton = document.getElementById(`view-more-${project.path}`);
     viewMoreButton?.addEventListener("click", () =>
       handleViewMoreClick(project.path),
@@ -140,7 +151,7 @@ const addProjectCardButtonsListeners = () => {
       `${project.path}-gallery-close-button`,
     );
     openGalleryButton?.addEventListener("click", () =>
-      openGalleryModal(project.path),
+      openGalleryModal(project.path, openGalleryButton as HTMLElement),
     );
     closeGalleryButton?.addEventListener("click", () =>
       closeGalleryModal(project.path),
@@ -160,18 +171,45 @@ const addFiltersListeners = () => {
   }
 };
 
-const openGalleryModal = (projectPath: string) => {
+let lastGalleryTrigger: HTMLElement | null = null;
+
+const openGalleryModal = (projectPath: string, trigger?: HTMLElement) => {
   const dialog = document.getElementById(
     `${projectPath}-gallery`,
   ) as HTMLDialogElement;
-  const closeButton = document.getElementById(`${projectPath}-close-btn`);
+  const closeButton = document.getElementById(
+    `${projectPath}-gallery-close-button`,
+  ) as HTMLElement | null;
+
+  lastGalleryTrigger = trigger ?? null;
+  lastGalleryCard = trigger?.closest(".project-card") as HTMLElement | null;
 
   projectSwiper?.disable();
+  isGalleryOpen = true;
+  setProjectsAutoplay(false);
+  if (lastInputWasKeyboard) {
+    lastGalleryCard?.classList.add("is-expanded");
+  }
 
   dialog?.showModal();
+  dialog?.addEventListener(
+    "close",
+    () => {
+      projectSwiper?.enable();
+      isGalleryOpen = false;
+      lastGalleryCard?.classList.remove("is-expanded");
+      lastGalleryCard = null;
+      if (lastInputWasKeyboard) {
+        lastGalleryTrigger?.focus();
+      } else {
+        lastGalleryTrigger?.blur();
+        suppressProjectHover();
+      }
+    },
+    { once: true },
+  );
 
-  dialog?.blur();
-  closeButton?.blur();
+  closeButton?.focus();
 };
 
 const closeGalleryModal = (projectPath: string) => {
@@ -183,13 +221,12 @@ const closeGalleryModal = (projectPath: string) => {
   galleryModal.classList.add("closing");
 
   setTimeout(() => {
-    projectSwiper?.enable();
     galleryModal.classList.remove("closing");
     galleryModal.close();
   }, ANIMATION_DURATION);
 };
 
-let selectedFilterIndex: ProjectFilters;
+let selectedFilterIndex: ProjectFilters = ProjectFilters.ALL;
 const handleFilter = (filter: Element) => {
   const selectedIndex = filter.attributes.getNamedItem("data-value")?.value;
 
@@ -224,8 +261,191 @@ const setProjectSlides = () => {
   });
 
   projectSwiper?.slideTo(0, 0);
-  projectSwiper?.autoplay?.start();
   projectSwiper?.update();
+  updateProjectsNavButtonsVisibility();
+  updateMobileNavVisibility();
+  updateProjectSlidesFocusability();
+};
+
+
+const getCurrentSlidesPerView = () => {
+  let slidesPerView = 1.1;
+  const breakpoints = getProjectsListBreakpoints();
+  const width = window.innerWidth;
+  const sizes = Object.keys(breakpoints)
+    .map((size) => parseInt(size))
+    .sort((a, b) => a - b);
+
+  for (const size of sizes) {
+    if (width >= size) {
+      slidesPerView = breakpoints[size].slidesPerView;
+    }
+  }
+
+  return slidesPerView;
+};
+
+const getVisibleProjectsCount = () => {
+  if (selectedFilterIndex === ProjectFilters.ALL) {
+    return projectsData.length;
+  }
+
+  return projectsData.filter((project) => project.type === selectedFilterIndex)
+    .length;
+};
+
+const updateProjectsNavButtonsVisibility = () => {
+  if (!nextButton || !prevButton) return;
+
+  const visibleProjects = getVisibleProjectsCount();
+  const slidesPerView = getCurrentSlidesPerView();
+
+  if (visibleProjects > slidesPerView) {
+    nextButton.classList.add("is-visible");
+    prevButton.classList.add("is-visible");
+  } else {
+    nextButton.classList.remove("is-visible");
+    prevButton.classList.remove("is-visible");
+  }
+};
+
+const getVisibleSlideIndices = () => {
+  const slides = Array.from(
+    document.querySelectorAll(".project-slide"),
+  ) as HTMLElement[];
+
+  return slides
+    .map((slide, index) => ({ slide, index }))
+    .filter(({ slide }) => slide.style.display !== "none")
+    .map(({ index }) => index);
+};
+
+const updateProjectsIndicator = () => {
+  if (!projectsIndicator || !projectSwiper) return;
+
+  const visibleIndices = getVisibleSlideIndices();
+  const total = visibleIndices.length;
+
+  projectsIndicator.innerHTML = "";
+
+  if (total <= 1) return;
+
+  const activeIndex = visibleIndices.indexOf(projectSwiper.realIndex);
+  const activePosition = activeIndex >= 0 ? activeIndex : 0;
+
+  for (let i = 0; i < total; i += 1) {
+    const dot = document.createElement("span");
+    if (i === activePosition) dot.classList.add("is-active");
+    projectsIndicator.appendChild(dot);
+  }
+};
+
+const focusableSelector = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]",
+].join(",");
+
+const setSlideFocusability = (slide: HTMLElement, isFocusable: boolean) => {
+  const focusables = slide.querySelectorAll<HTMLElement>(focusableSelector);
+
+  focusables.forEach((element) => {
+    if (isFocusable) {
+      const original = element.getAttribute("data-orig-tabindex");
+      if (original === null) return;
+      if (original === "none") {
+        element.removeAttribute("tabindex");
+      } else {
+        element.setAttribute("tabindex", original);
+      }
+      element.removeAttribute("data-orig-tabindex");
+      return;
+    }
+
+    if (!element.hasAttribute("data-orig-tabindex")) {
+      const current = element.getAttribute("tabindex");
+      element.setAttribute("data-orig-tabindex", current ?? "none");
+    }
+    element.setAttribute("tabindex", "-1");
+  });
+
+  slide.setAttribute("aria-hidden", isFocusable ? "false" : "true");
+  if (isFocusable) {
+    slide.removeAttribute("inert");
+  } else {
+    slide.setAttribute("inert", "");
+  }
+};
+
+const updateProjectSlidesFocusability = () => {
+  const slides = Array.from(
+    document.querySelectorAll(".project-slide"),
+  ) as HTMLElement[];
+
+  const visibleSlides = new Set(
+    (projectSwiper
+      ? (projectSwiper as unknown as { visibleSlides?: HTMLElement[] })
+          .visibleSlides
+      : undefined) ?? [],
+  );
+
+  slides.forEach((slide) => {
+    const isDisplayed = slide.style.display !== "none";
+    const isVisible = isDisplayed && (
+      visibleSlides.size > 0
+        ? visibleSlides.has(slide)
+        : slide.classList.contains("swiper-slide-active")
+    );
+    setSlideFocusability(slide, isVisible);
+  });
+};
+
+const setProjectsAutoplay = (shouldRun: boolean) => {
+  if (!projectSwiper?.autoplay) return;
+
+  if (!shouldRun) {
+    projectSwiper.autoplay.stop();
+    return;
+  }
+
+  if (!allowAutoplay) return;
+
+  if (projectSwiper.params.autoplay === false) {
+    projectSwiper.params.autoplay = { pauseOnMouseEnter: true };
+  }
+  projectSwiper.autoplay.start();
+};
+
+const addProjectsAutoplayGuards = () => {
+  const swiperEl = document.getElementById("projects-swiper");
+  if (!swiperEl) return;
+
+  swiperEl.addEventListener("focusin", () => setProjectsAutoplay(false));
+  swiperEl.addEventListener("focusout", () => {
+    window.setTimeout(() => {
+      if (isGalleryOpen) return;
+      if (!swiperEl.contains(document.activeElement)) {
+        setProjectsAutoplay(true);
+      }
+    }, 0);
+  });
+};
+
+const updateMobileNavVisibility = () => {
+  const mobileNav = document.getElementById("projects-mobile-nav");
+  if (!mobileNav || !projectsIndicator) return;
+
+  const visibleProjects = getVisibleProjectsCount();
+  if (visibleProjects > 1) {
+    mobileNav.classList.remove("invisible");
+  } else {
+    mobileNav.classList.add("invisible");
+  }
+
+  updateProjectsIndicator();
 };
 
 let isSmallCardLastResult = false;
@@ -233,40 +453,41 @@ let translations: (typeof projectsTranslations)["en"];
 
 let timeout: NodeJS.Timeout;
 const setCardStyles = () => {
+  const isSmallCard = window.innerWidth < 768;
+
+  if (isSmallCard === isSmallCardLastResult) return;
+
+  isSmallCardLastResult = isSmallCard;
+
+  const buttonLabels = document.getElementsByClassName("button-label");
+  for (const labelRef of buttonLabels) {
+    labelRef.classList.toggle("text-sm", isSmallCard);
+  }
+
+  const viewMoreButtons = document.getElementsByClassName("view-more");
+  for (const buttonRef of viewMoreButtons) {
+    buttonRef.classList.toggle("hidden", !isSmallCard);
+  }
+
+  projectsData.forEach((project) => {
+    const id = project.path;
+
+    const descriptionRef = document.getElementById(`description-${id}`);
+    if (!descriptionRef) return;
+
+    if (isSmallCard) {
+      const shortDescription = translations[id].description.split(".")[0];
+      descriptionRef.innerHTML = `${shortDescription}.`;
+    } else {
+      const fullDescription = translations[id].description;
+      descriptionRef.innerHTML = fullDescription;
+    }
+  });
+};
+
+const scheduleCardStyles = () => {
   clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    const projectCard = document.querySelector(".project-card") as HTMLElement;
-    const isSmallCard = projectCard.clientWidth < 400;
-
-    if (isSmallCard === isSmallCardLastResult) return;
-
-    isSmallCardLastResult = isSmallCard;
-
-    const buttonLabels = document.getElementsByClassName("button-label");
-    for (const labelRef of buttonLabels) {
-      labelRef.classList.toggle("text-sm");
-    }
-
-    const viewMoreButtons = document.getElementsByClassName("view-more");
-    for (const buttonRef of viewMoreButtons) {
-      buttonRef.classList.toggle("hidden");
-    }
-
-    projectsData.forEach((project) => {
-      const id = project.path;
-
-      const descriptionRef = document.getElementById(`description-${id}`);
-      if (!descriptionRef) return;
-
-      if (isSmallCard) {
-        const shortDescription = translations[id].description.split(".")[0];
-        descriptionRef.innerHTML = `${shortDescription}.`;
-      } else {
-        const fullDescription = translations[id].description;
-        descriptionRef.innerHTML = fullDescription;
-      }
-    });
-  }, 3000);
+  timeout = setTimeout(setCardStyles, 150);
 };
 
 const showFullDescription = {
@@ -289,40 +510,22 @@ const handleViewMoreClick = (id: ProjectNames) => {
   if (showFullDescription[id]) {
     viewMoreButton.innerText = translations.less;
     description.innerHTML = fullDescription;
-    setDescriptionReadingTime();
   } else {
     viewMoreButton.innerText = translations.more;
     description.innerHTML = shortDescription;
-    projectSwiper?.autoplay.resume();
   }
   technologies.classList.toggle("hidden");
 };
 
-const setDescriptionReadingTime = () => {
-  const READING_TIME = 7000;
-  projectSwiper?.autoplay.pause();
-  setTimeout(() => projectSwiper?.autoplay.resume(), READING_TIME);
-};
-
-const addDescriptionReadingTimeOnClick = () => {
-  if (window.innerWidth < 768) {
-    for (const projectCard of document.getElementsByClassName("project-card")) {
-      projectCard.addEventListener("click", setDescriptionReadingTime);
-    }
-  }
-};
-
-const disableAutoplayOnTab = () => {
-  document.addEventListener("keyup", (event) => {
-    if (event.key === "Tab") {
-      projectSwiper?.autoplay.stop();
-      projectSwiper?.slideTo(0);
-      document.removeEventListener("keyup", disableAutoplayOnTab);
-    }
-  });
-};
-
 document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("keydown", (event) => {
+    if (event.metaKey || event.altKey || event.ctrlKey) return;
+    lastInputWasKeyboard = true;
+  });
+  document.addEventListener("pointerdown", () => {
+    lastInputWasKeyboard = false;
+  });
+
   initializeProjectsSwiper();
   initializeProjectsGallerySwiper();
 
@@ -330,11 +533,48 @@ document.addEventListener("DOMContentLoaded", () => {
   translations = projectsTranslations[lang];
 
   setCardStyles();
-  window.addEventListener("resize", setCardStyles);
+  window.addEventListener("resize", scheduleCardStyles);
 
-  addDescriptionReadingTimeOnClick();
   setProjectTechnologiesTooltips(projectsData);
   addFiltersListeners();
   addProjectCardButtonsListeners();
-  disableAutoplayOnTab();
+
+  nextButton = document.getElementById("projects-next");
+  prevButton = document.getElementById("projects-prev");
+  mobilePrevButton = document.getElementById("projects-prev-mobile");
+  mobileNextButton = document.getElementById("projects-next-mobile");
+  projectsIndicator = document.getElementById("projects-indicator");
+  nextButton?.addEventListener("click", () => {
+    projectSwiper?.slideNext();
+  });
+  prevButton?.addEventListener("click", () => {
+    projectSwiper?.slidePrev();
+  });
+  mobileNextButton?.addEventListener("click", () => {
+    projectSwiper?.slideNext();
+  });
+  mobilePrevButton?.addEventListener("click", () => {
+    projectSwiper?.slidePrev();
+  });
+
+  updateProjectsNavButtonsVisibility();
+  updateMobileNavVisibility();
+  updateProjectSlidesFocusability();
+  addProjectsAutoplayGuards();
+  projectSwiper?.on("slideChange", () => {
+    updateProjectsIndicator();
+    updateProjectSlidesFocusability();
+  });
+  projectSwiper?.on("transitionEnd", updateProjectSlidesFocusability);
+  window.addEventListener("resize", () => {
+    allowAutoplay = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches
+      ? false
+      : window.innerWidth >= 768;
+    updateProjectsNavButtonsVisibility();
+    updateMobileNavVisibility();
+    updateProjectSlidesFocusability();
+    setProjectsAutoplay(allowAutoplay);
+  });
 });

@@ -87,12 +87,13 @@ const translations = contactTranslations[lang];
             <p class="text-pretty text-slate-200 text-sm">
               {translations.shortContent}
             </p>
-            <a
-              href="mailto:valentinnicheglod1@gmail.com"
-              class="flex items-end"
-            >
-              <SquareButton image={mailImage} label={translations.sendEmail} />
-            </a>
+            <div class="flex items-end">
+              <SquareButton
+                image={mailImage}
+                label={translations.sendEmail}
+                url="mailto:valentinnicheglod1@gmail.com"
+              />
+            </div>
           </div>
         </article>
       </div>

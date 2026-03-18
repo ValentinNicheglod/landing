@@ -9,47 +9,86 @@ import { Image } from "astro:assets";
 import "../styles/buttons.scss";
 
 const { label, image, url, project, id } = Astro.props;
+const elementId =
+  project && (url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`);
+const isExternalLink = typeof url === "string" && url.startsWith("http");
 ---
 
-<button
-  class="group border-2 border-slate-300 focus:border-primary hover:border-primary bg-slate-50 focus:bg-slate-200 hover:bg-slate-200 rounded-lg transition-colors square-button"
-  aria-label={label}
-  id={project &&
-    (url ? `${project.path}-${id}-button` : `${project.path}-gallery-button`)}
->
-  <div class="flex flex-col justify-between items-start gap-2 p-2 pl-3">
-    <div class="flex justify-between w-full">
-      <Image
-        src={image}
-        alt=""
-        class="drop-shadow-lg w-10 lg:w-12 h-10 lg:h-12"
-      />
-      <div>
-        <div
-          class={`relative ml-2 p-1 rounded-full transition-all overflow-hidden aspect-square
-          group-hover:bg-primary group-hover:shadow-md group-hover:animate-jump group-hover:animate-delay-500 group-hover:animate-iteration-2 group-hover:animate-duration-1000
-          group-focus:bg-primary group-focus:animate-jump group-focus:animate-delay-500 group-focus:animate-iteration-2 group-focus:animate-duration-1000`}
-        >
-          {
-            url && (
+{
+  url ? (
+    <a
+      class="group border-2 border-slate-300 focus:border-primary hover:border-primary bg-slate-50 focus:bg-slate-200 hover:bg-slate-200 rounded-lg transition-colors square-button"
+      aria-label={label}
+      id={elementId}
+      href={url}
+      target={isExternalLink ? "_blank" : undefined}
+      rel={isExternalLink ? "noreferrer noopener" : undefined}
+    >
+      <div class="flex flex-col justify-between items-start gap-2 p-2 pl-3">
+        <div class="flex justify-between w-full">
+          <Image
+            src={image}
+            alt=""
+            class="drop-shadow-lg w-10 lg:w-12 h-10 lg:h-12"
+          />
+          <div>
+            <div
+              class={`relative ml-2 p-1 rounded-full transition-all overflow-hidden aspect-square
+              group-hover:bg-primary group-hover:shadow-md group-hover:animate-jump group-hover:animate-delay-500 group-hover:animate-iteration-2 group-hover:animate-duration-1000
+              group-focus:bg-primary group-focus:animate-jump group-focus:animate-delay-500 group-focus:animate-iteration-2 group-focus:animate-duration-1000`}
+            >
               <Icon
                 name="external-link"
                 class={`absolute top-1 opacity-0 text-lg text-slate-400 lg:text-xl transition-opacity link-icon
                  group-hover:text-white group-focus:text-white group-hover:opacity-100 group-focus:opacity-100`}
               />
-            )
-          }
-          <Icon
-            name="chevron-right"
-            class="group-hover:text-white group-focus:text-white text-lg text-slate-400 lg:text-xl transition-opacity icon"
-          />
+              <Icon
+                name="chevron-right"
+                class="group-hover:text-white group-focus:text-white text-lg text-slate-400 lg:text-xl transition-opacity icon"
+              />
+            </div>
+          </div>
         </div>
+        <span
+          class="group-hover:text-primary group-focus:text-primary font-medium text-zinc-500 whitespace-nowrap button-label"
+        >
+          {label}
+        </span>
       </div>
-    </div>
-    <span
-      class="group-hover:text-primary group-focus:text-primary font-medium text-zinc-500 whitespace-nowrap button-label"
+    </a>
+  ) : (
+    <button
+      type="button"
+      class="group border-2 border-slate-300 focus:border-primary hover:border-primary bg-slate-50 focus:bg-slate-200 hover:bg-slate-200 rounded-lg transition-colors square-button"
+      aria-label={label}
+      id={elementId}
     >
-      {label}
-    </span>
-  </div>
-</button>
+      <div class="flex flex-col justify-between items-start gap-2 p-2 pl-3">
+        <div class="flex justify-between w-full">
+          <Image
+            src={image}
+            alt=""
+            class="drop-shadow-lg w-10 lg:w-12 h-10 lg:h-12"
+          />
+          <div>
+            <div
+              class={`relative ml-2 p-1 rounded-full transition-all overflow-hidden aspect-square
+              group-hover:bg-primary group-hover:shadow-md group-hover:animate-jump group-hover:animate-delay-500 group-hover:animate-iteration-2 group-hover:animate-duration-1000
+              group-focus:bg-primary group-focus:animate-jump group-focus:animate-delay-500 group-focus:animate-iteration-2 group-focus:animate-duration-1000`}
+            >
+              <Icon
+                name="chevron-right"
+                class="group-hover:text-white group-focus:text-white text-lg text-slate-400 lg:text-xl transition-opacity icon"
+              />
+            </div>
+          </div>
+        </div>
+        <span
+          class="group-hover:text-primary group-focus:text-primary font-medium text-zinc-500 whitespace-nowrap button-label"
+        >
+          {label}
+        </span>
+      </div>
+    </button>
+  )
+}

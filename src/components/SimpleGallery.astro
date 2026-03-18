@@ -20,17 +20,71 @@ const imagesAltText: Record<string, string> =
   projectsTranslations[projectPath].imagesAltText;
 ---
 
-<div class="flex justify-center items-center gallery-image-container">
-  <Image src={image} alt={imagesAltText[index]} class="w-auto gallery-image" />
+<div
+  class="flex justify-center items-center gallery-image-container"
+  data-gallery-item
+>
+  <div class="gallery-loader" aria-hidden="true">
+    <span class="gallery-spinner" />
+  </div>
+  <Image
+    src={image}
+    alt={imagesAltText[index]}
+    class="w-auto gallery-image"
+    loading="lazy"
+    decoding="async"
+    onload="this.closest('[data-gallery-item]')?.classList.add('is-loaded')"
+  />
 </div>
 <style lang="scss">
   $max-height: min(800px, 95dvh);
 
   .gallery-image-container {
     height: $max-height;
+    position: relative;
   }
 
   .gallery-image {
     max-height: $max-height;
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+
+  .gallery-loader {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(
+      circle at 50% 45%,
+      rgba(20, 20, 20, 0.08),
+      rgba(20, 20, 20, 0.2)
+    );
+    transition: opacity 250ms ease, visibility 250ms ease;
+    pointer-events: none;
+  }
+
+  .gallery-spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 3px solid rgba(0, 0, 0, 0.2);
+    border-top-color: rgba(0, 0, 0, 0.6);
+    animation: gallery-spin 0.9s linear infinite;
+  }
+
+  .gallery-image-container.is-loaded .gallery-loader {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .gallery-image-container.is-loaded .gallery-image {
+    opacity: 1;
+  }
+
+  @keyframes gallery-spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>
