@@ -401,11 +401,8 @@ const updateProjectSlidesFocusability = () => {
 
   slides.forEach((slide) => {
     const isDisplayed = slide.style.display !== "none";
-    const isVisible = isDisplayed && (
-      visibleSlides.size > 0
-        ? visibleSlides.has(slide)
-        : slide.classList.contains("swiper-slide-active")
-    );
+    const isVisible = isDisplayed
+      && (visibleSlides.size > 0 ? visibleSlides.has(slide) : true);
     setSlideFocusability(slide, isVisible);
   });
 };

@@ -8,6 +8,7 @@ import Hero from "../sections/Hero.astro";
 import Projects from "../sections/Projects.astro";
 import Contact from "../sections/Contact.astro";
 import Skills from "../sections/Skills.astro";
+import "../styles/global.scss";
 
 const lang = (Astro.currentLocale ?? "en") as "en" | "es";
 const siteUrl =
@@ -150,9 +151,6 @@ const showLoader = !import.meta.env.PROD;
       </main>
     </Layout>
   </body>
-  <style is:global>
-    @import url(../styles/global.scss);
-  </style>
   <script>
     import { showContent } from "../scripts/initialization.scripts.ts";
 
