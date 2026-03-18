@@ -1,5 +1,5 @@
 // Tippy
-import tippy, { sticky } from "tippy.js";
+import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
 
@@ -162,8 +162,15 @@ export const showCommandTooltip = (element: HTMLElement) => {
     ...defaultConfig,
     allowHTML: true,
     trigger: "manual",
-    sticky: "reference",
-    plugins: [sticky],
+    popperOptions: {
+      strategy: "fixed",
+      modifiers: [
+        {
+          name: "eventListeners",
+          options: { scroll: false, resize: true },
+        },
+      ],
+    },
     content: `
       <div class="flex items-center whitespace-nowrap">
         ${translations.cmd}
