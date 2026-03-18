@@ -1,6 +1,5 @@
 ---
 // Components
-import Loader from "../../components/Loader.astro";
 import Layout from "../../layouts/Layout.astro";
 import About from "../../sections/About.astro";
 import Footer from "../../sections/Footer.astro";
@@ -59,7 +58,6 @@ const websiteSchema = {
     url: canonicalUrl,
   },
 };
-const showLoader = !import.meta.env.PROD;
 ---
 
 <html lang="es" dir="ltr">
@@ -137,13 +135,6 @@ const showLoader = !import.meta.env.PROD;
   </head>
   <body>
     <Layout>
-      {
-        showLoader && (
-          <div id="loader" class="absolute w-dvw h-dvh overflow-hidden">
-            <Loader />
-          </div>
-        )
-      }
       <Hero />
       <main id="content">
         <About />
@@ -154,9 +145,4 @@ const showLoader = !import.meta.env.PROD;
       </main>
     </Layout>
   </body>
-  <script>
-    import { showContent } from "../../scripts/initialization.scripts.ts";
-
-    showContent();
-  </script>
 </html>
