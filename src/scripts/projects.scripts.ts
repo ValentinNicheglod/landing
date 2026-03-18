@@ -60,7 +60,9 @@ const getProjectsListSwiperConfig = () => {
   return options;
 };
 
-const getProjectsListBreakpoints = () => {
+type SlidesPerViewBreakpoints = Record<number, { slidesPerView: number }>;
+
+const getProjectsListBreakpoints = (): SlidesPerViewBreakpoints => {
   return {
     704: {
       slidesPerView: 1.25,

@@ -105,7 +105,9 @@ const setSkillSlides = () => {
 };
 
 
-const getSwiperBreakpoints = () => {
+type SlidesPerViewBreakpoints = Record<number, { slidesPerView: number }>;
+
+const getSwiperBreakpoints = (): SlidesPerViewBreakpoints => {
   return {
     384: {
       slidesPerView: 3.25,
