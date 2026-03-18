@@ -9,6 +9,19 @@ export default defineConfig({
   site: "https://valentin-nicheglod.is-a.dev",
   build: {
     format: "preserve",
+    inlineStylesheets: "always",
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: "modern",
+        },
+        sass: {
+          api: "modern",
+        },
+      },
+    },
   },
   integrations: [
     icon(),
