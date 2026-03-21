@@ -46,4 +46,18 @@ const translations = themeTranslations[lang];
 <script src="../scripts/theme.scripts.ts"></script>
 <style lang="scss">
   @import "../styles/minified/sun-and-moon.min.scss";
+
+  @media (hover: none), (pointer: coarse) {
+    #theme-toggle:hover {
+      .sun-and-moon {
+        :is(.moon, .sun) {
+          fill: var(--icon-fill);
+        }
+
+        .sun-beams {
+          stroke: var(--icon-fill);
+        }
+      }
+    }
+  }
 </style>
