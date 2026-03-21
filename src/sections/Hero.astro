@@ -11,8 +11,23 @@ const lang: "en" | "es" = Astro.currentLocale as "en" | "es";
 const translations = heroTranslations[lang];
 
 // Assets
-import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 import background from "../images/HeroBackground.jpg";
+import backgroundMobile from "../images/HeroBackgroundMobile.jpg";
+
+const desktopBg = await getImage({
+  src: background,
+  sizes: "100vw",
+  widths: [640, 768, 1024, 1280, 1440, 1920, 2048, 2560],
+  quality: 100,
+});
+
+const mobileBg = await getImage({
+  src: backgroundMobile,
+  sizes: "100vw",
+  widths: [320, 480, 640, 768, 1024, 1280, 1440],
+  quality: 100,
+});
 ---
 
 <>
@@ -25,18 +40,17 @@ import background from "../images/HeroBackground.jpg";
     <picture>
       <source
         media="(max-width: 767px)"
-        sizes="100vw"
-        srcset="/images/HeroBackgroundMobile.jpg"
+        sizes={mobileBg.attributes.sizes}
+        srcset={mobileBg.srcSet.attribute}
       />
-      <Image
-        src={background}
+      <img
+        src={desktopBg.src}
+        srcset={desktopBg.srcSet.attribute}
+        sizes={desktopBg.attributes.sizes}
         alt={translations.bgAlt}
         loading="eager"
         fetchpriority="high"
         class="absolute inset-0 h-full w-full object-cover"
-        sizes="100vw"
-        widths={[640, 768, 1024, 1280, 1440, 1920, 2048, 2560]}
-        quality={100}
       />
     </picture>
 
