@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector("#hero");
   const header = document.getElementById("header");
   let intersectingHeroSection = true;
-  let mobileHideTimeoutId: number | null = null;
 
   if (hero && header) {
     const options = document.getElementsByClassName("option");
@@ -75,32 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isMobile = window.innerWidth < 768;
     if (isMobile) {
-      const optionsArray = Array.from(options);
-      optionsArray.forEach((option) => {
-        const optionButton = option.querySelector("button");
-        optionButton?.addEventListener("click", (event) => {
-          event.stopPropagation();
-
-          if (mobileHideTimeoutId !== null) {
-            window.clearTimeout(mobileHideTimeoutId);
-          }
-
-          mobileHideTimeoutId = window.setTimeout(() => {
-            const isExpanded = header?.getAttribute("aria-expanded") === "true";
-            if (isExpanded) hideOptions();
-            mobileHideTimeoutId = null;
-          }, ANIMATION_DURATION);
-        });
-      });
-
       header.addEventListener(
         "click",
         () => {
-          if (mobileHideTimeoutId !== null) {
-            window.clearTimeout(mobileHideTimeoutId);
-            mobileHideTimeoutId = null;
-          }
-
           const isExpanded = header?.getAttribute("aria-expanded") === "true";
           isExpanded ? hideOptions() : showOptions();
         },
