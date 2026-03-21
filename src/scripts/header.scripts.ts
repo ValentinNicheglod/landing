@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let mobileHideTimeoutId: number | null = null;
 
   if (hero && header) {
-    const isMobile = window.innerWidth < 768;
     const options = document.getElementsByClassName("option");
 
     const showOptions = () => {
@@ -20,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       optionsArray.forEach((option) => {
         const optionButton = option.querySelector("button");
         option.setAttribute("style", "transform: translateX(0)");
-        option.classList.add("header-shadow");
+        option.classList.add("shadow-md");
 
         setTimeout(() => {
           header.setAttribute("aria-expanded", "true");
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "style",
           `transform: translateX(${100 * (index + 1)}px)`,
         );
-        option.classList.remove("header-shadow");
+        option.classList.remove("shadow-md");
         setTimeout(() => {
           header.setAttribute("aria-expanded", "false");
           optionButton?.setAttribute("tabindex", "-1");
@@ -74,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     observe();
 
+    const isMobile = window.innerWidth < 768;
     if (isMobile) {
       const optionsArray = Array.from(options);
       optionsArray.forEach((option) => {
@@ -106,17 +106,16 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       );
     }
-    if (!isMobile) {
-      header.addEventListener(
-        "mouseenter",
-        () => intersectingHeroSection === false && showOptions(),
-      );
 
-      header.addEventListener(
-        "mouseleave",
-        () => intersectingHeroSection === false && hideOptions(),
-      );
-    }
+    header.addEventListener(
+      "mouseenter",
+      () => intersectingHeroSection === false && showOptions(),
+    );
+
+    header.addEventListener(
+      "mouseleave",
+      () => intersectingHeroSection === false && hideOptions(),
+    );
 
     document.addEventListener("keydown", (event) => {
       if (event.ctrlKey && event.key.toLowerCase() === "m") {

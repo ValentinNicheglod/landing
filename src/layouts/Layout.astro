@@ -17,28 +17,28 @@ const translations = heroTranslations[lang];
   <menu>
     <ul
       id="header"
-      class="header-menu fixed z-30 flex h-12 items-center gap-3 sm:h-14 sm:gap-4"
+      class="flex gap-4 fixed top-8 right-0 h-14 z-30"
       tabindex="-1"
     >
       <li
-        class="option header-surface header-shadow thin-border flex h-12 w-12 items-center justify-center rounded-full transition-all duration-1000 sm:h-14 sm:w-14"
+        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
       >
         <ThemeToggle />
       </li>
       <li
-        class="option header-surface header-shadow thin-border flex h-12 w-12 items-center justify-center rounded-full transition-all duration-1000 sm:h-14 sm:w-14"
+        class="option flex items-center justify-center w-14 h-14 rounded-full bg-white transition-all duration-1000"
       >
         <LanguageToggle />
       </li>
       <li
-        class="header-surface header-shadow thin-border z-30 h-full rounded-bl-full rounded-tl-full border-r-0 px-4 pr-7 sm:pr-8"
+        class="bg-white thin-border border-r-0 shadow-md pr-8 pl-4 rounded-tl-full rounded-bl-full z-30"
       >
-        <div class="flex h-full items-center justify-center">
+        <div class="flex items-center justify-center h-full">
           <Image
             src={logo}
             alt={translations.logoAlt}
             loading="eager"
-            class="w-10 sm:w-12"
+            class="w-12"
           />
         </div>
       </li>

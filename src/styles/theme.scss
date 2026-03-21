@@ -56,36 +56,6 @@ b {
   color: var(--primary-color);
 }
 
-.header-menu {
-  top: calc(1rem + env(safe-area-inset-top));
-  right: calc(1rem + env(safe-area-inset-right));
-}
-
-@media (min-width: 640px) {
-  .header-menu {
-    top: 2rem;
-    right: 1rem;
-  }
-}
-
-.header-surface {
-  @apply backdrop-blur-md;
-  background-color: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-[data-theme="dark"] .header-surface {
-  background-color: rgba(15, 23, 41, 0.72);
-}
-
-.header-shadow {
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
-}
-
-[data-theme="dark"] .header-shadow {
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
-}
-
 @media (prefers-reduced-motion: no-preference) {
   body {
     @apply transition-colors duration-500;
