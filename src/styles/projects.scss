@@ -50,7 +50,7 @@
 }
 
 .projects-nav {
-  @apply mt-3 flex items-center justify-center gap-4;
+  @apply mt-3 flex items-center justify-around sm:justify-center gap-4;
 }
 
 .projects-nav-button {

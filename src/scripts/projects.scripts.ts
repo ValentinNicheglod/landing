@@ -45,10 +45,9 @@ const getProjectsListSwiperConfig = () => {
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
-  const isMobile = window.innerWidth < 768;
-  allowAutoplay = !(prefersReducedMotion || isMobile);
+  allowAutoplay = !prefersReducedMotion;
   const options: SwiperOptions = {
-    slidesPerView: 1.1,
+    slidesPerView: 1,
     spaceBetween: 16,
     loop: true,
     watchSlidesProgress: true,
@@ -439,7 +438,7 @@ const addProjectsAutoplayGuards = () => {
 };
 
 const updateMobileNavVisibility = () => {
-  const mobileNav = document.getElementById("projects-mobile-nav");
+  const mobileNav = document.getElementById("projects-nav");
   if (!mobileNav || !projectsIndicator) return;
 
   const visibleProjects = getVisibleProjectsCount();
@@ -457,8 +456,27 @@ let isSmallCardLastResult = false;
 let translations: (typeof projectsTranslations)["en"];
 
 let timeout: NodeJS.Timeout;
+const getRepresentativeCardWidth = (): number | null => {
+  const slides = Array.from(
+    document.querySelectorAll<HTMLElement>(".project-slide"),
+  );
+  const visibleSlide =
+    slides.find((slide) => slide.style.display !== "none") ??
+    slides[0] ??
+    null;
+  const card =
+    visibleSlide?.querySelector<HTMLElement>(".project-card") ??
+    document.querySelector<HTMLElement>(".project-card") ??
+    null;
+
+  return card ? card.getBoundingClientRect().width : null;
+};
+
 const setCardStyles = () => {
-  const isSmallCard = window.innerWidth < 768;
+  const SMALL_CARD_WIDTH = 400;
+  const cardWidth = getRepresentativeCardWidth();
+  const isSmallCard =
+    cardWidth !== null ? cardWidth < SMALL_CARD_WIDTH : window.innerWidth < 768;
 
   if (isSmallCard === isSmallCardLastResult) return;
 
@@ -580,8 +598,8 @@ const onReady = () => {
   addFiltersListeners();
   addProjectCardButtonsListeners();
 
-  mobilePrevButton = document.getElementById("projects-prev-mobile");
-  mobileNextButton = document.getElementById("projects-next-mobile");
+  mobilePrevButton = document.getElementById("projects-prev");
+  mobileNextButton = document.getElementById("projects-next");
   projectsIndicator = document.getElementById("projects-indicator");
   mobileNextButton?.addEventListener("click", () => {
     projectSwiper?.slideNext();
@@ -599,11 +617,8 @@ const onReady = () => {
   });
   projectSwiper?.on("transitionEnd", updateProjectSlidesFocusability);
   window.addEventListener("resize", () => {
-    allowAutoplay = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches
-      ? false
-      : window.innerWidth >= 768;
+    allowAutoplay = !window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches;
     updateMobileNavVisibility();
     updateProjectSlidesFocusability();
     setProjectsAutoplay(allowAutoplay);
