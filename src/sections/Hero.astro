@@ -15,114 +15,127 @@ import { Image } from "astro:assets";
 import background from "../images/HeroBackground.jpg";
 ---
 
-<section id="hero" class="relative flex flex-col h-dvh" role="banner">
-  <ScrollInstruction lang={lang} />
-  <Image
-    src={background}
-    alt={translations.bgAlt}
-    loading="eager"
-    fetchpriority="high"
-    class="absolute w-screen h-screen object-cover"
-    sizes="100vw"
-    widths={[640, 768, 1024, 1280, 1440, 1920, 2048, 2560]}
-    quality={100}
-  />
+<>
+  <section
+    id="hero"
+    class="relative flex min-h-screen min-h-[100dvh] flex-col"
+    role="banner"
+  >
+    <ScrollInstruction lang={lang} />
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        sizes="100vw"
+        srcset="/images/HeroBackgroundMobile.jpg"
+      />
+      <Image
+        src={background}
+        alt={translations.bgAlt}
+        loading="eager"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover"
+        sizes="100vw"
+        widths={[640, 768, 1024, 1280, 1440, 1920, 2048, 2560]}
+        quality={100}
+      />
+    </picture>
 
-  <div class="z-10 flex flex-1 items-center mx-auto p-8 container">
-    <div class="flex flex-col gap-8 md:w-fit">
-      <article class="bg-white rounded-xl sm:rounded-3xl inner-container">
-        <div class="flex items-center gap-6 sm:gap-8 p-6 sm:p-8">
-          <div class="text-6xl sm:text-7xl" set:html={Emojis.HandWave} />
-          <div class="gap-3 grid">
-            <span class="text-base text-gray sm:text-lg">
-              {translations.presentation}
-            </span>
-            <h1
-              class="font-bold text-3xl text-primary md:text-4xl"
-              translate="no"
-            >
-              Valentín Nicheglod
-            </h1>
-            <h2 class="sr-only">
-              {translations.developer} & {translations.designer}
-            </h2>
+    <div class="z-10 flex flex-1 items-center mx-auto p-8 container">
+      <div class="flex flex-col gap-8 md:w-fit">
+        <article class="bg-white rounded-xl sm:rounded-3xl inner-container">
+          <div class="flex items-center gap-6 sm:gap-8 p-6 sm:p-8">
+            <div class="text-6xl sm:text-7xl" set:html={Emojis.HandWave} />
+            <div class="gap-3 grid">
+              <span class="text-base text-gray sm:text-lg">
+                {translations.presentation}
+              </span>
+              <h1
+                class="font-bold text-3xl text-primary md:text-4xl"
+                translate="no"
+              >
+                Valentín Nicheglod
+              </h1>
+              <h2 class="sr-only">
+                {translations.developer} & {translations.designer}
+              </h2>
+            </div>
           </div>
+        </article>
+
+        <div class="gap-4 grid">
+          <article
+            class="bg-white rounded-xl sm:rounded-3xl inner-container"
+            tabindex="0"
+          >
+            <div class="flex items-center gap-6 px-6 sm:px-8 py-3 sm:py-4">
+              <div
+                class="text-3xl sm:text-4xl md:text-5xl"
+                set:html={Emojis.Developer}
+              />
+              <h3 class="text-lg text-slate-800 sm:text-xl md:text-2xl">
+                {translations.developer}
+              </h3>
+            </div>
+          </article>
+
+          <article
+            class="bg-white rounded-xl sm:rounded-3xl inner-container"
+            tabindex="0"
+          >
+            <div class="flex items-center gap-6 px-6 sm:px-8 py-3 sm:py-4">
+              <div
+                class="text-3xl sm:text-4xl md:text-5xl"
+                set:html={Emojis.Designer}
+              />
+              <h3 class="text-lg text-slate-800 sm:text-xl md:text-2xl">
+                {translations.designer}
+              </h3>
+            </div>
+          </article>
         </div>
-      </article>
-
-      <div class="gap-4 grid">
-        <article
-          class="bg-white rounded-xl sm:rounded-3xl inner-container"
-          tabindex="0"
-        >
-          <div class="flex items-center gap-6 px-6 sm:px-8 py-3 sm:py-4">
-            <div
-              class="text-3xl sm:text-4xl md:text-5xl"
-              set:html={Emojis.Developer}
-            />
-            <h3 class="text-lg text-slate-800 sm:text-xl md:text-2xl">
-              {translations.developer}
-            </h3>
-          </div>
-        </article>
-
-        <article
-          class="bg-white rounded-xl sm:rounded-3xl inner-container"
-          tabindex="0"
-        >
-          <div class="flex items-center gap-6 px-6 sm:px-8 py-3 sm:py-4">
-            <div
-              class="text-3xl sm:text-4xl md:text-5xl"
-              set:html={Emojis.Designer}
-            />
-            <h3 class="text-lg text-slate-800 sm:text-xl md:text-2xl">
-              {translations.designer}
-            </h3>
-          </div>
-        </article>
+        <div class="flex flex-wrap items-center gap-4">
+          <a
+            href="#projects"
+            class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 font-semibold text-primary shadow-md transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+          >
+            {translations.ctaProjects}
+          </a>
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 font-semibold text-white shadow-md transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+          >
+            {translations.ctaContact}
+          </a>
+        </div>
+        <nav class="flex flex-wrap gap-3 text-sm text-white/80 pl-2">
+          <a
+            href="#about"
+            class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
+          >
+            {translations.navAbout}
+          </a>
+          <a
+            href="#skills"
+            class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
+          >
+            {translations.navSkills}
+          </a>
+          <a
+            href="#projects"
+            class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
+          >
+            {translations.navProjects}
+          </a>
+          <a
+            href="#contact"
+            class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
+          >
+            {translations.navContact}
+          </a>
+        </nav>
       </div>
-      <div class="flex flex-wrap items-center gap-4">
-        <a
-          href="#projects"
-          class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 font-semibold text-primary shadow-md transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
-        >
-          {translations.ctaProjects}
-        </a>
-        <a
-          href="#contact"
-          class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 font-semibold text-white shadow-md transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
-        >
-          {translations.ctaContact}
-        </a>
-      </div>
-      <nav class="flex flex-wrap gap-3 text-sm text-white/80 pl-2">
-        <a
-          href="#about"
-          class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
-        >
-          {translations.navAbout}
-        </a>
-        <a
-          href="#skills"
-          class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
-        >
-          {translations.navSkills}
-        </a>
-        <a
-          href="#projects"
-          class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
-        >
-          {translations.navProjects}
-        </a>
-        <a
-          href="#contact"
-          class="underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
-        >
-          {translations.navContact}
-        </a>
-      </nav>
     </div>
+  </section>
+  <div class="bg-gradient w-full h-1 -translate-y-1" aria-hidden="true">
   </div>
-  <div class="bottom-0 absolute bg-gradient w-full h-1" aria-hidden="true">
-  </div>
-</section>
+</>
